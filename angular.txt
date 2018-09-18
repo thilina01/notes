@@ -143,7 +143,10 @@ imports: [
 </div>
 
 
-/* *** home.component.ts ( Declare a variable to hold and function to add fruit ) *** */
+/* *** home.component.ts ( Declare variables to hold and function to add fruit ) *** */
+  fruits = [];
+  fruit = "";
+
   addFruit(): void {
     this.fruits.push(this.fruit);
     this.fruit = '';
