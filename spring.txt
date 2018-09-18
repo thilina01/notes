@@ -1,0 +1,86 @@
+# use Spring Initializr to generate the base for project.
+https://start.spring.io/
+
+# Dependencies
+Web, JPA, MySQL, Rest Repositories,
+
+# extract 
+unzip demo.zip
+
+# change working directory
+cd demo
+
+# open directory in vscode
+code .
+--
+# create a mysql user and database 
+username: test1
+password: test1
+database: test1
+
+CREATE USER 'test1'@'localhost' IDENTIFIED BY 'test1';
+DROP DATABASE IF EXISTS test1;
+CREATE DATABASE test1;
+GRANT ALL PRIVILEGES ON test1. * TO 'test1'@'localhost';
+--
+# add database configuration to /resources/application.properties
+spring.datasource.url=jdbc:mysql://localhost/test1?useUnicode=true&characterEncoding=UTF-8
+spring.datasource.username=test1
+spring.datasource.password=test1
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.jpa.hibernate.ddl-auto = update
+--
+# create directory named student
+mkdir ./src/main/java/com/example/demo/student
+
+# create entity in student directory
+
+package com.example.demo.student;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Data
+@Entity
+@NoArgsConstructor
+@EqualsAndHashCode(of = { "id" })
+class Student {
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+    private String name;
+    private String email;
+}
+
+--
+
+# create repository  in student directory
+
+package com.example.demo.student;
+
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface StudentRepository extends PagingAndSortingRepository<Student, Long> {
+}
+
+--
+
+# run application
+mvn clean spring-boot:run
+
+# post data
+curl -X POST localhost:8080/students -H 'Content-type:application/json' -d '{"name": "Sam", "email": "sam@test.com"}'
+
+# get all data
+curl -v localhost:8080/students/
+
+# get data by id
+curl -v localhost:8080/students/1
+
+# delete data by id
+curl -X DELETE localhost:8080/students/1
+
