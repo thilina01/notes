@@ -58,12 +58,27 @@ class Student {
 
 --
 
+# create Projection  in student directory
+
+package com.example.demo.student;
+
+interface StudentProjection {
+
+    Long getId();
+
+    String getName();
+
+    String getEmail();
+}
+
 # create repository  in student directory
 
 package com.example.demo.student;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+@RepositoryRestResource(excerptProjection = StudentProjection.class)
 public interface StudentRepository extends PagingAndSortingRepository<Student, Long> {
 }
 
