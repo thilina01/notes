@@ -151,6 +151,15 @@ imports: [
 
 ---------------- content below this requires spring API
 
+/* create student class */
+ng g class pages/student/student
+
+export class Student {
+    id: number;
+    name: string;
+    email: string;
+}
+
 /* create student service */
 ng g service pages/student/student
 
