@@ -363,8 +363,21 @@ ng g c pages/student
           </div>
         </div>
 ----------------
+/** add HttpClientModule in to impotrs of app.module.ts & fix imports **/
 
-/* add proxy.conf.json file */
+
+/** edit pages-routing.module.ts and add routing to student page **/
+      { path: 'student', component: StudentComponent },
+
+
+/** edit header.component.html and add menu link to student page **/
+      <li class="nav-item">
+        <a class="nav-link" routerLink="student" routerLinkActive="active">Student</a>
+      </li>
+
+
+/* create proxy.conf.json file in root folder */
+
 {
     "/api": {
       "target": "http://localhost:8080",
