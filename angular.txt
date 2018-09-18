@@ -1,1 +1,372 @@
 
+ng new testApp --routing
+cd testApp
+ng g m pages --routing
+ng g c pages
+ng g c pages/@shared/header
+ng g c pages/@shared/footer
+ng g c pages/home
+ng g c pages/about
+code .
+ng serve -o
+
+
+/*** index.html head***/
+<!-- Bootstrap -->
+<!-- https://getbootstrap.com/docs/4.1/getting-started/introduction/ -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<!-- add js to the bottom of the page before html close tag -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+/* *** app-routing.module (Replace existing routers) *** */
+const routes: Routes = [
+  { path: 'pages', loadChildren: './pages/pages.module#PagesModule' },
+  { path: '', redirectTo: 'pages', pathMatch: 'full' },
+  { path: '**', redirectTo: 'pages/home' }
+];
+
+
+/* *** app.component.html *** *
+<router-outlet></router-outlet>
+
+
+/* *** pages-routing.module (Replace existing routers & fix imports) *** */
+const routes: Routes = [
+  {
+    path: '',
+    component: PagesComponent,
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
+      { path: 'about', component: AboutComponent }
+    ]
+  }
+];
+
+/* *** pages.component.html *** */
+<app-header></app-header>
+<br/>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+<app-footer></app-footer>
+
+
+/* *** header.component.html *** */
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="home" routerLinkActive="active">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="about" routerLinkActive="active">About</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+/* *** footer.component.html *** */
+<footer class="footer">
+  <div class="container">
+    <span class="text-muted">Footer goes here</span>
+  </div>
+</footer>
+
+
+/* *** footer.component.css *** */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+
+
+/* *** pages.module.ts ( import FormsModule )*** */
+import { FormsModule } from '@angular/forms';
+
+imports: [
+    CommonModule,
+    PagesRoutingModule,
+    FormsModule
+  ],
+
+
+
+/* *** home.component.html *** */
+<div class="row">
+
+  <div class="col-sm-6">
+    <div class="card">
+      <h4 class="card-header">Add Fruit {{fruit}}</h4>
+      <div class="card-body">
+        <input class="form-control" type="text" placeholder="Enter Fruit here" [(ngModel)]="fruit">
+      </div>
+      <div class="card-footer">
+        <div class="btn btn-primary" (click)="addFruit()">Add</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <h4 class="card-header">Fruit Bucket ({{fruits.length}})</h4>
+      <div class="card-body">
+        <ul class="list-group">
+          <li *ngFor="let fruit of fruits; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+            {{fruit}}
+            <span class="btn btn-danger btn-sm" (click)="removeFruit(i)">&times;</span>
+          </li>
+          <li *ngIf="fruits.length == 0" class="list-group-item align-items-center">
+             No Fruits Available, Please Add!
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+/* *** home.component.ts ( Declare a variable to hold and function to add fruit ) *** */
+  addFruit(): void {
+    this.fruits.push(this.fruit);
+    this.fruit = '';
+  }
+
+---------------- content below this requires spring API
+
+/* create student service */
+ng g service pages/student/student
+
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+
+import { Student } from './student';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
+@Injectable({ providedIn: 'root' })
+export class StudentService {
+
+  private studentsUrl = 'api/students';  // URL to web api
+
+  constructor(
+    private http: HttpClient) { }
+
+  /** GET students from the server */
+  getStudents(): Observable<any> {
+    return this.http.get<any>(this.studentsUrl)
+      .pipe(
+        tap(students => this.log('fetched students')),
+        catchError(this.handleError('getStudents', []))
+      );
+  }
+
+  /** GET student by id. Return `undefined` when id not found */
+  getStudentNo404<Data>(id: number): Observable<Student> {
+    const url = `${this.studentsUrl}/?id=${id}`;
+    return this.http.get<Student[]>(url)
+      .pipe(
+        map(students => students[0]), // returns a {0|1} element array
+        tap(h => {
+          const outcome = h ? `fetched` : `did not find`;
+          this.log(`${outcome} student id=${id}`);
+        }),
+        catchError(this.handleError<Student>(`getStudent id=${id}`))
+      );
+  }
+
+  /** GET student by id. Will 404 if id not found */
+  getStudent(id: number): Observable<Student> {
+    const url = `${this.studentsUrl}/${id}`;
+    return this.http.get<Student>(url).pipe(
+      tap(_ => this.log(`fetched student id=${id}`)),
+      catchError(this.handleError<Student>(`getStudent id=${id}`))
+    );
+  }
+
+  /* GET students whose name contains search term */
+  searchStudents(term: string): Observable<Student[]> {
+    if (!term.trim()) {
+      // if not search term, return empty student array.
+      return of([]);
+    }
+    return this.http.get<Student[]>(`${this.studentsUrl}/?name=${term}`).pipe(
+      tap(_ => this.log(`found students matching "${term}"`)),
+      catchError(this.handleError<Student[]>('searchStudents', []))
+    );
+  }
+
+  /** POST: add a new student to the server */
+  addStudent(student: Student): Observable<Student> {
+    return this.http.post<Student>(this.studentsUrl, student, httpOptions).pipe(
+      tap((student: Student) => this.log(`added student w/ id=${student.id}`)),
+      catchError(this.handleError<Student>('addStudent'))
+    );
+  }
+
+  /** DELETE: delete the student from the server */
+  deleteStudent(student: Student | number): Observable<Student> {
+    const id = typeof student === 'number' ? student : student.id;
+    const url = `${this.studentsUrl}/${id}`;
+
+    return this.http.delete<Student>(url, httpOptions).pipe(
+      tap(_ => this.log(`deleted student id=${id}`)),
+      catchError(this.handleError<Student>('deleteStudent'))
+    );
+  }
+
+  /** PUT: update the student on the server */
+  updateStudent(student: Student): Observable<any> {
+    return this.http.put(this.studentsUrl, student, httpOptions).pipe(
+      tap(_ => this.log(`updated student id=${student.id}`)),
+      catchError(this.handleError<any>('updateStudent'))
+    );
+  }
+
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
+  /** Log a StudentService message with the MessageService */
+  private log(message: string) {
+    // TODO: implement propper logging service 
+    console.log(message); // log to console instead
+  }
+}
+
+---------
+
+ng g c pages/student
+
+        /* student.component.ts */
+
+        import { Component, OnInit } from '@angular/core';
+        import { Student } from './student';
+        import { StudentService } from './student.service';
+        
+        @Component({
+          selector: 'app-student',
+          templateUrl: './student.component.html',
+          styleUrls: ['./student.component.css']
+        })
+        export class StudentComponent implements OnInit {
+          student = new Student();
+          students: Array<Student> = new Array();
+          constructor(private studentService: StudentService) { }
+        
+          ngOnInit() {
+            this.getStudents();
+          }
+        
+          getStudents(): void {
+            this.studentService.getStudents()
+              .subscribe(res => { this.students = res._embedded.students; });
+          }
+        
+          addStudent(): void {
+            this.studentService.addStudent(this.student)
+              .subscribe(student => this.getStudents());
+            this.student = new Student();
+          }
+        
+          editStudent(student) {
+            this.student = student;
+          }
+        
+          deleteStudent(student) {
+            this.studentService.deleteStudent(student).subscribe(() => this.getStudents());
+          }
+        }
+        
+/* student.component.html */
+<div class="row">
+
+        <div class="col-sm-6">
+          <div class="card">
+            <h4 class="card-header">Add Student {{student?.name}}</h4>
+            <div class="card-body">
+              <input class="form-control" type="text" placeholder="Enter Name" [(ngModel)]="student.name"><br />
+              <input class="form-control" type="text" placeholder="Enter Email" [(ngModel)]="student.email">
+            </div>
+            <div class="card-footer">
+              <div class="btn btn-primary" (click)="addStudent()">Add</div>
+            </div>
+          </div>
+      
+        </div>
+      
+        <div class="col-sm-6">
+          <div class="card">
+            <h4 class="card-header">Student List ({{students?.length}})</h4>
+            <div class="card-body">
+              <ul class="list-group">
+                <li *ngFor="let student of students; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+                  {{student.name}}&nbsp; {{student.email}}
+                  <span class="btn btn-danger btn-sm" (click)="deleteStudent(student)">&times;</span>
+                  <span class="btn btn-warning btn-sm" (click)="editStudent(student)">&#9998;</span>
+                </li>
+                <li *ngIf="students.length == 0" class="list-group-item align-items-center">
+                  Students not Available, Please Add!
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+----------------
+
+/* add proxy.conf.json file */
+{
+    "/api": {
+      "target": "http://localhost:8080",
+      "secure": false,
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
+  }
+
+/* use below command to run with proxy */
+ng serve --proxy-config proxy.conf.json
+
+or edit package.json 
+"start": "ng serve --proxy-config proxy.conf.json",
+
+
