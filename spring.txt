@@ -2,7 +2,7 @@
 https://start.spring.io/
 
 # Dependencies
-Web, JPA, MySQL, Rest Repositories,
+Web, JPA, MySQL, Rest Repositories,Lombok
 
 # extract 
 unzip demo.zip
