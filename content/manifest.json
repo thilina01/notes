@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2025-10-25T18:01:17.234Z",
+  "ordering": {
+    "method": "prefix",
+    "customOrder": []
+  },
+  "contentFiles": [
+    {
+      "file": "001-java-versions.json",
+      "order": 1,
+      "title": "java versions"
+    },
+    {
+      "file": "002-java-advanced.json",
+      "order": 2,
+      "title": "java advanced"
+    },
+    {
+      "file": "003-spring-advanced.json",
+      "order": 3,
+      "title": "spring advanced"
+    },
+    {
+      "file": "004-kubernetes.json",
+      "order": 4,
+      "title": "kubernetes"
+    },
+    {
+      "file": "005-docker.json",
+      "order": 5,
+      "title": "docker"
+    },
+    {
+      "file": "006-terraform.json",
+      "order": 6,
+      "title": "terraform"
+    },
+    {
+      "file": "008-postgresql-advanced.json",
+      "order": 8,
+      "title": "postgresql advanced"
+    },
+    {
+      "file": "009-mysql-advanced.json",
+      "order": 9,
+      "title": "mysql advanced"
+    },
+    {
+      "file": "010-interview-qa.json",
+      "order": 10,
+      "title": "interview qa"
+    },
+    {
+      "file": "content-template.json",
+      "order": 100,
+      "title": "content template"
+    }
+  ]
+}

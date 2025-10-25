@@ -1,0 +1,181 @@
+{
+  "config": {
+    "id": "java-versions",
+    "name": "Java Versions",
+    "description": "Java Programming Language & Ecosystem",
+    "icon": "☕",
+    "enabled": true
+  },
+  "content": [
+    {
+      "id": "8",
+      "title": "🧩 Java 8 (2014) — Functional Revolution",
+      "sections": [
+        {
+          "name": "✅ Lambda Expressions",
+          "code": "List<String> names = List.of(\"Thilina\", \"Sara\", \"Maya\");\nnames.forEach(n -> System.out.println(\"Hello, \" + n));"
+        },
+        {
+          "name": "✅ Stream API",
+          "code": "int sum = List.of(1, 2, 3, 4, 5)\n              .stream()\n              .filter(n -> n % 2 == 1)\n              .mapToInt(n -> n * n)\n              .sum();\nSystem.out.println(sum); // 35"
+        },
+        {
+          "name": "✅ Functional Interfaces",
+          "code": "Predicate<String> notEmpty = s -> !s.isEmpty();\nSystem.out.println(notEmpty.test(\"Java\")); // true"
+        },
+        {
+          "name": "✅ Default & Static Methods in Interfaces",
+          "code": "interface Greeting {\n    default void sayHello() { System.out.println(\"Hello!\"); }\n    static void info() { System.out.println(\"Static method in interface.\"); }\n}\nclass Person implements Greeting {}\nnew Person().sayHello(); \nGreeting.info();"
+        },
+        {
+          "name": "✅ Optional",
+          "code": "Optional<String> name = Optional.ofNullable(null);\nSystem.out.println(name.orElse(\"Unknown\"));"
+        },
+        {
+          "name": "✅ Date and Time API",
+          "code": "LocalDate today = LocalDate.now();\nLocalDate nextWeek = today.plusWeeks(1);\nSystem.out.println(today + \" → \" + nextWeek);"
+        },
+        {
+          "name": "✅ Parallel Streams",
+          "code": "IntStream.range(1, 6).parallel().forEach(System.out::println);"
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "title": "🧱 Java 9 (2017) — Modularity & Tooling",
+      "sections": [
+        {
+          "name": "✅ Improved Streams API",
+          "code": "Stream.of(1, 2, 3, 4, 5)\n      .takeWhile(n -> n < 4)\n      .forEach(System.out::print); // 123"
+        },
+        {
+          "name": "✅ Private Methods in Interfaces",
+          "code": "interface Helper {\n    private void log(String msg) { System.out.println(\"LOG: \" + msg); }\n    default void process() { log(\"Processing...\"); }\n}\nnew Helper(){}.process();"
+        },
+        {
+          "name": "✅ Factory Methods for Collections",
+          "code": "List<String> list = List.of(\"A\", \"B\", \"C\");\nSystem.out.println(list);"
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "title": "🔍 Java 10 (2018) — Local Variable Type Inference",
+      "sections": [
+        {
+          "name": "✅ Local Variable Type Inference (var)",
+          "code": "var list = List.of(\"Java\", \"10\", \"var\");\nvar map = Map.of(\"key\", \"value\");\nvar stream = list.stream();"
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "title": "🧰 Java 11 (2018 LTS) — Modernization & LTS",
+      "sections": [
+        {
+          "name": "✅ New HttpClient API",
+          "code": "var client = HttpClient.newHttpClient();\nvar request = HttpRequest.newBuilder(URI.create(\"https://example.com\")).build();\nvar response = client.send(request, HttpResponse.BodyHandlers.ofString());\nSystem.out.println(response.statusCode());"
+        },
+        {
+          "name": "✅ String Enhancements",
+          "code": "String s = \"  Java 11  \";\nSystem.out.println(s.isBlank()); // false\nSystem.out.println(s.strip());   // \"Java 11\"\nSystem.out.println(\"A\\nB\\nC\".lines().count()); // 3"
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "title": "💡 Java 14 (2020) — Expressive Code",
+      "sections": [
+        {
+          "name": "✅ Switch Expressions (Standard)",
+          "code": "String day = \"SAT\";\nString type = switch (day) {\n    case \"SAT\", \"SUN\" -> \"Weekend\";\n    default -> \"Weekday\";\n};\nSystem.out.println(type);"
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "title": "🧬 Java 15 (2020) — Syntax Modernization",
+      "sections": [
+        {
+          "name": "✅ Text Blocks",
+          "code": "String json = \"\"\"\n{\n  \"name\": \"Thilina\",\n  \"role\": \"Lead Developer\"\n}\n\"\"\";\nSystem.out.println(json);"
+        },
+        {
+          "name": "✅ Hidden Classes (Used internally)",
+          "code": "// Concept only — frameworks use Lookup.defineHiddenClass(bytecode, ...)\n// Used by frameworks like proxies, you usually don't code these manually"
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "title": "🦾 Java 16 (2021) — Records Become Official",
+      "sections": [
+        {
+          "name": "✅ Records",
+          "code": "record Point(int x, int y) {}\nPoint p = new Point(10, 20);\nSystem.out.println(p.x() + \", \" + p.y());"
+        }
+      ]
+    },
+    {
+      "id": "17",
+      "title": "🧠 Java 17 (2021 LTS) — Stability & Sealing",
+      "sections": [
+        {
+          "name": "✅ Sealed Classes",
+          "code": "sealed interface Shape permits Circle, Rectangle {}\nfinal class Circle implements Shape {}\nfinal class Rectangle implements Shape {}"
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "title": "⚡ Java 18 (2022) — Networking & UTF",
+      "sections": [
+        {
+          "name": "✅ Simple Web Server",
+          "code": "# Run in terminal\njwebserver --directory .\n\n# Then open http://localhost:8000 to serve current directory"
+        },
+        {
+          "name": "✅ UTF-8 by Default",
+          "code": "// Demonstration — no special code needed.\n// All new Java 18+ source files and console IO default to UTF-8 encoding.\nSystem.out.println(\"✓ UTF-8 by default\");"
+        }
+      ]
+    },
+    {
+      "id": "21",
+      "title": "🧵 Java 21 (2023 LTS) — Big Leap Forward",
+      "sections": [
+        {
+          "name": "✅ Virtual Threads",
+          "code": "try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {\n    IntStream.range(0, 5).forEach(i ->\n        executor.submit(() -> System.out.println(Thread.currentThread())));\n}"
+        },
+        {
+          "name": "✅ Record Patterns",
+          "code": "record Point(int x, int y) {}\nstatic void print(Point p) {\n    if (p instanceof Point(int x, int y)) {\n        System.out.println(x + \", \" + y);\n    }\n}\nprint(new Point(5, 6));"
+        },
+        {
+          "name": "✅ Pattern Matching for switch",
+          "code": "static String type(Object obj) {\n    return switch (obj) {\n        case Integer i -> \"int: \" + i;\n        case String s -> \"string: \" + s;\n        default -> \"unknown\";\n    };\n}\nSystem.out.println(type(\"Hi\"));"
+        },
+        {
+          "name": "✅ Sequenced Collections",
+          "code": "SequencedSet<String> set = new LinkedHashSet<>();\nset.addFirst(\"first\");\nset.addLast(\"last\");\nSystem.out.println(set.getFirst()); // first"
+        }
+      ]
+    },
+    {
+      "id": "22",
+      "title": "🔮 Java 22 (2024) — Polish & Practical Power",
+      "sections": [
+        {
+          "name": "✅ Statements before super() in Constructors",
+          "code": "class A { A(String msg) { System.out.println(msg); } }\nclass B extends A {\n    B() {\n        System.out.println(\"Before super()\");\n        super(\"From superclass\");\n    }\n}\nnew B();"
+        },
+        {
+          "name": "✅ Foreign Function & Memory API (Standard)",
+          "code": "try (Arena arena = Arena.ofConfined()) {\n    MemorySegment seg = arena.allocate(8);\n    seg.set(ValueLayout.JAVA_LONG, 0, 123L);\n    System.out.println(seg.get(ValueLayout.JAVA_LONG, 0));\n}"
+        }
+      ]
+    }
+  ]
+}

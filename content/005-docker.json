@@ -1,0 +1,188 @@
+{
+  "config": {
+    "id": "docker",
+    "name": "Docker",
+    "description": "Containerization platform for building, shipping, and running applications",
+    "icon": "🐳",
+    "enabled": true
+  },
+  "content": [
+    {
+      "id": "docker-basics",
+      "title": "🐳 Basics — Essential Commands",
+      "sections": [
+        {
+          "name": "Installation & Setup",
+          "text": "Docker is a containerization platform that allows you to package applications and their dependencies into lightweight, portable containers. This section covers installation and basic setup.",
+          "code": "# Install Docker on Ubuntu/Debian\nsudo apt update\nsudo apt install docker.io\nsudo systemctl start docker\nsudo systemctl enable docker\n\n# Install Docker on CentOS/RHEL\nsudo yum install docker\nsudo systemctl start docker\nsudo systemctl enable docker\n\n# Install Docker Desktop (Windows/Mac)\n# Download from: https://www.docker.com/products/docker-desktop\n\n# Verify installation\ndocker --version\ndocker-compose --version"
+        },
+        {
+          "name": "Images",
+          "text": "Docker images are read-only templates used to create containers. Learn how to manage images effectively.",
+          "code": "# List all images\ndocker images\ndocker image ls\n\n# Pull an image from Docker Hub\ndocker pull nginx:latest\ndocker pull ubuntu:20.04\n\n# Build an image from Dockerfile\ndocker build -t my-app:latest .\ndocker build -t my-app:v1.0 -f Dockerfile.prod .\n\n# Remove images\ndocker rmi nginx:latest\ndocker image rm ubuntu:20.04\n\n# Remove unused images\ndocker image prune\ndocker image prune -a  # Remove all unused images"
+        },
+        {
+          "name": "Containers",
+          "text": "Containers are running instances of Docker images. Master container lifecycle management.",
+          "code": "# Run a container\ndocker run nginx:latest\ndocker run -d nginx:latest  # Run in background\ndocker run -p 8080:80 nginx:latest  # Port mapping\ndocker run -v /host/path:/container/path nginx:latest  # Volume mount\n\n# List containers\ndocker ps  # Running containers\ndocker ps -a  # All containers\n\n# Stop and start containers\ndocker stop container_id\ndocker start container_id\ndocker restart container_id\n\n# Remove containers\ndocker rm container_id\ndocker container prune  # Remove stopped containers"
+        },
+        {
+          "name": "Networking",
+          "text": "Docker provides several networking options to connect containers and external networks.",
+          "code": "# List networks\ndocker network ls\n\n# Create a custom network\ndocker network create my-network\ndocker network create --driver bridge my-bridge\n\n# Run containers on specific network\ndocker run --network my-network nginx:latest\ndocker run --network host nginx:latest  # Use host network\n\n# Connect container to network\ndocker network connect my-network container_id\n\n# Inspect network\ndocker network inspect my-network\n\n# Remove network\ndocker network rm my-network"
+        }
+      ]
+    },
+    {
+      "id": "dockerfile-mastery",
+      "title": "📝 Mastery — Building Images",
+      "sections": [
+        {
+          "name": "Basics",
+          "text": "Dockerfile is a text file containing instructions to build Docker images. Learn the essential commands and best practices.",
+          "code": "# Basic Dockerfile example\nFROM node:16-alpine\n\n# Set working directory\nWORKDIR /app\n\n# Copy package files\nCOPY package*.json ./\n\n# Install dependencies\nRUN npm install\n\n# Copy application code\nCOPY . .\n\n# Expose port\nEXPOSE 3000\n\n# Define startup command\nCMD [\"npm\", \"start\"]"
+        },
+        {
+          "name": "Multi-stage Builds",
+          "text": "Multi-stage builds help create smaller, more efficient images by using multiple build stages.",
+          "code": "# Multi-stage Dockerfile for Node.js app\n# Build stage\nFROM node:16-alpine AS builder\nWORKDIR /app\nCOPY package*.json ./\nRUN npm install\nCOPY . .\nRUN npm run build\n\n# Production stage\nFROM node:16-alpine AS production\nWORKDIR /app\nCOPY package*.json ./\nRUN npm install --only=production\nCOPY --from=builder /app/dist ./dist\nEXPOSE 3000\nCMD [\"npm\", \"start\"]"
+        },
+        {
+          "name": "Dockerfile Best Practices",
+          "text": "Follow these best practices to create efficient, secure, and maintainable Docker images.",
+          "code": "# Best practices Dockerfile\nFROM node:16-alpine\n\n# Use specific user (security)\nRUN addgroup -g 1001 -S nodejs\nRUN adduser -S nextjs -u 1001\n\n# Set working directory\nWORKDIR /app\n\n# Copy package files first (better caching)\nCOPY package*.json ./\n\n# Install dependencies\nRUN npm ci --only=production && npm cache clean --force\n\n# Copy application code\nCOPY --chown=nextjs:nodejs . .\n\n# Switch to non-root user\nUSER nextjs\n\n# Expose port\nEXPOSE 3000\n\n# Health check\nHEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \\\n  CMD curl -f http://localhost:3000/health || exit 1\n\n# Start application\nCMD [\"npm\", \"start\"]"
+        },
+        {
+          "name": "Build Optimization",
+          "text": "Optimize your Docker builds for faster builds and smaller images using various techniques.",
+          "code": "# Optimized Dockerfile with build cache\nFROM node:16-alpine AS base\nWORKDIR /app\n\n# Install dependencies\nFROM base AS deps\nCOPY package*.json ./\nRUN npm ci --only=production\n\n# Build application\nFROM base AS builder\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nRUN npm run build\n\n# Production image\nFROM base AS runner\nENV NODE_ENV=production\nRUN addgroup --system --gid 1001 nodejs\nRUN adduser --system --uid 1001 nextjs\n\nCOPY --from=deps /app/node_modules ./node_modules\nCOPY --from=builder /app/dist ./dist\nCOPY --from=builder /app/public ./public\n\nUSER nextjs\nEXPOSE 3000\nCMD [\"npm\", \"start\"]"
+        }
+      ]
+    },
+    {
+      "id": "docker-compose",
+      "title": "🔗 Compose — Multi-Container Applications",
+      "sections": [
+        {
+          "name": "Compose Basics",
+          "text": "Docker Compose allows you to define and run multi-container Docker applications using YAML files.",
+          "code": "# docker-compose.yml example\nversion: '3.8'\n\nservices:\n  web:\n    build: .\n    ports:\n      - \"3000:3000\"\n    environment:\n      - NODE_ENV=production\n    depends_on:\n      - db\n      - redis\n\n  db:\n    image: postgres:13\n    environment:\n      POSTGRES_DB: myapp\n      POSTGRES_USER: user\n      POSTGRES_PASSWORD: password\n    volumes:\n      - postgres_data:/var/lib/postgresql/data\n\n  redis:\n    image: redis:6-alpine\n    ports:\n      - \"6379:6379\"\n\nvolumes:\n  postgres_data:"
+        },
+        {
+          "name": "Compose Commands",
+          "text": "Essential Docker Compose commands for managing multi-container applications.",
+          "code": "# Start services\ndocker-compose up\ndocker-compose up -d  # Run in background\ndocker-compose up --build  # Rebuild images\n\n# Stop services\ndocker-compose down\ndocker-compose down -v  # Remove volumes\n\n# View logs\ndocker-compose logs\ndocker-compose logs web  # Specific service\n\n# Scale services\ndocker-compose up --scale web=3\n\n# Execute commands in running container\ndocker-compose exec web bash\ndocker-compose exec db psql -U user -d myapp\n\n# View running services\ndocker-compose ps"
+        },
+        {
+          "name": "Environment Configuration",
+          "text": "Manage different environments (development, staging, production) using Docker Compose.",
+          "code": "# docker-compose.override.yml (for development)\nversion: '3.8'\n\nservices:\n  web:\n    build:\n      context: .\n      target: development\n    volumes:\n      - .:/app\n      - /app/node_modules\n    environment:\n      - NODE_ENV=development\n    ports:\n      - \"3000:3000\"\n      - \"9229:9229\"  # Debug port\n\n  db:\n    ports:\n      - \"5432:5432\"\n\n# docker-compose.prod.yml (for production)\nversion: '3.8'\n\nservices:\n  web:\n    build:\n      context: .\n      target: production\n    environment:\n      - NODE_ENV=production\n    restart: unless-stopped\n\n  db:\n    restart: unless-stopped\n    environment:\n      - POSTGRES_PASSWORD_FILE=/run/secrets/db_password\n    secrets:\n      - db_password\n\nsecrets:\n  db_password:\n    file: ./secrets/db_password.txt"
+        },
+        {
+          "name": "Networking & Volumes",
+          "text": "Advanced Docker Compose features for networking and persistent data storage.",
+          "code": "# Advanced docker-compose.yml with networking and volumes\nversion: '3.8'\n\nservices:\n  web:\n    build: .\n    networks:\n      - frontend\n      - backend\n    volumes:\n      - app_data:/app/data\n      - ./logs:/app/logs\n\n  api:\n    build: ./api\n    networks:\n      - backend\n    volumes:\n      - api_data:/app/data\n\n  db:\n    image: postgres:13\n    networks:\n      - backend\n    volumes:\n      - postgres_data:/var/lib/postgresql/data\n      - ./init.sql:/docker-entrypoint-initdb.d/init.sql\n\n  nginx:\n    image: nginx:alpine\n    networks:\n      - frontend\n    volumes:\n      - ./nginx.conf:/etc/nginx/nginx.conf\n    ports:\n      - \"80:80\"\n      - \"443:443\"\n\nnetworks:\n  frontend:\n    driver: bridge\n  backend:\n    driver: bridge\n\nvolumes:\n  app_data:\n  api_data:\n  postgres_data:"
+        }
+      ]
+    },
+    {
+      "id": "docker-volumes",
+      "title": "💾 Volumes — Data Persistence",
+      "sections": [
+        {
+          "name": "Volume Types",
+          "text": "Docker provides three types of volumes for data persistence: named volumes, bind mounts, and tmpfs mounts.",
+          "code": "# Named volumes (recommended)\ndocker volume create my-volume\ndocker run -v my-volume:/data nginx:latest\n\n# Bind mounts (host path)\ndocker run -v /host/path:/container/path nginx:latest\ndocker run -v $(pwd):/app nginx:latest\n\n# tmpfs mounts (in-memory)\ndocker run --tmpfs /tmp nginx:latest\ndocker run --tmpfs /tmp:rw,size=100m nginx:latest\n\n# List volumes\ndocker volume ls\n\n# Inspect volume\ndocker volume inspect my-volume\n\n# Remove volume\ndocker volume rm my-volume\ndocker volume prune  # Remove unused volumes"
+        },
+        {
+          "name": "Volume Management",
+          "text": "Best practices for managing Docker volumes and ensuring data persistence.",
+          "code": "# Create and manage volumes\ndocker volume create --driver local \\\n  --opt type=none \\\n  --opt device=/path/to/host/directory \\\n  --opt o=bind \\\n  my-bind-volume\n\n# Backup volume data\ndocker run --rm -v my-volume:/data -v $(pwd):/backup \\\n  alpine tar czf /backup/backup.tar.gz -C /data .\n\n# Restore volume data\ndocker run --rm -v my-volume:/data -v $(pwd):/backup \\\n  alpine tar xzf /backup/backup.tar.gz -C /data\n\n# Copy data between containers\ndocker cp container1:/data/file.txt container2:/data/\n\n# Mount volume with specific permissions\ndocker run -v my-volume:/data:ro nginx:latest  # Read-only"
+        },
+        {
+          "name": "Database Volumes",
+          "text": "Proper volume configuration for database containers to ensure data persistence.",
+          "code": "# PostgreSQL with persistent volume\ndocker run -d \\\n  --name postgres-db \\\n  -e POSTGRES_DB=mydb \\\n  -e POSTGRES_USER=user \\\n  -e POSTGRES_PASSWORD=password \\\n  -v postgres_data:/var/lib/postgresql/data \\\n  -p 5432:5432 \\\n  postgres:13\n\n# MySQL with persistent volume\ndocker run -d \\\n  --name mysql-db \\\n  -e MYSQL_ROOT_PASSWORD=rootpassword \\\n  -e MYSQL_DATABASE=mydb \\\n  -e MYSQL_USER=user \\\n  -e MYSQL_PASSWORD=password \\\n  -v mysql_data:/var/lib/mysql \\\n  -p 3306:3306 \\\n  mysql:8.0\n\n# MongoDB with persistent volume\ndocker run -d \\\n  --name mongo-db \\\n  -e MONGO_INITDB_ROOT_USERNAME=admin \\\n  -e MONGO_INITDB_ROOT_PASSWORD=password \\\n  -v mongo_data:/data/db \\\n  -p 27017:27017 \\\n  mongo:5.0"
+        }
+      ]
+    },
+    {
+      "id": "docker-security",
+      "title": "🔒 Security — Best Practices",
+      "sections": [
+        {
+          "name": "Container Security",
+          "text": "Essential security practices for Docker containers to protect your applications and infrastructure.",
+          "code": "# Run container as non-root user\nFROM node:16-alpine\nRUN addgroup -g 1001 -S nodejs\nRUN adduser -S nextjs -u 1001\nUSER nextjs\n\n# Use specific image tags (not 'latest')\nFROM node:16.7.0-alpine  # Instead of node:latest\n\n# Scan images for vulnerabilities\ndocker scan nginx:latest\ndocker scan my-app:latest\n\n# Use multi-stage builds to reduce attack surface\nFROM node:16-alpine AS builder\n# ... build steps\nFROM node:16-alpine AS production\nCOPY --from=builder /app/dist ./dist\n# Only production dependencies"
+        },
+        {
+          "name": "Network Security",
+          "text": "Secure Docker networking and limit container communication.",
+          "code": "# Create isolated network\ndocker network create --internal secure-network\n\n# Run container on isolated network\ndocker run --network secure-network nginx:latest\n\n# Limit container capabilities\ndocker run --cap-drop=ALL --cap-add=NET_BIND_SERVICE nginx:latest\n\n# Use read-only filesystem\ndocker run --read-only nginx:latest\n\n# Set memory and CPU limits\ndocker run --memory=512m --cpus=1.0 nginx:latest\n\n# Disable privileged mode\ndocker run --privileged=false nginx:latest\n\n# Use security options\ndocker run --security-opt=no-new-privileges nginx:latest"
+        },
+        {
+          "name": "Secrets Management",
+          "text": "Manage sensitive data securely in Docker containers using Docker secrets.",
+          "code": "# Create Docker secret\necho 'mysecretpassword' | docker secret create db_password -\n\n# Use secret in service\ndocker service create \\\n  --name web \\\n  --secret db_password \\\n  --env DB_PASSWORD_FILE=/run/secrets/db_password \\\n  nginx:latest\n\n# Docker Compose with secrets\nversion: '3.8'\nservices:\n  web:\n    image: nginx:latest\n    secrets:\n      - db_password\n    environment:\n      - DB_PASSWORD_FILE=/run/secrets/db_password\n\nsecrets:\n  db_password:\n    file: ./secrets/db_password.txt\n\n# External secret\ndocker secret create external_secret ./secret_file.txt"
+        },
+        {
+          "name": "Image Security Scanning",
+          "text": "Regular security scanning and vulnerability assessment for Docker images.",
+          "code": "# Scan image with Docker Scout\ndocker scout cves nginx:latest\ndocker scout recommendations nginx:latest\n\n# Scan with Trivy\ndocker run --rm -v /var/run/docker.sock:/var/run/docker.sock \\\n  aquasec/trivy image nginx:latest\n\n# Scan with Snyk\ndocker run --rm -v /var/run/docker.sock:/var/run/docker.sock \\\n  snyk/snyk:docker nginx:latest\n\n# Build with security scanning\ndocker build --security-opt=no-new-privileges \\\n  --cap-drop=ALL \\\n  -t my-secure-app .\n\n# Use distroless base images\ndocker run gcr.io/distroless/java:11"
+        }
+      ]
+    },
+    {
+      "id": "docker-monitoring",
+      "title": "📊 Monitoring — Observability",
+      "sections": [
+        {
+          "name": "Container Monitoring",
+          "text": "Monitor Docker containers for performance, resource usage, and health status.",
+          "code": "# View container stats\ndocker stats\ndocker stats container_id\ndocker stats --format \"table {{.Container}}\\t{{.CPUPerc}}\\t{{.MemUsage}}\"\n\n# Monitor specific metrics\ndocker stats --no-stream --format \"{{.Container}}: {{.CPUPerc}} CPU, {{.MemUsage}} Memory\"\n\n# View container logs\ndocker logs container_id\ndocker logs -f container_id  # Follow logs\ndocker logs --tail 100 container_id\n\n# Inspect container\ndocker inspect container_id\ndocker inspect --format='{{.State.Health.Status}}' container_id"
+        },
+        {
+          "name": "Health Checks",
+          "text": "Implement health checks to monitor container and application health.",
+          "code": "# Dockerfile with health check\nFROM nginx:alpine\n\nHEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \\\n  CMD curl -f http://localhost/health || exit 1\n\n# Docker Compose with health check\nversion: '3.8'\nservices:\n  web:\n    image: nginx:alpine\n    healthcheck:\n      test: [\"CMD\", \"curl\", \"-f\", \"http://localhost/health\"]\n      interval: 30s\n      timeout: 10s\n      retries: 3\n      start_period: 40s\n\n# Custom health check script\nHEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \\\n  CMD /usr/local/bin/health-check.sh || exit 1"
+        },
+        {
+          "name": "Logging Configuration",
+          "text": "Configure Docker logging drivers and log management for better observability.",
+          "code": "# Configure logging driver\ndocker run --log-driver=json-file \\\n  --log-opt max-size=10m \\\n  --log-opt max-file=3 \\\n  nginx:latest\n\n# Syslog logging\ndocker run --log-driver=syslog \\\n  --log-opt syslog-address=udp://localhost:514 \\\n  nginx:latest\n\n# Fluentd logging\ndocker run --log-driver=fluentd \\\n  --log-opt fluentd-address=localhost:24224 \\\n  --log-opt tag=docker.{{.Name}} \\\n  nginx:latest\n\n# Docker Compose logging\nversion: '3.8'\nservices:\n  web:\n    image: nginx:alpine\n    logging:\n      driver: json-file\n      options:\n        max-size: \"10m\"\n        max-file: \"3\""
+        },
+        {
+          "name": "Performance Monitoring",
+          "text": "Monitor Docker performance metrics and optimize container resource usage.",
+          "code": "# Monitor resource usage\ndocker system df  # Disk usage\ndocker system events  # Real-time events\n\n# Monitor specific container\ndocker exec container_id top\ndocker exec container_id ps aux\n\n# Monitor network traffic\ndocker exec container_id netstat -tulpn\ndocker exec container_id ss -tulpn\n\n# Monitor file system\ndocker exec container_id df -h\ndocker exec container_id du -sh /*\n\n# Performance profiling\ndocker run --rm -it --pid=host alpine:latest \\\n  sh -c 'apk add --no-cache procps && top'"
+        }
+      ]
+    },
+    {
+      "id": "docker-production",
+      "title": "🚀 Production — Deployment",
+      "sections": [
+        {
+          "name": "Production Best Practices",
+          "text": "Essential practices for running Docker containers in production environments.",
+          "code": "# Production Dockerfile\nFROM node:16-alpine AS base\nWORKDIR /app\n\n# Install security updates\nRUN apk update && apk upgrade\n\n# Create non-root user\nRUN addgroup -g 1001 -S nodejs\nRUN adduser -S nextjs -u 1001\n\n# Install dependencies\nCOPY package*.json ./\nRUN npm ci --only=production && npm cache clean --force\n\n# Copy application\nCOPY --chown=nextjs:nodejs . .\n\n# Switch to non-root user\nUSER nextjs\n\n# Health check\nHEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \\\n  CMD curl -f http://localhost:3000/health || exit 1\n\n# Start application\nCMD [\"npm\", \"start\"]"
+        },
+        {
+          "name": "Container Orchestration",
+          "text": "Deploy and manage Docker containers at scale using orchestration tools.",
+          "code": "# Docker Swarm deployment\ndocker swarm init\ndocker service create --name web --replicas 3 -p 80:80 nginx:latest\n\n# Docker Swarm stack\ndocker stack deploy -c docker-compose.yml myapp\n\n# Kubernetes deployment\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: web-app\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: web-app\n  template:\n    metadata:\n      labels:\n        app: web-app\n    spec:\n      containers:\n      - name: web\n        image: my-app:latest\n        ports:\n        - containerPort: 3000"
+        },
+        {
+          "name": "CI/CD Integration",
+          "text": "Integrate Docker into your CI/CD pipeline for automated builds and deployments.",
+          "code": "# GitHub Actions with Docker\nname: Build and Deploy\non:\n  push:\n    branches: [main]\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n    - uses: actions/checkout@v2\n    \n    - name: Build Docker image\n      run: docker build -t my-app:${{ github.sha }} .\n    \n    - name: Run tests\n      run: docker run --rm my-app:${{ github.sha }} npm test\n    \n    - name: Push to registry\n      run: |\n        echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin\n        docker push my-app:${{ github.sha }}\n    \n    - name: Deploy\n      run: docker service update --image my-app:${{ github.sha }} web-service"
+        },
+        {
+          "name": "Scaling & Load Balancing",
+          "text": "Scale Docker applications and implement load balancing for high availability.",
+          "code": "# Scale Docker Compose services\ndocker-compose up --scale web=5\n\n# Docker Swarm scaling\ndocker service scale web=5\n\n# Load balancer with Nginx\nupstream backend {\n    server web1:3000;\n    server web2:3000;\n    server web3:3000;\n}\n\nserver {\n    listen 80;\n    location / {\n        proxy_pass http://backend;\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n    }\n}\n\n# Health check for load balancer\nupstream backend {\n    server web1:3000 max_fails=3 fail_timeout=30s;\n    server web2:3000 max_fails=3 fail_timeout=30s;\n    server web3:3000 max_fails=3 fail_timeout=30s;\n}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "config": {
+    "id": "template",
+    "name": "Template Name",
+    "description": "Brief description of what this content covers",
+    "icon": "🎯",
+    "enabled": false
+  },
+  "content": [
+    {
+      "id": "item1",
+      "title": "📝 Item 1 — Brief Description",
+      "sections": [
+        {
+          "name": "✅ Section 1",
+          "text": "This is a descriptive text explaining the section. It can span multiple lines and will preserve line breaks.\n\nYou can include:\n• Bullet points\n• Multiple paragraphs\n• Detailed explanations",
+          "code": "// Example code for Section 1\nfunction exampleFunction() {\n    console.log('Hello, World!');\n    return 'Success';\n}"
+        },
+        {
+          "name": "✅ Section 2",
+          "text": "Another section with just text content. No code needed for this one.",
+          "code": null
+        },
+        {
+          "name": "✅ Section 3",
+          "code": "// Code-only section\nconst data = {\n    name: 'Example',\n    value: 42\n};",
+          "text": null
+        }
+      ]
+    },
+    {
+      "id": "item2",
+      "title": "📝 Item 2 — Another Description",
+      "sections": [
+        {
+          "name": "✅ Advanced Section",
+          "text": "This section demonstrates mixed content with both explanatory text and code examples.",
+          "code": "// Advanced example\nclass ExampleClass {\n    constructor(name) {\n        this.name = name;\n    }\n    \n    greet() {\n        return `Hello, ${this.name}!`;\n    }\n}"
+        },
+        {
+          "name": "✅ Configuration Section",
+          "text": "Configuration settings and their explanations:\n\n• Setting 1: Controls basic behavior\n• Setting 2: Advanced configuration\n• Setting 3: Optional feature toggle",
+          "code": "// Configuration example\nconst config = {\n    setting1: true,\n    setting2: 'advanced',\n    setting3: false\n};"
+        }
+      ]
+    }
+  ]
+}

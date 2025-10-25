@@ -1,0 +1,23 @@
+{
+  "name": "tech-learning-hub",
+  "version": "1.0.0",
+  "description": "A dynamic content management system for technical learning materials",
+  "scripts": {
+    "update-manifest": "node update-manifest.js",
+    "start": "python -m http.server 8000",
+    "start-node": "npx http-server -p 8000"
+  },
+  "keywords": [
+    "learning",
+    "documentation",
+    "tech",
+    "java",
+    "kubernetes",
+    "spring"
+  ],
+  "author": "Tech Learning Hub",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

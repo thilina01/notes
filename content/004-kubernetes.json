@@ -1,0 +1,194 @@
+{
+  "config": {
+    "id": "kubernetes",
+    "name": "Kubernetes",
+    "description": "Kubernetes Orchestration & Container Management",
+    "icon": "☸️",
+    "enabled": true
+  },
+  "content": [
+    {
+      "id": "basic-commands",
+      "title": "🔧 Basic kubectl Commands",
+      "sections": [
+        {
+          "name": "✅ Cluster Information",
+          "text": "Essential commands to get information about your Kubernetes cluster and its components.",
+          "code": "# Get cluster information\nkubectl cluster-info\n\n# Get detailed cluster information\nkubectl cluster-info dump\n\n# Get cluster version\nkubectl version\n\n# Get API resources\nkubectl api-resources"
+        },
+        {
+          "name": "✅ Node Management",
+          "text": "Commands to view and manage Kubernetes nodes in your cluster.",
+          "code": "# List all nodes\nkubectl get nodes\n\n# Get detailed node information\nkubectl get nodes -o wide\n\n# Describe a specific node\nkubectl describe node <node-name>\n\n# Get node resource usage\nkubectl top nodes"
+        },
+        {
+          "name": "✅ Pod Operations",
+          "text": "Commands to view, manage, and troubleshoot pods in your cluster.",
+          "code": "# List all pods\nkubectl get pods\n\n# List pods in all namespaces\nkubectl get pods --all-namespaces\n\n# List pods with additional info\nkubectl get pods -o wide\n\n# Describe a specific pod\nkubectl describe pod <pod-name>\n\n# Get pod logs\nkubectl logs <pod-name>\n\n# Follow logs in real-time\nkubectl logs -f <pod-name>"
+        },
+        {
+          "name": "✅ Deployment Management",
+          "text": "Commands to manage deployments and their lifecycle.",
+          "code": "# List all deployments\nkubectl get deployments\n\n# Get deployment details\nkubectl describe deployment <deployment-name>\n\n# Get deployment status\nkubectl rollout status deployment/<deployment-name>\n\n# View deployment history\nkubectl rollout history deployment/<deployment-name>\n\n# Rollback to previous version\nkubectl rollout undo deployment/<deployment-name>"
+        },
+        {
+          "name": "✅ Service Management",
+          "text": "Commands to manage services and networking in Kubernetes.",
+          "code": "# List all services\nkubectl get services\n# Short form\nkubectl get svc\n\n# Get service details\nkubectl describe service <service-name>\n\n# List services in specific namespace\nkubectl get svc -n <namespace>\n\n# Get service endpoints\nkubectl get endpoints"
+        },
+        {
+          "name": "✅ Ingress Management",
+          "text": "Commands to manage ingress resources for external access.",
+          "code": "# List all ingress resources\nkubectl get ingress\n\n# Get ingress details\nkubectl describe ingress <ingress-name>\n\n# List ingress in specific namespace\nkubectl get ingress -n <namespace>\n\n# Get ingress with additional info\nkubectl get ingress -o wide"
+        }
+      ]
+    },
+    {
+      "id": "namespace-operations",
+      "title": "📁 Namespace Operations",
+      "sections": [
+        {
+          "name": "✅ Namespace Basics",
+          "text": "Namespaces provide logical separation of resources in a Kubernetes cluster. They help organize and isolate different applications or environments.",
+          "code": "# List all namespaces\nkubectl get namespaces\n# Short form\nkubectl get ns\n\n# Create a new namespace\nkubectl create namespace <namespace-name>\n\n# Delete a namespace\nkubectl delete namespace <namespace-name>\n\n# Get current namespace context\nkubectl config view --minify --output 'jsonpath={..namespace}'"
+        },
+        {
+          "name": "✅ Working with Namespaces",
+          "text": "Commands to work with resources in specific namespaces and manage namespace-scoped operations.",
+          "code": "# Get pods in specific namespace\nkubectl get pods -n <namespace>\n\n# Get all resources in namespace\nkubectl get all -n <namespace>\n\n# Set default namespace for current context\nkubectl config set-context --current --namespace=<namespace>\n\n# Switch to different namespace context\nkubectl config use-context <context-name> --namespace=<namespace>"
+        },
+        {
+          "name": "✅ Cross-Namespace Operations",
+          "text": "Commands to work across multiple namespaces and get cluster-wide information.",
+          "code": "# Get pods from all namespaces\nkubectl get pods --all-namespaces\n# Short form\nkubectl get pods -A\n\n# Get all resources from all namespaces\nkubectl get all --all-namespaces\n\n# Describe resource across namespaces\nkubectl describe pod <pod-name> -n <namespace>\n\n# Get resource usage across namespaces\nkubectl top pods --all-namespaces"
+        }
+      ]
+    },
+    {
+      "id": "file-operations",
+      "title": "📄 File Operations & Configuration",
+      "sections": [
+        {
+          "name": "✅ Apply Configuration Files",
+          "text": "Apply Kubernetes manifests and configuration files to create or update resources.",
+          "code": "# Apply a single file\nkubectl apply -f <file.yaml>\n\n# Apply multiple files\nkubectl apply -f <directory/>\n\n# Apply with specific namespace\nkubectl apply -f <file.yaml> -n <namespace>\n\n# Dry run to see what would be created\nkubectl apply -f <file.yaml> --dry-run=client\n\n# Apply and force recreation\nkubectl apply -f <file.yaml> --force"
+        },
+        {
+          "name": "✅ Delete Resources",
+          "text": "Commands to delete Kubernetes resources using configuration files or direct resource names.",
+          "code": "# Delete resources from file\nkubectl delete -f <file.yaml>\n\n# Delete specific resource\nkubectl delete pod <pod-name>\n\n# Delete with namespace\nkubectl delete pod <pod-name> -n <namespace>\n\n# Delete all resources of a type\nkubectl delete pods --all\n\n# Delete with grace period\nkubectl delete pod <pod-name> --grace-period=30"
+        },
+        {
+          "name": "✅ File Copy Operations",
+          "text": "Copy files between local machine and Kubernetes pods for debugging and maintenance.",
+          "code": "# Copy file from local to pod\nkubectl cp local.txt <pod-name>:/path/to/destination\n\n# Copy file from pod to local\nkubectl cp <pod-name>:/path/to/file local.txt\n\n# Copy directory\nkubectl cp local-dir/ <pod-name>:/path/to/destination/\n\n# Copy with namespace\nkubectl cp local.txt <pod-name>:/path/ -n <namespace>"
+        }
+      ]
+    },
+    {
+      "id": "debugging-troubleshooting",
+      "title": "🐛 Debugging & Troubleshooting",
+      "sections": [
+        {
+          "name": "✅ Pod Debugging",
+          "text": "Essential commands for debugging pods and understanding their current state.",
+          "code": "# Describe pod for detailed information\nkubectl describe pod <pod-name>\n\n# Get pod logs\nkubectl logs <pod-name>\n\n# Get logs from previous container instance\nkubectl logs <pod-name> --previous\n\n# Get logs from specific container in multi-container pod\nkubectl logs <pod-name> -c <container-name>\n\n# Follow logs in real-time\nkubectl logs -f <pod-name>"
+        },
+        {
+          "name": "✅ Interactive Pod Access",
+          "text": "Commands to access pods interactively for debugging and maintenance tasks.",
+          "code": "# Execute command in pod\nkubectl exec <pod-name> -- <command>\n\n# Interactive shell access\nkubectl exec -it <pod-name> -- /bin/bash\n\n# Access with specific shell\nkubectl exec -it <pod-name> -- /bin/sh\n\n# Execute in specific container\nkubectl exec -it <pod-name> -c <container-name> -- /bin/bash\n\n# Run command with namespace\nkubectl exec -it <pod-name> -n <namespace> -- /bin/bash"
+        },
+        {
+          "name": "✅ Port Forwarding",
+          "text": "Port forwarding allows you to access services running in pods from your local machine.",
+          "code": "# Forward pod port to local\nkubectl port-forward <pod-name> 8080:80\n\n# Forward service port\nkubectl port-forward svc/<service-name> 8080:80\n\n# Forward with namespace\nkubectl port-forward svc/<service-name> 8080:80 -n <namespace>\n\n# Forward multiple ports\nkubectl port-forward <pod-name> 8080:80 9090:9090\n\n# Forward to specific local address\nkubectl port-forward --address 0.0.0.0 <pod-name> 8080:80"
+        }
+      ]
+    },
+    {
+      "id": "deployment-management",
+      "title": "🚀 Deployment Management",
+      "sections": [
+        {
+          "name": "✅ Image Updates",
+          "text": "Commands to update container images in deployments and manage rolling updates.",
+          "code": "# Update deployment image\nkubectl set image deployment/<deployment-name> <container-name>=<new-image>\n\n# Update multiple containers\nkubectl set image deployment/<deployment-name> container1=image1:tag1 container2=image2:tag2\n\n# Update with namespace\nkubectl set image deployment/<deployment-name> <container-name>=<new-image> -n <namespace>\n\n# Update environment variables\nkubectl set env deployment/<deployment-name> KEY=value"
+        },
+        {
+          "name": "✅ Rollout Management",
+          "text": "Commands to manage deployment rollouts, check status, and handle rollbacks.",
+          "code": "# Check rollout status\nkubectl rollout status deployment/<deployment-name>\n\n# View rollout history\nkubectl rollout history deployment/<deployment-name>\n\n# Rollback to previous version\nkubectl rollout undo deployment/<deployment-name>\n\n# Rollback to specific revision\nkubectl rollout undo deployment/<deployment-name> --to-revision=2\n\n# Pause rollout\nkubectl rollout pause deployment/<deployment-name>\n\n# Resume rollout\nkubectl rollout resume deployment/<deployment-name>"
+        },
+        {
+          "name": "✅ Scaling Operations",
+          "text": "Commands to scale deployments and manage replica counts.",
+          "code": "# Scale deployment\nkubectl scale deployment <deployment-name> --replicas=3\n\n# Scale with namespace\nkubectl scale deployment <deployment-name> --replicas=5 -n <namespace>\n\n# Scale based on CPU utilization\nkubectl autoscale deployment <deployment-name> --min=2 --max=10 --cpu-percent=50\n\n# Get current replica count\nkubectl get deployment <deployment-name> -o jsonpath='{.spec.replicas}'"
+        }
+      ]
+    },
+    {
+      "id": "configuration-management",
+      "title": "⚙️ Configuration Management",
+      "sections": [
+        {
+          "name": "✅ ConfigMaps",
+          "text": "ConfigMaps store configuration data as key-value pairs that can be consumed by pods.",
+          "code": "# Create ConfigMap from file\nkubectl create configmap <config-name> --from-file=<file-path>\n\n# Create ConfigMap from directory\nkubectl create configmap <config-name> --from-file=<directory-path>\n\n# Create ConfigMap from literal values\nkubectl create configmap <config-name> --from-literal=key1=value1 --from-literal=key2=value2\n\n# List ConfigMaps\nkubectl get configmaps\n\n# Describe ConfigMap\nkubectl describe configmap <config-name>\n\n# Get ConfigMap data\nkubectl get configmap <config-name> -o yaml"
+        },
+        {
+          "name": "✅ Secrets",
+          "text": "Secrets store sensitive data like passwords, tokens, and keys securely.",
+          "code": "# Create secret from file\nkubectl create secret generic <secret-name> --from-file=<file-path>\n\n# Create secret from literal values\nkubectl create secret generic <secret-name> --from-literal=username=admin --from-literal=password=secret\n\n# Create Docker registry secret\nkubectl create secret docker-registry <secret-name> --docker-server=<server> --docker-username=<username> --docker-password=<password>\n\n# List secrets\nkubectl get secrets\n\n# Describe secret\nkubectl describe secret <secret-name>\n\n# Get secret data (base64 encoded)\nkubectl get secret <secret-name> -o yaml"
+        },
+        {
+          "name": "✅ External Secrets",
+          "text": "External Secrets Operator integrates with external secret management systems like AWS Secrets Manager.",
+          "code": "# Create SecretStore for AWS Secrets Manager\napiVersion: external-secrets.io/v1beta1\nkind: SecretStore\nmetadata:\n  name: aws-secrets-manager\nspec:\n  provider:\n    aws:\n      service: SecretsManager\n      region: us-west-2\n      auth:\n        secretRef:\n          accessKeyID:\n            name: aws-credentials\n            key: access-key\n          secretAccessKey:\n            name: aws-credentials\n            key: secret-key\n\n# Create ExternalSecret\napiVersion: external-secrets.io/v1beta1\nkind: ExternalSecret\nmetadata:\n  name: app-secrets\nspec:\n  refreshInterval: 1h\n  secretStoreRef:\n    name: aws-secrets-manager\n    kind: SecretStore\n  target:\n    name: app-secrets\n    creationPolicy: Owner\n  data:\n  - secretKey: database-password\n    remoteRef:\n      key: prod/database\n      property: password"
+        }
+      ]
+    },
+    {
+      "id": "cluster-architecture",
+      "title": "🏗️ Cluster Architecture",
+      "sections": [
+        {
+          "name": "✅ Control Plane Components",
+          "text": "The control plane manages the cluster and makes decisions about cluster state. It consists of several key components.",
+          "code": "# API Server - Central management point\n# Handles all API requests and validates them\n# Runs on master nodes\n\n# etcd - Distributed key-value store\n# Stores all cluster data and configuration\n# Provides consistency and reliability\n\n# Controller Manager - Runs controllers\n# Node Controller: Monitors node health\n# Replication Controller: Maintains desired replica count\n# Endpoint Controller: Manages service endpoints\n\n# Scheduler - Assigns pods to nodes\n# Considers resource requirements, constraints, and policies\n# Makes placement decisions for new pods"
+        },
+        {
+          "name": "✅ Worker Node Components",
+          "text": "Worker nodes run the actual workloads and communicate with the control plane.",
+          "code": "# Kubelet - Node agent\n# Communicates with API Server\n# Manages pods and containers on the node\n# Reports node and pod status\n\n# Container Runtime - Runs containers\n# Examples: Docker, containerd, CRI-O\n# Pulls images and manages container lifecycle\n\n# Kube-proxy - Network proxy\n# Maintains network rules on nodes\n# Enables service discovery and load balancing\n# Implements service abstraction"
+        },
+        {
+          "name": "✅ Context Management",
+          "text": "Kubernetes contexts allow you to manage multiple clusters and switch between them easily.",
+          "code": "# List all available contexts\nkubectl config get-contexts\n\n# Get current context\nkubectl config current-context\n\n# Switch to different context\nkubectl config use-context <context-name>\n\n# Set namespace for current context\nkubectl config set-context --current --namespace=<namespace>\n\n# Create new context\nkubectl config set-context <context-name> --cluster=<cluster-name> --user=<user-name>\n\n# Delete context\nkubectl config delete-context <context-name>"
+        }
+      ]
+    },
+    {
+      "id": "advanced-operations",
+      "title": "🔬 Advanced Operations",
+      "sections": [
+        {
+          "name": "✅ Resource Monitoring",
+          "text": "Commands to monitor resource usage and performance across the cluster.",
+          "code": "# Get resource usage for nodes\nkubectl top nodes\n\n# Get resource usage for pods\nkubectl top pods\n\n# Get resource usage in specific namespace\nkubectl top pods -n <namespace>\n\n# Get resource usage for all namespaces\nkubectl top pods --all-namespaces\n\n# Get resource usage for specific pod\nkubectl top pod <pod-name>\n\n# Get resource usage with containers\nkubectl top pods --containers"
+        },
+        {
+          "name": "✅ Resource Quotas & Limits",
+          "text": "Commands to manage resource quotas and limits for namespaces and pods.",
+          "code": "# List resource quotas\nkubectl get resourcequotas\n\n# Describe resource quota\nkubectl describe resourcequota <quota-name>\n\n# List limit ranges\nkubectl get limitranges\n\n# Describe limit range\nkubectl describe limitrange <limit-range-name>\n\n# Get resource quota usage\nkubectl describe resourcequota <quota-name> -n <namespace>"
+        },
+        {
+          "name": "✅ Custom Resources",
+          "text": "Commands to work with Custom Resource Definitions (CRDs) and custom resources.",
+          "code": "# List Custom Resource Definitions\nkubectl get crd\n\n# Describe CRD\nkubectl describe crd <crd-name>\n\n# List custom resources\nkubectl get <custom-resource-name>\n\n# Get custom resource details\nkubectl describe <custom-resource-name> <resource-name>\n\n# Create custom resource from file\nkubectl apply -f <custom-resource.yaml>"
+        }
+      ]
+    }
+  ]
+}
