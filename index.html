@@ -58,7 +58,7 @@
         </main>
     </div>
 
-        <script src="app.js?v=50"></script>
+        <script src="app.js?v=51"></script>
         <script>
             // Register service worker for offline support
             if ('serviceWorker' in navigator) {
@@ -74,8 +74,11 @@
             }
 
             // Offline/Online event handlers
+            let isOnline = navigator.onLine;
+            
             window.addEventListener('online', () => {
                 console.log('Back online!');
+                isOnline = true;
                 document.body.classList.remove('offline');
                 const indicator = document.getElementById('offlineIndicator');
                 if (indicator) indicator.classList.remove('active');
@@ -83,17 +86,22 @@
 
             window.addEventListener('offline', () => {
                 console.log('Gone offline!');
+                isOnline = false;
                 document.body.classList.add('offline');
                 const indicator = document.getElementById('offlineIndicator');
                 if (indicator) indicator.classList.add('active');
             });
 
-            // Check initial state
-            if (!navigator.onLine) {
-                document.body.classList.add('offline');
-                const indicator = document.getElementById('offlineIndicator');
-                if (indicator) indicator.classList.add('active');
-            }
+            // Check initial state only when page loads
+            // Wait a bit to ensure the page is fully loaded
+            setTimeout(() => {
+                if (!navigator.onLine) {
+                    console.log('Initial state: offline');
+                    document.body.classList.add('offline');
+                    const indicator = document.getElementById('offlineIndicator');
+                    if (indicator) indicator.classList.add('active');
+                }
+            }, 100);
         </script>
 </body>
 </html>
