@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tech-learning-hub-v1';
+const CACHE_NAME = 'tech-learning-hub-v2';
 const OFFLINE_URL = 'index.html';
 
 // Files to cache immediately
@@ -35,7 +35,15 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME)
       .then((cache) => {
         console.log('[ServiceWorker] Caching app shell');
-        return cache.addAll(FILES_TO_CACHE);
+        // Try to cache files, but don't fail installation if some fail
+        return Promise.allSettled(
+          FILES_TO_CACHE.map(file => 
+            cache.add(file).catch(err => {
+              console.log('[ServiceWorker] Failed to cache', file, err);
+              return null;
+            })
+          )
+        );
       })
       .then(() => {
         console.log('[ServiceWorker] Skip waiting');
