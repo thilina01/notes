@@ -2,7 +2,7 @@
   "config": {
     "id": "java-versions",
     "name": "Java Versions",
-    "description": "Java Programming Language & Ecosystem",
+    "description": "Java Programming Language & Ecosystem - Comprehensive Feature Guide",
     "icon": "☕",
     "enabled": true
   },
@@ -13,31 +13,38 @@
       "sections": [
         {
           "name": "✅ Lambda Expressions",
-          "code": "List<String> names = List.of(\"Thilina\", \"Sara\", \"Maya\");\nnames.forEach(n -> System.out.println(\"Hello, \" + n));"
+          "text": "**Usage:** Replace anonymous inner classes with concise functional syntax for cleaner, more readable code.\n\n**Gains:**\n• **Conciseness:** Reduces boilerplate code by ~70% compared to anonymous classes\n• **Better Readability:** Focus on business logic rather than ceremony\n• **Faster JVM Startup:** No separate .class files generated (unlike inner classes)\n• **Parallel Processing:** Easy integration with Stream API for multi-core utilization\n• **Functional Programming:** Enables passing behavior as data, code reuse through variables",
+          "code": "// Before Java 8 - Anonymous Inner Class\nList<String> names = Arrays.asList(\"Thilina\", \"Sara\", \"Maya\");\nnames.forEach(new Consumer<String>() {\n    public void accept(String n) {\n        System.out.println(\"Hello, \" + n);\n    }\n});\n\n// After Java 8 - Lambda Expression\nnames.forEach(n -> System.out.println(\"Hello, \" + n));\n\n// Lambda with type inference\nPredicate<String> notEmpty = s -> !s.isEmpty();\n\n// Lambda as variable (reusable)\nBiFunction<Integer, Integer, Integer> add = (a, b) -> a + b;\nSystem.out.println(add.apply(10, 20)); // 30"
         },
         {
           "name": "✅ Stream API",
-          "code": "int sum = List.of(1, 2, 3, 4, 5)\n              .stream()\n              .filter(n -> n % 2 == 1)\n              .mapToInt(n -> n * n)\n              .sum();\nSystem.out.println(sum); // 35"
+          "text": "**Usage:** Process collections declaratively with functional-style operations like filter, map, and reduce.\n\n**Gains:**\n• **Declarative Code:** Express what to do, not how to do it\n• **Lazy Evaluation:** Only processes elements when terminal operation is called\n• **Parallel Processing:** Easy parallelization with .parallelStream()\n• **No Intermediate Collections:** Efficient memory usage, no temporary lists\n• **Composable Operations:** Chain multiple operations for complex transformations\n• **Better Performance:** Optimized internally, especially for large datasets",
+          "code": "// Filter odd numbers, square them, and sum\nint sum = List.of(1, 2, 3, 4, 5)\n              .stream()\n              .filter(n -> n % 2 == 1)      // Only odd numbers\n              .mapToInt(n -> n * n)         // Square them\n              .sum();                        // Sum result\nSystem.out.println(sum); // 35 (1 + 9 + 25)\n\n// Parallel processing for large datasets\nList<String> result = bigList.parallelStream()\n    .filter(s -> s.length() > 5)\n    .map(String::toUpperCase)\n    .collect(Collectors.toList());"
         },
         {
           "name": "✅ Functional Interfaces",
-          "code": "Predicate<String> notEmpty = s -> !s.isEmpty();\nSystem.out.println(notEmpty.test(\"Java\")); // true"
+          "text": "**Usage:** Single abstract method interfaces that work seamlessly with lambda expressions.\n\n**Gains:**\n• **Lambda Compatibility:** Target type for lambda expressions\n• **Code Reusability:** Pass behavior as parameters to methods\n• **Built-in Interfaces:** Predicate, Function, Consumer, Supplier for common patterns\n• **Type Safety:** Compile-time checking for functional contracts",
+          "code": "// Predicate - boolean test\nPredicate<String> notEmpty = s -> !s.isEmpty();\nSystem.out.println(notEmpty.test(\"Java\")); // true\n\n// Function - transform input to output\nFunction<String, Integer> length = s -> s.length();\nSystem.out.println(length.apply(\"Hello\")); // 5\n\n// Consumer - accept input, no return\nConsumer<String> print = s -> System.out.println(s);\nprint.accept(\"Java 8\");\n\n// Custom functional interface\n@FunctionalInterface\ninterface Calculator {\n    int calculate(int a, int b);\n}\nCalculator multiply = (a, b) -> a * b;"
         },
         {
           "name": "✅ Default & Static Methods in Interfaces",
-          "code": "interface Greeting {\n    default void sayHello() { System.out.println(\"Hello!\"); }\n    static void info() { System.out.println(\"Static method in interface.\"); }\n}\nclass Person implements Greeting {}\nnew Person().sayHello(); \nGreeting.info();"
+          "text": "**Usage:** Add new methods to interfaces without breaking existing implementations.\n\n**Gains:**\n• **Backward Compatibility:** Evolve interfaces without breaking clients\n• **Code Reuse:** Share common logic across implementations\n• **Multiple Inheritance:** Compose behavior from multiple interfaces\n• **Static Utilities:** Interface-level helper methods",
+          "code": "interface Greeting {\n    // Default method - can be overridden\n    default void sayHello() { \n        System.out.println(\"Hello!\"); \n    }\n\n    // Static method - interface-level utility\n    static void info() { \n        System.out.println(\"Static method in interface.\"); \n    }\n\n    // Private helper (Java 9+)\n    private void logMessage(String msg) {\n        System.out.println(\"LOG: \" + msg);\n    }\n}\n\nclass Person implements Greeting {\n    // Inherits sayHello() automatically\n}\n\nnew Person().sayHello(); // Hello!\nGreeting.info();         // Static method in interface."
         },
         {
           "name": "✅ Optional",
-          "code": "Optional<String> name = Optional.ofNullable(null);\nSystem.out.println(name.orElse(\"Unknown\"));"
+          "text": "**Usage:** Explicit handling of potentially null values to avoid NullPointerException.\n\n**Gains:**\n• **Null Safety:** Makes null handling explicit and intentional\n• **Expressive API:** Fluent methods for common null-check patterns\n• **Better Documentation:** Method signatures show optional values clearly\n• **Stream Integration:** Works seamlessly with Stream API\n• **Functional Style:** Chain operations with map, flatMap, filter",
+          "code": "// Create Optional\nOptional<String> name = Optional.ofNullable(getUserName());\n\n// Provide default value\nString result = name.orElse(\"Unknown\");\n\n// Execute only if present\nname.ifPresent(n -> System.out.println(\"Hello, \" + n));\n\n// Transform value if present\nOptional<Integer> length = name.map(String::length);\n\n// Chain with flatMap\nOptional<String> email = getUserById(id)\n    .flatMap(User::getEmail)\n    .filter(e -> e.contains(\"@\"))\n    .map(String::toLowerCase);\n\n// Get or throw custom exception\nString value = name.orElseThrow(() -> \n    new IllegalStateException(\"Name required\"));"
         },
         {
           "name": "✅ Date and Time API",
-          "code": "LocalDate today = LocalDate.now();\nLocalDate nextWeek = today.plusWeeks(1);\nSystem.out.println(today + \" → \" + nextWeek);"
+          "text": "**Usage:** Modern, immutable, and thread-safe date-time handling replacing old Date/Calendar.\n\n**Gains:**\n• **Immutability:** Thread-safe, no unexpected mutations\n• **Clear API:** Separate classes for date, time, and timestamp\n• **Time Zone Support:** Proper handling of zones and offsets\n• **Fluent Interface:** Easy date arithmetic and manipulation\n• **ISO-8601 Standard:** Industry-standard date-time formatting",
+          "code": "// Current date and time\nLocalDate today = LocalDate.now();\nLocalTime now = LocalTime.now();\nLocalDateTime dateTime = LocalDateTime.now();\n\n// Date arithmetic\nLocalDate nextWeek = today.plusWeeks(1);\nLocalDate lastMonth = today.minusMonths(1);\n\n// Specific date\nLocalDate birthday = LocalDate.of(1990, Month.JANUARY, 15);\n\n// Time zone handling\nZonedDateTime utcNow = ZonedDateTime.now(ZoneId.of(\"UTC\"));\nZonedDateTime dubai = utcNow.withZoneSameInstant(\n    ZoneId.of(\"Asia/Dubai\"));\n\n// Period between dates\nPeriod age = Period.between(birthday, today);\nSystem.out.println(\"Age: \" + age.getYears() + \" years\");"
         },
         {
           "name": "✅ Parallel Streams",
-          "code": "IntStream.range(1, 6).parallel().forEach(System.out::println);"
+          "text": "**Usage:** Leverage multi-core processors for parallel data processing with minimal code changes.\n\n**Gains:**\n• **Easy Parallelization:** Single method call to enable parallel processing\n• **Automatic Thread Management:** JVM handles thread pool automatically\n• **Performance Boost:** Significant speedup for CPU-intensive operations\n• **Same API:** No code changes needed beyond .parallel() or .parallelStream()",
+          "code": "// Sequential processing\nlong count = IntStream.range(1, 1_000_000)\n    .filter(n -> isPrime(n))\n    .count();\n\n// Parallel processing - utilizes all CPU cores\nlong countParallel = IntStream.range(1, 1_000_000)\n    .parallel()\n    .filter(n -> isPrime(n))\n    .count();\n\n// Parallel forEach\nList<String> urls = getUrls();\nurls.parallelStream()\n    .forEach(url -> processUrl(url));"
         }
       ]
     },
@@ -46,16 +53,24 @@
       "title": "🧱 Java 9 (2017) — Modularity & Tooling",
       "sections": [
         {
-          "name": "✅ Improved Streams API",
-          "code": "Stream.of(1, 2, 3, 4, 5)\n      .takeWhile(n -> n < 4)\n      .forEach(System.out::print); // 123"
+          "name": "✅ Java Platform Module System (JPMS)",
+          "text": "**Usage:** Organize code into modules with explicit dependencies for better encapsulation and smaller runtimes.\n\n**Gains:**\n• **Strong Encapsulation:** Control which packages are accessible to other modules\n• **Smaller Runtimes:** Create custom JRE with only needed modules (reduced footprint by ~90%)\n• **Better Dependency Management:** Explicit module dependencies, resolve conflicts at compile-time\n• **Improved Performance:** Faster startup time and reduced memory usage\n• **Enhanced Security:** Limit access to internal APIs",
+          "code": "// module-info.java\nmodule com.example.myapp {\n    // Dependencies\n    requires java.sql;\n    requires java.logging;\n\n    // Export packages\n    exports com.example.myapp.api;\n\n    // Provide service\n    provides com.example.Service \n        with com.example.ServiceImpl;\n}\n\n// Create custom runtime (reduced size)\njlink --module-path $JAVA_HOME/jmods:mods \\\n      --add-modules com.example.myapp \\\n      --output custom-jre"
+        },
+        {
+          "name": "✅ Improved Streams API (takeWhile/dropWhile)",
+          "text": "**Usage:** Process stream elements conditionally until/after a predicate becomes false.\n\n**Gains:**\n• **Early Termination:** Stop processing when condition fails (better performance)\n• **Expressive Code:** Clearly express intent for conditional streaming\n• **Memory Efficient:** Doesn't process unnecessary elements\n• **Ordered Processing:** Works on sequential or parallel streams",
+          "code": "// takeWhile - take elements while condition is true\nStream.of(1, 2, 3, 4, 5, 6, 7, 8, 9)\n      .takeWhile(n -> n < 5)\n      .forEach(System.out::print); // 1234\n\n// dropWhile - drop elements while condition is true\nStream.of(1, 2, 3, 4, 5, 6, 7, 8, 9)\n      .dropWhile(n -> n < 5)\n      .forEach(System.out::print); // 56789\n\n// Use case: Process until empty line\nFiles.lines(Path.of(\"file.txt\"))\n     .takeWhile(line -> !line.isEmpty())\n     .forEach(System.out::println);"
         },
         {
           "name": "✅ Private Methods in Interfaces",
-          "code": "interface Helper {\n    private void log(String msg) { System.out.println(\"LOG: \" + msg); }\n    default void process() { log(\"Processing...\"); }\n}\nnew Helper(){}.process();"
+          "text": "**Usage:** Share code between default methods without exposing helper methods to implementers.\n\n**Gains:**\n• **Code Reusability:** Avoid duplication in default methods\n• **Better Encapsulation:** Keep helper methods private to interface\n• **Cleaner API:** Don't expose implementation details\n• **Maintainability:** Centralize common logic in one place",
+          "code": "interface Calculator {\n    default int addEvenNumbers(int... nums) {\n        return add(n -> n % 2 == 0, nums);\n    }\n\n    default int addOddNumbers(int... nums) {\n        return add(n -> n % 2 != 0, nums);\n    }\n\n    // Private helper method - shared logic\n    private int add(IntPredicate predicate, int... nums) {\n        return IntStream.of(nums)\n                        .filter(predicate)\n                        .sum();\n    }\n}\n\nclass MyCalc implements Calculator {}\nMyCalc calc = new MyCalc();\nSystem.out.println(calc.addEvenNumbers(1,2,3,4,5,6)); // 12"
         },
         {
           "name": "✅ Factory Methods for Collections",
-          "code": "List<String> list = List.of(\"A\", \"B\", \"C\");\nSystem.out.println(list);"
+          "text": "**Usage:** Create immutable collections with concise factory methods.\n\n**Gains:**\n• **Immutability:** Thread-safe, cannot be modified after creation\n• **Concise Syntax:** No need for verbose initialization code\n• **Better Performance:** Optimized internal representation\n• **Null-Safe:** Doesn't allow null elements (fails fast)",
+          "code": "// Immutable List\nList<String> list = List.of(\"A\", \"B\", \"C\");\n// list.add(\"D\"); // UnsupportedOperationException\n\n// Immutable Set\nSet<Integer> set = Set.of(1, 2, 3, 4, 5);\n\n// Immutable Map\nMap<String, Integer> map = Map.of(\n    \"one\", 1,\n    \"two\", 2,\n    \"three\", 3\n);\n\n// Larger maps with entries\nMap<String, String> largeMap = Map.ofEntries(\n    Map.entry(\"key1\", \"value1\"),\n    Map.entry(\"key2\", \"value2\")\n);"
         }
       ]
     },
@@ -65,7 +80,8 @@
       "sections": [
         {
           "name": "✅ Local Variable Type Inference (var)",
-          "code": "var list = List.of(\"Java\", \"10\", \"var\");\nvar map = Map.of(\"key\", \"value\");\nvar stream = list.stream();"
+          "text": "**Usage:** Let the compiler infer local variable types for cleaner, more readable code.\n\n**Gains:**\n• **Reduced Boilerplate:** Less repetitive type declarations, especially with generics\n• **Better Readability:** Focus on variable names and logic, not types\n• **Easier Refactoring:** Change types without updating all declarations\n• **Familiar Syntax:** Similar to JavaScript, TypeScript, C#, Kotlin\n• **Compile-Time Safety:** Still strongly typed, not dynamic typing\n\n**Limitations:**\n• Only for local variables with initializers\n• Cannot use with method parameters, return types, or fields\n• Cannot initialize with null (ambiguous type)\n• Not for lambda expressions (need explicit target type)",
+          "code": "// Before Java 10 - verbose generics\nMap<String, List<String>> companyToEmployees = new HashMap<>();\nfor (Map.Entry<String, List<String>> entry : companyToEmployees.entrySet()) {\n    List<String> employees = entry.getValue();\n}\n\n// With Java 10 var - cleaner and concise\nvar companyToEmployees = new HashMap<String, List<String>>();\nfor (var entry : companyToEmployees.entrySet()) {\n    var employees = entry.getValue();\n}\n\n// Simple types\nvar list = List.of(\"Java\", \"10\", \"var\");\nvar map = Map.of(\"key\", \"value\");\nvar stream = list.stream();\n\n// Still compile-time type checking\nvar number = 10;\n// number = \"string\"; // Compile error!"
         }
       ]
     },
@@ -75,11 +91,13 @@
       "sections": [
         {
           "name": "✅ New HttpClient API",
-          "code": "var client = HttpClient.newHttpClient();\nvar request = HttpRequest.newBuilder(URI.create(\"https://example.com\")).build();\nvar response = client.send(request, HttpResponse.BodyHandlers.ofString());\nSystem.out.println(response.statusCode());"
+          "text": "**Usage:** Modern, feature-rich HTTP client with HTTP/2 support, async operations, and clean API.\n\n**Gains:**\n• **HTTP/2 Support:** Better performance with multiplexing and server push\n• **Async Operations:** Non-blocking I/O with CompletableFuture\n• **WebSocket Support:** Built-in WebSocket client\n• **Clean Builder API:** Fluent, readable request/response handling\n• **Better Performance:** 4-5x faster than legacy HttpURLConnection\n• **No External Dependencies:** Built into JDK (no Apache HttpClient needed)",
+          "code": "// Create HTTP client (reusable, thread-safe)\nvar client = HttpClient.newBuilder()\n    .version(HttpClient.Version.HTTP_2)\n    .connectTimeout(Duration.ofSeconds(10))\n    .build();\n\n// Synchronous GET request\nvar request = HttpRequest.newBuilder()\n    .uri(URI.create(\"https://api.example.com/users\"))\n    .header(\"Accept\", \"application/json\")\n    .build();\n\nvar response = client.send(request, HttpResponse.BodyHandlers.ofString());\nSystem.out.println(response.statusCode());\nSystem.out.println(response.body());\n\n// Asynchronous request\nclient.sendAsync(request, HttpResponse.BodyHandlers.ofString())\n      .thenApply(HttpResponse::body)\n      .thenAccept(System.out::println);\n\n// POST with JSON\nvar postRequest = HttpRequest.newBuilder()\n    .uri(URI.create(\"https://api.example.com/users\"))\n    .header(\"Content-Type\", \"application/json\")\n    .POST(HttpRequest.BodyPublishers.ofString(\"{\\\"name\\\":\\\"John\\\"}\"))\n    .build();"
         },
         {
-          "name": "✅ String Enhancements",
-          "code": "String s = \"  Java 11  \";\nSystem.out.println(s.isBlank()); // false\nSystem.out.println(s.strip());   // \"Java 11\"\nSystem.out.println(\"A\\nB\\nC\".lines().count()); // 3"
+          "name": "✅ String Enhancements (isBlank, strip, lines)",
+          "text": "**Usage:** New methods for common string operations with Unicode support.\n\n**Gains:**\n• **Unicode Support:** strip() handles all Unicode whitespace (trim() only handles ASCII ≤32)\n• **Expressive API:** Clear intent with isBlank(), lines()\n• **Stream Integration:** lines() returns Stream for functional processing\n• **Better Performance:** Optimized implementations",
+          "code": "String text = \"  Java 11  \";\n\n// isBlank() - checks for empty or only whitespace\nSystem.out.println(text.isBlank());        // false\nSystem.out.println(\"   \".isBlank());       // true\nSystem.out.println(\"\".isBlank());          // true\n\n// strip() - removes leading and trailing whitespace (Unicode-aware)\nSystem.out.println(text.strip());          // \"Java 11\"\nSystem.out.println(text.stripLeading());   // \"Java 11  \"\nSystem.out.println(text.stripTrailing());  // \"  Java 11\"\n\n// lines() - split by line terminators, returns Stream\nString multiline = \"Line 1\\nLine 2\\nLine 3\";\nlong count = multiline.lines().count();    // 3\nmultiline.lines()\n         .map(String::toUpperCase)\n         .forEach(System.out::println);\n\n// repeat() - repeat string n times\nString repeated = \"Java\".repeat(3);        // \"JavaJavaJava\""
         }
       ]
     },
@@ -89,7 +107,8 @@
       "sections": [
         {
           "name": "✅ Switch Expressions (Standard)",
-          "code": "String day = \"SAT\";\nString type = switch (day) {\n    case \"SAT\", \"SUN\" -> \"Weekend\";\n    default -> \"Weekday\";\n};\nSystem.out.println(type);"
+          "text": "**Usage:** Use switch as an expression that returns a value, with no fall-through and exhaustiveness checking.\n\n**Gains:**\n• **Returns Values:** Switch can be assigned to variables\n• **No break Statements:** Arrow syntax (->) prevents fall-through bugs\n• **Exhaustiveness:** Compiler ensures all cases are covered\n• **Multiple Labels:** Combine multiple case labels with comma\n• **Cleaner Code:** Reduces boilerplate and potential bugs by ~50%\n• **yield Keyword:** Explicitly return values from code blocks",
+          "code": "// Switch expression with arrow syntax\nString day = \"SAT\";\nString type = switch (day) {\n    case \"SAT\", \"SUN\" -> \"Weekend\";\n    case \"MON\", \"TUE\", \"WED\", \"THU\", \"FRI\" -> \"Weekday\";\n    default -> \"Unknown\";\n};\nSystem.out.println(type); // Weekend\n\n// With yield for code blocks\nint numLetters = switch (day) {\n    case \"SAT\", \"SUN\" -> {\n        System.out.println(\"Weekend day\");\n        yield 6;\n    }\n    case \"MON\", \"TUE\", \"WED\", \"THU\", \"FRI\" -> {\n        System.out.println(\"Weekday\");\n        yield 7;\n    }\n    default -> 0;\n};"
         }
       ]
     },
@@ -99,11 +118,8 @@
       "sections": [
         {
           "name": "✅ Text Blocks",
-          "code": "String json = \"\"\"\n{\n  \"name\": \"Thilina\",\n  \"role\": \"Lead Developer\"\n}\n\"\"\";\nSystem.out.println(json);"
-        },
-        {
-          "name": "✅ Hidden Classes (Used internally)",
-          "code": "// Concept only — frameworks use Lookup.defineHiddenClass(bytecode, ...)\n// Used by frameworks like proxies, you usually don't code these manually"
+          "text": "**Usage:** Multi-line string literals for HTML, JSON, SQL without escape sequences and concatenation.\n\n**Gains:**\n• **No Escape Sequences:** No need for \\n, \\\", \\\\ in multi-line strings\n• **Better Readability:** See actual format of text (HTML, JSON, SQL)\n• **Easier Maintenance:** Spot syntax errors easily (missing quotes, commas)\n• **No Concatenation:** No + operators for multi-line strings\n• **Automatic Indentation:** Intelligent whitespace handling\n• **Syntax Highlighting:** IDEs can highlight embedded languages",
+          "code": "// HTML with text blocks - clean and readable\nString html = \"\"\"\n    <html>\n      <body>\n        <h1>Hello World!</h1>\n      </body>\n    </html>\n    \"\"\";\n\n// JSON example\nString json = \"\"\"\n    {\n      \"name\": \"Thilina\",\n      \"role\": \"Lead Developer\",\n      \"skills\": [\"Java\", \"Spring\", \"Microservices\"]\n    }\n    \"\"\";\n\n// SQL query\nString sql = \"\"\"\n    SELECT id, name, email\n    FROM users\n    WHERE age > 18\n      AND status = 'active'\n    ORDER BY name\n    \"\"\";\n\n// String interpolation with formatted()\nString name = \"Alice\";\nString message = \"\"\"\n    Hello, %s!\n    Welcome to Java 15.\n    \"\"\".formatted(name);"
         }
       ]
     },
@@ -113,7 +129,8 @@
       "sections": [
         {
           "name": "✅ Records",
-          "code": "record Point(int x, int y) {}\nPoint p = new Point(10, 20);\nSystem.out.println(p.x() + \", \" + p.y());"
+          "text": "**Usage:** Immutable data carriers with automatic constructor, getters, equals, hashCode, and toString.\n\n**Gains:**\n• **Conciseness:** Define data class in one line (vs 50+ lines of POJO)\n• **Immutability:** All fields are final by default (thread-safe)\n• **Less Boilerplate:** No need to write getters, equals, hashCode, toString\n• **Clear Intent:** Explicitly marks class as data holder\n• **Pattern Matching:** Works seamlessly with pattern matching (Java 21+)\n• **Compile-Time Validation:** Constructor validates components automatically",
+          "code": "// Record definition - one line!\nrecord Point(int x, int y) {}\n\n// Using records\nPoint p = new Point(10, 20);\nSystem.out.println(p.x() + \", \" + p.y());  // 10, 20\nSystem.out.println(p);                      // Point[x=10, y=20]\n\n// Custom constructor with validation\nrecord Person(String name, int age) {\n    // Compact constructor\n    Person {\n        if (age < 0) {\n            throw new IllegalArgumentException(\"Age cannot be negative\");\n        }\n    }\n}\n\n// Records in collections\nList<Point> points = List.of(\n    new Point(0, 0),\n    new Point(10, 20),\n    new Point(5, 15)\n);"
         }
       ]
     },
@@ -123,7 +140,8 @@
       "sections": [
         {
           "name": "✅ Sealed Classes",
-          "code": "sealed interface Shape permits Circle, Rectangle {}\nfinal class Circle implements Shape {}\nfinal class Rectangle implements Shape {}"
+          "text": "**Usage:** Restrict which classes can extend/implement a class/interface for controlled inheritance.\n\n**Gains:**\n• **Controlled Inheritance:** Define exact set of permitted subclasses\n• **Better Domain Modeling:** Accurately model fixed sets of possibilities\n• **Exhaustiveness Checking:** Compiler ensures all cases handled in switch\n• **Improved Security:** Prevent unauthorized extensions\n• **Better Maintainability:** Clear hierarchy at compile time\n• **Pattern Matching:** Works with switch pattern matching for type-safe code",
+          "code": "// Sealed interface with permitted implementations\nsealed interface Shape permits Circle, Rectangle, Triangle {}\n\nfinal class Circle implements Shape {\n    double radius;\n}\n\nfinal class Rectangle implements Shape {\n    double width, height;\n}\n\nfinal class Triangle implements Shape {\n    double base, height;\n}\n\n// Exhaustive pattern matching (no default needed)\ndouble calculateArea(Shape shape) {\n    return switch (shape) {\n        case Circle c -> Math.PI * c.radius * c.radius;\n        case Rectangle r -> r.width * r.height;\n        case Triangle t -> 0.5 * t.base * t.height;\n        // No default needed - all cases covered!\n    };\n}"
         }
       ]
     },
@@ -132,12 +150,14 @@
       "title": "⚡ Java 18 (2022) — Networking & UTF",
       "sections": [
         {
-          "name": "✅ Simple Web Server",
-          "code": "# Run in terminal\njwebserver --directory .\n\n# Then open http://localhost:8000 to serve current directory"
+          "name": "✅ Simple Web Server (jwebserver)",
+          "text": "**Usage:** Built-in minimal HTTP server for prototyping, testing, and serving static files.\n\n**Gains:**\n• **Zero Setup:** No installation, configuration, or dependencies\n• **Quick Testing:** Instantly serve HTML, JSON, or files for testing\n• **Prototyping:** Fast ad-hoc development and debugging\n• **File Browsing:** Easy directory listing and file sharing\n• **Programmatic API:** Can be embedded in applications\n\n**Use Cases:**\n• Testing web applications during development\n• Serving static files for demos\n• Quick API endpoint mocking\n• File sharing across systems",
+          "code": "# Command line - start server in current directory\njwebserver\n# Serving /current/directory on http://127.0.0.1:8000\n\n# Custom port and directory\njwebserver --port 9000 --directory /path/to/files\n\n# Programmatic usage\nimport com.sun.net.httpserver.*;\n\nvar server = SimpleFileServer.createFileServer(\n    new InetSocketAddress(8080),\n    Path.of(\"/some/path\"),\n    SimpleFileServer.OutputLevel.VERBOSE\n);\nserver.start();\n\n// Custom file handler\nvar handler = SimpleFileServer.createFileHandler(Path.of(\"/path\"));\nvar server = HttpServer.create(new InetSocketAddress(8080), 10, \"/\", handler);\nserver.start();"
         },
         {
           "name": "✅ UTF-8 by Default",
-          "code": "// Demonstration — no special code needed.\n// All new Java 18+ source files and console IO default to UTF-8 encoding.\nSystem.out.println(\"✓ UTF-8 by default\");"
+          "text": "**Usage:** UTF-8 is now the default charset for all Java APIs, ensuring consistent behavior across platforms.\n\n**Gains:**\n• **Platform Independence:** Same behavior on Windows, Linux, macOS\n• **Predictable Encoding:** No surprises from OS/locale settings\n• **International Support:** Proper handling of all Unicode characters\n• **Simpler Code:** No need to explicitly specify charset in most cases\n• **Fewer Bugs:** Eliminates encoding-related issues\n\n**Note:** Console I/O (System.out/err) still uses native encoding",
+          "code": "// Before Java 18 - encoding depended on OS/locale\nFileReader reader = new FileReader(\"file.txt\"); // Platform-dependent!\n\n// Java 18+ - UTF-8 by default\nFileReader reader = new FileReader(\"file.txt\"); // Always UTF-8\n\n// Reading files\nString content = Files.readString(Path.of(\"file.txt\")); // UTF-8\n\n// Writing files\nFiles.writeString(Path.of(\"output.txt\"), content); // UTF-8\n\n// Revert to old behavior if needed\n// java -Dfile.encoding=COMPAT MyApp\n\n// Get native encoding\nString nativeEncoding = System.getProperty(\"native.encoding\");\nSystem.out.println(nativeEncoding); // e.g., \"Cp1252\" on Windows"
         }
       ]
     },
@@ -147,19 +167,23 @@
       "sections": [
         {
           "name": "✅ Virtual Threads",
-          "code": "try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {\n    IntStream.range(0, 5).forEach(i ->\n        executor.submit(() -> System.out.println(Thread.currentThread())));\n}"
+          "text": "**Usage:** Lightweight threads for high-concurrency applications without resource overhead.\n\n**Gains:**\n• **Massive Scalability:** Millions of threads vs thousands of platform threads\n• **Low Memory Overhead:** ~1KB per virtual thread vs ~1MB for platform thread\n• **Simple Programming Model:** Keep thread-per-request model, no reactive complexity\n• **Better Resource Utilization:** JVM manages thread scheduling efficiently\n• **Backward Compatible:** Works with existing thread-based code\n• **Faster Startup:** Reduced thread creation/destruction overhead",
+          "code": "// Create and start virtual thread\nThread.startVirtualThread(() -> {\n    System.out.println(\"Running in: \" + Thread.currentThread());\n});\n\n// Executor for virtual threads\ntry (var executor = Executors.newVirtualThreadPerTaskExecutor()) {\n    IntStream.range(0, 10_000).forEach(i ->\n        executor.submit(() -> {\n            // Each task runs in its own virtual thread\n            processRequest(i);\n        })\n    );\n} // Auto-shutdown\n\n// Compare: Platform thread pool (limited)\nvar platformPool = Executors.newFixedThreadPool(100); // Max 100\n\n// Virtual threads - millions possible\nvar virtualExecutor = Executors.newVirtualThreadPerTaskExecutor();\n\n// Builder API\nThread vThread = Thread.ofVirtual()\n    .name(\"virtual-worker\")\n    .unstarted(() -> doWork());\nvThread.start();"
         },
         {
           "name": "✅ Record Patterns",
-          "code": "record Point(int x, int y) {}\nstatic void print(Point p) {\n    if (p instanceof Point(int x, int y)) {\n        System.out.println(x + \", \" + y);\n    }\n}\nprint(new Point(5, 6));"
+          "text": "**Usage:** Deconstruct records in pattern matching to access components directly.\n\n**Gains:**\n• **Concise Extraction:** Access record components in one step\n• **Nested Deconstruction:** Handle complex nested records elegantly\n• **Type Safety:** Compile-time checking of patterns\n• **Readable Code:** Clear intent for data extraction\n• **Works with Switch:** Powerful combination with pattern matching switch",
+          "code": "record Point(int x, int y) {}\n\n// Deconstruct in instanceof\nObject obj = new Point(5, 10);\nif (obj instanceof Point(int x, int y)) {\n    System.out.println(\"x=\" + x + \", y=\" + y); // Direct access\n}\n\n// Nested records\nrecord Name(String first, String last) {}\nrecord Person(Name name, int age) {}\n\nPerson person = new Person(new Name(\"John\", \"Doe\"), 30);\n\n// Nested pattern matching\nif (person instanceof Person(Name(var first, var last), var age)) {\n    System.out.println(first + \" \" + last + \" is \" + age);\n}\n\n// In switch expressions\nString describe(Object obj) {\n    return switch (obj) {\n        case Point(int x, int y) -> \"Point at (\" + x + \", \" + y + \")\";\n        case Person(Name(var f, var l), var a) -> f + \" \" + l + \", age \" + a;\n        default -> \"Unknown\";\n    };\n}"
         },
         {
           "name": "✅ Pattern Matching for switch",
-          "code": "static String type(Object obj) {\n    return switch (obj) {\n        case Integer i -> \"int: \" + i;\n        case String s -> \"string: \" + s;\n        default -> \"unknown\";\n    };\n}\nSystem.out.println(type(\"Hi\"));"
+          "text": "**Usage:** Match patterns in switch statements/expressions including type patterns and guards.\n\n**Gains:**\n• **Type Patterns:** Switch on types, not just constants\n• **Null Handling:** Can include null cases explicitly\n• **Guard Clauses:** Add conditions with when\n• **Exhaustiveness:** Compiler ensures all types covered (with sealed classes)\n• **Cleaner Code:** Replaces long if-else chains\n• **Better Performance:** Potentially faster than if-else chains",
+          "code": "// Type pattern matching in switch\nstatic String describe(Object obj) {\n    return switch (obj) {\n        case Integer i -> \"int: \" + i;\n        case String s -> \"string: \" + s;\n        case Point(int x, int y) -> \"Point(\" + x + \", \" + y + \")\";\n        case null -> \"null value\";\n        default -> \"unknown\";\n    };\n}\n\n// Guard clauses with when\nstatic String classify(Object obj) {\n    return switch (obj) {\n        case String s when s.length() > 10 -> \"Long string\";\n        case String s -> \"Short string\";\n        case Integer i when i > 0 -> \"Positive\";\n        case Integer i -> \"Non-positive\";\n        default -> \"Other\";\n    };\n}\n\n// With sealed classes - no default needed\nsealed interface Result permits Success, Error {}\nrecord Success(String data) implements Result {}\nrecord Error(String message) implements Result {}\n\nString handle(Result result) {\n    return switch (result) {\n        case Success(var data) -> \"Got: \" + data;\n        case Error(var msg) -> \"Error: \" + msg;\n        // No default - exhaustive!\n    };\n}"
         },
         {
           "name": "✅ Sequenced Collections",
-          "code": "SequencedSet<String> set = new LinkedHashSet<>();\nset.addFirst(\"first\");\nset.addLast(\"last\");\nSystem.out.println(set.getFirst()); // first"
+          "text": "**Usage:** Uniform API to access first/last elements and reverse iteration for ordered collections.\n\n**Gains:**\n• **Consistent API:** Same methods across List, Deque, SortedSet, LinkedHashMap\n• **Reverse Iteration:** Easy iteration in reverse order\n• **First/Last Access:** Direct access to first and last elements\n• **Better Readability:** Clear intent with getFirst(), getLast()\n• **No Index Calculations:** No need for size()-1 tricks",
+          "code": "// SequencedCollection methods\nSequencedSet<String> set = new LinkedHashSet<>();\nset.addFirst(\"first\");\nset.addLast(\"last\");\nset.add(\"middle\");\n\nSystem.out.println(set.getFirst());  // \"first\"\nSystem.out.println(set.getLast());   // \"last\"\n\n// Reverse iteration\nfor (String s : set.reversed()) {\n    System.out.println(s); // last, middle, first\n}\n\n// SequencedMap\nSequencedMap<String, Integer> map = new LinkedHashMap<>();\nmap.putFirst(\"a\", 1);\nmap.putLast(\"z\", 26);\n\nvar firstEntry = map.firstEntry();  // a=1\nvar lastEntry = map.lastEntry();    // z=26\n\n// Before Java 21 - awkward\nList<String> list = List.of(\"a\", \"b\", \"c\");\nString last = list.get(list.size() - 1); // Awkward!\n\n// Java 21 - clean\nString lastNew = list.getLast(); // Clean!"
         }
       ]
     },
@@ -169,11 +193,13 @@
       "sections": [
         {
           "name": "✅ Statements before super() in Constructors",
-          "code": "class A { A(String msg) { System.out.println(msg); } }\nclass B extends A {\n    B() {\n        System.out.println(\"Before super()\");\n        super(\"From superclass\");\n    }\n}\nnew B();"
+          "text": "**Usage:** Execute validation and preparation statements before calling super() or this() in constructors.\n\n**Gains:**\n• **Cleaner Code:** No need for static helper methods to validate arguments\n• **Better Validation:** Validate before passing to parent constructor\n• **Argument Preparation:** Transform/prepare arguments before super() call\n• **More Intuitive:** Natural flow of constructor logic\n• **Works with Records:** Also applies to record compact constructors\n\n**Restrictions:**\n• Cannot access instance members (this.field) before super()\n• Cannot use unqualified 'this' expressions\n• Can use static methods, local variables, parameters",
+          "code": "class Parent {\n    Parent(int value) {\n        if (value < 0) throw new IllegalArgumentException();\n    }\n}\n\n// Before Java 22 - awkward static method workaround\nclass ChildOld extends Parent {\n    ChildOld(int value) {\n        super(validatePositive(value));\n    }\n    private static int validatePositive(int v) {\n        if (v < 0) throw new IllegalArgumentException();\n        return v;\n    }\n}\n\n// Java 22 - natural flow\nclass Child extends Parent {\n    Child(int value) {\n        // Validate BEFORE calling super\n        if (value < 0) {\n            throw new IllegalArgumentException(\"Value must be positive\");\n        }\n        super(value);\n    }\n}\n\n// Argument preparation\nclass Email extends Parent {\n    Email(String local, String domain) {\n        // Prepare argument before super()\n        String fullEmail = local + \"@\" + domain;\n        if (!fullEmail.contains(\"@\")) {\n            throw new IllegalArgumentException(\"Invalid email\");\n        }\n        super(fullEmail.hashCode());\n    }\n}\n\n// Record with validation\nrecord Person(String name, int age) {\n    Person {\n        // Statements before this() call to canonical constructor\n        if (age < 0) {\n            System.out.println(\"Adjusting negative age\");\n            age = 0;\n        }\n    }\n}"
         },
         {
-          "name": "✅ Foreign Function & Memory API (Standard)",
-          "code": "try (Arena arena = Arena.ofConfined()) {\n    MemorySegment seg = arena.allocate(8);\n    seg.set(ValueLayout.JAVA_LONG, 0, 123L);\n    System.out.println(seg.get(ValueLayout.JAVA_LONG, 0));\n}"
+          "name": "✅ Foreign Function & Memory API (Final)",
+          "text": "**Usage:** Call native libraries and access off-heap memory safely without JNI's complexity and dangers.\n\n**Gains:**\n• **JNI Replacement:** Modern, safe alternative to Java Native Interface\n• **4-5x Faster:** Significantly faster than JNI\n• **Memory Safety:** Managed arenas prevent crashes, throw exceptions instead\n• **90% Less Code:** Dramatically less boilerplate than JNI\n• **Native Library Access:** Call C libraries (OpenGL, TensorFlow, OS APIs) directly\n• **Off-Heap Memory:** Efficient access to native memory for performance-critical code\n• **Type Safety:** Compile-time checking for foreign function calls\n\n**Use Cases:**\n• High-performance computing\n• Game development (OpenGL, Vulkan)\n• Machine learning (TensorFlow, PyTorch)\n• OS-specific APIs\n• Legacy C/C++ library integration",
+          "code": "import java.lang.foreign.*;\nimport static java.lang.foreign.ValueLayout.*;\n\n// Allocate and access native memory\ntry (Arena arena = Arena.ofConfined()) {\n    // Allocate 8 bytes off-heap\n    MemorySegment segment = arena.allocate(8);\n    \n    // Write long value\n    segment.set(JAVA_LONG, 0, 123L);\n    \n    // Read long value\n    long value = segment.get(JAVA_LONG, 0);\n    System.out.println(value); // 123\n}\n// Memory automatically freed when arena closes\n\n// Call C library function (e.g., strlen)\nLinker linker = Linker.nativeLinker();\nSymbolLookup stdlib = linker.defaultLookup();\n\n// Find strlen function\nMemorySegment strlenAddr = stdlib.find(\"strlen\").orElseThrow();\n\n// Define function signature: size_t strlen(const char *)\nFunctionDescriptor strlenDesc = FunctionDescriptor.of(\n    JAVA_LONG,  // return type\n    ADDRESS     // parameter type\n);\n\n// Create method handle\nMethodHandle strlen = linker.downcallHandle(\n    strlenAddr,\n    strlenDesc\n);\n\n// Call native strlen\ntry (Arena arena = Arena.ofConfined()) {\n    MemorySegment str = arena.allocateUtf8String(\"Hello\");\n    long length = (long) strlen.invoke(str);\n    System.out.println(length); // 5\n}"
         }
       ]
     }
