@@ -2056,3 +2056,27 @@ pre[class*="language-"] {
     font-size: var(--font-size-sm); /* Appropriate font size for mobile */
   }
 }
+
+/* Offline indicator */
+.offline-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #f39c12;
+  color: white;
+  text-align: center;
+  padding: 8px;
+  font-size: 14px;
+  z-index: 10000;
+  display: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.offline-indicator.active {
+  display: block;
+}
+
+body.offline {
+  padding-top: 40px; /* Add space for offline indicator when active */
+}
