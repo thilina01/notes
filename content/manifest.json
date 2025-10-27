@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastUpdated": "2025-10-26T10:05:48.610Z",
+  "lastUpdated": "2025-10-27T13:48:31.972Z",
   "ordering": {
     "method": "prefix",
     "customOrder": []
@@ -50,6 +50,11 @@
       "file": "010-interview-qa.json",
       "order": 10,
       "title": "interview qa"
+    },
+    {
+      "file": "011-devops-qa.json",
+      "order": 11,
+      "title": "devops qa"
     },
     {
       "file": "content-template.json",

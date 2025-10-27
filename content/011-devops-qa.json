@@ -1,0 +1,571 @@
+{
+  "config": {
+    "id": "devops-qa",
+    "name": "DevOps Q&A",
+    "description": "100 Comprehensive Questions & Answers for DevOps, Docker, Kubernetes, AWS, Terraform, CI/CD, and more",
+    "icon": "🚀",
+    "enabled": true
+  },
+  "content": [
+    {
+      "id": "section1",
+      "title": "📚 FUNDAMENTALS & BASICS",
+      "sections": [
+        {
+          "name": "Q1: What is DevOps and how does it benefit organizations?",
+          "text": "DevOps is a set of practices that integrates software development (Dev) and IT operations (Ops) to shorten the development lifecycle and deliver features, fixes, and updates frequently in close alignment with business objectives. Benefits include:\n- Faster time-to-market\n- Improved collaboration between teams\n- Higher deployment frequency\n- Lower failure rate of new releases\n- Shortened lead time between fixes\n- Faster mean time to recovery (MTTR)\n- Reduced manual intervention through automation",
+          "code": null
+        },
+        {
+          "name": "Q2: Explain the concept of Infrastructure as Code (IaC).",
+          "text": "Infrastructure as Code (IaC) is the practice of managing and provisioning infrastructure through code instead of manual processes. Configuration files are created according to infrastructure specifications, and these configurations can be edited, distributed, and version-controlled. Benefits include:\n- Consistency across environments\n- Version control for infrastructure\n- Reduced human error\n- Faster provisioning\n- Self-documenting infrastructure\n- Cost optimization through automation",
+          "code": null
+        },
+        {
+          "name": "Q3: What are the key DevOps KPIs you would monitor?",
+          "text": "Key DevOps KPIs include:\n- **Deployment Frequency**: How often deployments occur\n- **Lead Time for Changes**: Time from code commit to production\n- **Mean Time to Recovery (MTTR)**: Average time to recover from failures\n- **Change Failure Rate**: Percentage of deployments causing failures\n- **Availability/Uptime**: System reliability metrics\n- **Code Coverage**: Percentage of code tested\n- **Cycle Time**: Time to complete a full development cycle",
+          "code": null
+        },
+        {
+          "name": "Q4: What is the difference between Continuous Integration, Continuous Delivery, and Continuous Deployment?",
+          "text": "- **Continuous Integration (CI)**: Developers frequently merge code changes into a central repository, after which automated builds and tests run. Focus is on early bug detection.\n- **Continuous Delivery (CD)**: Extension of CI ensuring code can be released to production at any time. Deployment to production requires manual approval.\n- **Continuous Deployment**: Every change that passes automated tests is automatically deployed to production without manual intervention.",
+          "code": null
+        },
+        {
+          "name": "Q5: What is containerization and why is it important in DevOps?",
+          "text": "Containerization packages an application and its dependencies into a container that can run consistently across different computing environments. Importance:\n- Environment consistency (dev, test, prod)\n- Resource efficiency compared to VMs\n- Faster startup times\n- Easy scaling\n- Microservices enablement\n- Simplified dependency management\n\n### Cloud & Infrastructure Basics",
+          "code": null
+        },
+        {
+          "name": "Q6: What are the main cloud service models (IaaS, PaaS, SaaS)?",
+          "text": "- **IaaS (Infrastructure as a Service)**: Provides virtualized computing resources (EC2, Azure VMs, GCE). Users manage OS, middleware, runtime, data, and applications.\n- **PaaS (Platform as a Service)**: Provides platform allowing development without managing infrastructure (AWS Elastic Beanstalk, Azure App Service). Users manage data and applications.\n- **SaaS (Software as a Service)**: Complete software delivered over internet (Office 365, Salesforce). Provider manages everything.",
+          "code": null
+        },
+        {
+          "name": "Q7: What is the difference between vertical and horizontal scaling?",
+          "text": "- **Vertical Scaling (Scale Up)**: Adding more power (CPU, RAM) to existing machines. Limited by hardware capacity, requires downtime, single point of failure.\n- **Horizontal Scaling (Scale Out)**: Adding more machines to the pool. Better for distributed systems, provides redundancy, supports higher loads, more cost-effective for cloud.",
+          "code": null
+        },
+        {
+          "name": "Q8: Explain the concept of high availability.",
+          "text": "High availability ensures systems remain operational and accessible with minimal downtime. Key components:\n- **Redundancy**: Multiple instances/components\n- **Failover mechanisms**: Automatic switching to backup\n- **Load balancing**: Distributing traffic across instances\n- **Multi-AZ/region deployment**: Geographic distribution\n- **Health checks**: Automated monitoring\n- **Auto-recovery**: Self-healing capabilities\nTarget: Typically 99.9% (43.2 min downtime/month) to 99.999% (5.26 min/month)",
+          "code": null
+        },
+        {
+          "name": "Q9: What is load balancing and why is it important?",
+          "text": "Load balancing distributes network traffic across multiple servers to ensure no single server bears too much load. Benefits:\n- Improved application availability\n- Better resource utilization\n- Increased throughput\n- Reduced response time\n- Enables horizontal scaling\n- Provides failover capability\nTypes: Application Load Balancer (Layer 7), Network Load Balancer (Layer 4), Classic Load Balancer",
+          "code": null
+        },
+        {
+          "name": "Q10: What are the three main cloud providers and their key differences?",
+          "text": "- **AWS (Amazon Web Services)**: Market leader, broadest service portfolio, mature ecosystem, strong enterprise adoption\n- **Azure (Microsoft)**: Best integration with Microsoft products, strong hybrid cloud, excellent for .NET workloads\n- **GCP (Google Cloud Platform)**: Strong in data analytics/ML, Kubernetes-native (GKE), competitive pricing, advanced networking\n\n### Version Control Basics",
+          "code": null
+        },
+        {
+          "name": "Q11: What is Git and why is it essential for DevOps?",
+          "text": "Git is a distributed version control system that tracks changes in source code during software development. Essential because:\n- Enables collaboration among developers\n- Maintains complete history of changes\n- Supports branching and merging\n- Allows rollback to previous versions\n- Facilitates code review through pull requests\n- Foundation for CI/CD pipelines\n- Distributed architecture provides redundancy",
+          "code": null
+        },
+        {
+          "name": "Q12: Explain common Git commands and their purposes.",
+          "text": "- `git init`: Initialize a new repository\n- `git clone`: Copy a repository\n- `git add`: Stage changes\n- `git commit`: Save staged changes\n- `git push`: Upload commits to remote\n- `git pull`: Download and merge remote changes\n- `git branch`: List/create/delete branches\n- `git checkout`: Switch branches\n- `git merge`: Combine branches\n- `git status`: Show working directory status\n- `git log`: View commit history",
+          "code": null
+        },
+        {
+          "name": "Q13: What is a merge conflict and how do you resolve it?",
+          "text": "A merge conflict occurs when Git cannot automatically resolve differences between two commits. Resolution steps:\n1. Identify conflicting files using `git status`\n2. Open files and locate conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`)\n3. Manually edit to resolve conflicts\n4. Remove conflict markers\n5. Stage resolved files: `git add <file>`\n6. Complete merge: `git commit`\nPrevention: Frequent pulls, small commits, clear communication, feature branches",
+          "code": null
+        },
+        {
+          "name": "Q14: What are branching strategies and which do you prefer?",
+          "text": "Common strategies:\n- **GitFlow**: Master, develop, feature, release, hotfix branches. Good for scheduled releases.\n- **GitHub Flow**: Master + feature branches. Simple, continuous delivery.\n- **Trunk-Based Development**: Short-lived feature branches, frequent merges to main.\n- **Release Branching**: Create branch when ready to release.\n\n**Preference depends on context:** For BI platform with agile development, GitHub Flow or Trunk-Based with feature flags enables continuous delivery while maintaining stability.",
+          "code": null
+        },
+        {
+          "name": "Q15: What is a pull request and its importance in DevOps?",
+          "text": "A pull request (PR) is a method of submitting contributions to a project. Importance:\n- Enables code review before merging\n- Facilitates knowledge sharing\n- Ensures code quality standards\n- Triggers automated CI/CD pipelines\n- Provides discussion platform\n- Documents decision-making\n- Enables approval workflows\nBest practice: Small PRs, clear descriptions, automated checks, required reviewers\n\n### CI/CD Fundamentals",
+          "code": null
+        },
+        {
+          "name": "Q16: What are the stages of a typical CI/CD pipeline?",
+          "text": "Typical stages:\n1. **Source**: Code commit triggers pipeline\n2. **Build**: Compile code, create artifacts\n3. **Test**: Unit tests, integration tests, static analysis\n4. **Security Scan**: Vulnerability scanning, dependency checks\n5. **Package**: Create container images, build packages\n6. **Deploy to Staging**: Deploy to test environment\n7. **Integration Testing**: End-to-end tests\n8. **Manual Approval** (for CD): Gating before production\n9. **Deploy to Production**: Release to users\n10. **Monitor**: Observe metrics and logs",
+          "code": null
+        },
+        {
+          "name": "Q17: What is artifact versioning and why is it important?",
+          "text": "Artifact versioning assigns unique identifiers to build outputs. Importance:\n- Enables traceability: Know exactly what code is in production\n- Facilitates rollback to specific versions\n- Supports parallel development\n- Enables reproducible builds\n- Simplifies dependency management\nCommon schemes: Semantic versioning (MAJOR.MINOR.PATCH), timestamp-based, commit SHA",
+          "code": null
+        },
+        {
+          "name": "Q18: What is the purpose of automated testing in CI/CD?",
+          "text": "Automated testing ensures:\n- **Early bug detection**: Catch issues before production\n- **Faster feedback**: Immediate results after code changes\n- **Consistency**: Same tests run every time\n- **Regression prevention**: Ensure new changes don't break existing functionality\n- **Confidence**: Safe deployments\n- **Documentation**: Tests describe expected behavior\nTest pyramid: Unit tests (base) → Integration tests → E2E tests (top)",
+          "code": null
+        },
+        {
+          "name": "Q19: What is blue-green deployment?",
+          "text": "Blue-green deployment maintains two identical production environments (Blue and Green):\n- **Blue**: Current production version\n- **Green**: New version deployed and tested\n- Traffic switched from Blue to Green once validated\n- Blue kept as backup for instant rollback\n\n**Benefits:**\n- Zero-downtime deployments\n- Easy rollback\n- Reduced risk\n- Production testing capability\n\n**Challenges:** Double infrastructure cost, database migrations, state synchronization",
+          "code": null
+        },
+        {
+          "name": "Q20: What is canary deployment?",
+          "text": "Canary deployment gradually rolls out changes to a small subset of users before full deployment:\n1. Deploy new version to small percentage (e.g., 5%)\n2. Monitor metrics (errors, latency, user feedback)\n3. Gradually increase traffic if successful (10%, 25%, 50%, 100%)\n4. Rollback if issues detected\n\n**Benefits:**\n- Lower risk than big-bang deployment\n- Real-world validation\n- Quick issue detection\n- Minimal user impact on failures\nCommon for AI/ML model deployments\n\n---",
+          "code": null
+        }
+      ]
+    },
+    {
+      "id": "section2",
+      "title": "📚 DOCKER & CONTAINERIZATION",
+      "sections": [
+        {
+          "name": "Q21: What is Docker and how does it differ from virtual machines?",
+          "text": "Docker is a containerization platform that packages applications and dependencies into containers.\n\n**Docker vs VMs:**\n- **Docker**: Shares host OS kernel, lightweight (MBs), starts in seconds, more containers per host\n- **VMs**: Each has full OS, heavy (GBs), starts in minutes, stronger isolation\n\n**When to use:**\n- Docker: Microservices, CI/CD, development consistency\n- VMs: Strong isolation needs, different OS requirements, legacy applications",
+          "code": null
+        },
+        {
+          "name": "Q22: Explain the Docker architecture and key components.",
+          "text": "**Components:**\n- **Docker Client**: CLI that sends commands to daemon\n- **Docker Daemon**: Manages containers, images, networks, volumes\n- **Docker Registry**: Stores images (Docker Hub, ECR, ACR)\n- **Images**: Read-only templates with application and dependencies\n- **Containers**: Running instances of images\n- **Dockerfile**: Text file with instructions to build image\n- **Docker Compose**: Tool for multi-container applications",
+          "code": null
+        },
+        {
+          "name": "Q23: What is a Dockerfile and what are the key instructions?",
+          "text": "Dockerfile contains instructions to build a Docker image.\n\n**Key instructions:**\n```dockerfile\nFROM ubuntu:20.04              # Base image\nLABEL maintainer=\"dev@company.com\"  # Metadata\nRUN apt-get update && apt-get install -y python3  # Execute commands\nCOPY ./app /app                # Copy files\nWORKDIR /app                   # Set working directory\nENV APP_ENV=production         # Environment variables\nEXPOSE 8080                    # Document ports\nCMD [\"python3\", \"app.py\"]      # Container startup command\nENTRYPOINT [\"/bin/bash\"]       # Configurable entry point\n```",
+          "code": null
+        },
+        {
+          "name": "Q24: What are multi-stage Docker builds and their benefits?",
+          "text": "Multi-stage builds use multiple FROM statements in one Dockerfile, copying only necessary artifacts between stages.\n\n**Example:**\n```dockerfile\n# Build stage\nFROM maven:3.8-openjdk-11 AS builder\nCOPY . /app\nWORKDIR /app\nRUN mvn clean package\n\n# Runtime stage\nFROM openjdk:11-jre-slim\nCOPY --from=builder /app/target/app.jar /app.jar\nCMD [\"java\", \"-jar\", \"/app.jar\"]\n```\n\n**Benefits:**\n- Smaller final images (only runtime dependencies)\n- Improved security (no build tools in production)\n- Faster deployment\n- Clear separation of build/runtime concerns",
+          "code": null
+        },
+        {
+          "name": "Q25: How do you optimize Docker images?",
+          "text": "Optimization strategies:\n1. **Use smaller base images**: Alpine, distroless\n2. **Multi-stage builds**: Remove build dependencies\n3. **Minimize layers**: Combine RUN commands\n4. **Order instructions**: Put changing layers last\n5. **.dockerignore**: Exclude unnecessary files\n6. **Remove cache**: `RUN apt-get clean`\n7. **Use specific tags**: Avoid `latest`\n8. **Security scanning**: Scan for vulnerabilities\n\n**Example:**\n```dockerfile\nFROM python:3.9-alpine\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\nCOPY . .\nCMD [\"python\", \"app.py\"]\n```",
+          "code": null
+        },
+        {
+          "name": "Q26: What is Docker Compose and when would you use it?",
+          "text": "Docker Compose is a tool for defining and running multi-container applications using YAML.\n\n**Use cases:**\n- Local development environments\n- Automated testing\n- Microservices development\n- Quick proof-of-concepts\n\n**Example:**\n```yaml\nversion: '3.8'\nservices:\n  web:\n    build: .\n    ports:\n      - \"5000:5000\"\n    environment:\n      - DATABASE_URL=postgres://db:5432\n    depends_on:\n      - db\n  db:\n    image: postgres:13\n    volumes:\n      - postgres_data:/var/lib/postgresql/data\nvolumes:\n  postgres_data:\n```",
+          "code": null
+        },
+        {
+          "name": "Q27: How do you handle persistent data in Docker containers?",
+          "text": "Three methods:\n1. **Volumes**: Managed by Docker, stored in `/var/lib/docker/volumes/`\n   ```bash\n   docker volume create mydata\n   docker run -v mydata:/data myapp\n   ```\n\n2. **Bind Mounts**: Map host directory to container\n   ```bash\n   docker run -v /host/path:/container/path myapp\n   ```\n\n3. **tmpfs Mounts**: Stored in host memory (temporary)\n\n**Best practices:**\n- Use volumes for production data\n- Bind mounts for development\n- Never store data in container layer\n- Regular backups\n- Named volumes for clarity",
+          "code": null
+        },
+        {
+          "name": "Q28: What are Docker networking modes?",
+          "text": "- **Bridge** (default): Isolated network, containers communicate via IP\n- **Host**: Container uses host network directly, no isolation\n- **None**: No networking\n- **Overlay**: Multi-host networking for swarm/Kubernetes\n- **Macvlan**: Assign MAC address to container\n\n**Custom networks:**\n```bash\ndocker network create mynet\ndocker run --network mynet app1\ndocker run --network mynet app2\n```",
+          "code": null
+        },
+        {
+          "name": "Q29: How do you troubleshoot a failing Docker container?",
+          "text": "Troubleshooting steps:\n1. **Check logs**: `docker logs <container>`\n2. **Inspect container**: `docker inspect <container>`\n3. **Check processes**: `docker top <container>`\n4. **Execute commands**: `docker exec -it <container> /bin/sh`\n5. **Check resource usage**: `docker stats`\n6. **Review events**: `docker events`\n7. **Verify network**: `docker network inspect <network>`\n8. **Check health**: `docker ps` (STATUS column)\n\n**Common issues:**\n- Port conflicts\n- Missing environment variables\n- Volume permission issues\n- Resource constraints\n- Network connectivity",
+          "code": null
+        },
+        {
+          "name": "Q30: What is Docker Content Trust and why is it important?",
+          "text": "Docker Content Trust (DCT) ensures integrity and publisher authenticity of images using digital signatures.\n\n**Importance:**\n- Prevents pulling malicious images\n- Verifies image source\n- Ensures image hasn't been tampered\n- Compliance requirements\n\n**Enable:**\n```bash\nexport DOCKER_CONTENT_TRUST=1\n```\n\n**Security best practices:**\n- Enable DCT in production\n- Scan images for vulnerabilities\n- Use private registries\n- Implement image signing\n- Regular base image updates\n- Minimal base images\n- Non-root users in containers\n\n---",
+          "code": null
+        }
+      ]
+    },
+    {
+      "id": "section3",
+      "title": "📚 KUBERNETES & ORCHESTRATION",
+      "sections": [
+        {
+          "name": "Q31: What is Kubernetes and why is it important?",
+          "text": "Kubernetes (K8s) is an open-source container orchestration platform that automates deployment, scaling, and management of containerized applications.\n\n**Importance:**\n- Automates container lifecycle management\n- Self-healing (restarts failed containers)\n- Horizontal auto-scaling\n- Service discovery and load balancing\n- Rolling updates and rollbacks\n- Secret and configuration management\n- Storage orchestration\n- Multi-cloud and hybrid cloud support",
+          "code": null
+        },
+        {
+          "name": "Q32: Explain Kubernetes architecture.",
+          "text": "**Control Plane (Master Node):**\n- **API Server**: Frontend, handles all requests\n- **etcd**: Distributed key-value store for cluster state\n- **Scheduler**: Assigns pods to nodes based on resources\n- **Controller Manager**: Runs controllers (replication, endpoints, etc.)\n- **Cloud Controller Manager**: Cloud-specific control logic\n\n**Worker Nodes:**\n- **Kubelet**: Ensures containers are running in pods\n- **Container Runtime**: Runs containers (Docker, containerd)\n- **Kube-proxy**: Manages network rules and routing",
+          "code": null
+        },
+        {
+          "name": "Q33: What are Kubernetes objects (Pods, Deployments, Services)?",
+          "text": "**Pod**: Smallest deployable unit, one or more containers\n\n\n**Deployment**: Manages replica sets and pods, enables rolling updates\n\n\n**Service**: Exposes pods to network, provides load balancing\n- ClusterIP (internal), NodePort (external on port), LoadBalancer (cloud LB)",
+          "code": "// yaml\napiVersion: v1\nkind: Pod\nmetadata:\n  name: myapp-pod\nspec:\n  containers:\n  - name: myapp\n    image: myapp:1.0\n\n// yaml\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: myapp-deployment\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: myapp\n  template:\n    metadata:\n      labels:\n        app: myapp\n    spec:\n      containers:\n      - name: myapp\n        image: myapp:1.0"
+        },
+        {
+          "name": "Q34: What is a Kubernetes Namespace and when to use it?",
+          "text": "Namespaces provide virtual clusters within a physical cluster for resource isolation.\n\n**Use cases:**\n- **Environment separation**: dev, staging, prod\n- **Team isolation**: team-a, team-b\n- **Multi-tenancy**: customer-1, customer-2\n- **Resource quotas**: Limit resource usage per namespace\n\n**Commands:**\n```bash\nkubectl create namespace dev\nkubectl get pods -n dev\nkubectl config set-context --current --namespace=dev\n```\n\n**Default namespaces:**\n- `default`: Default for resources\n- `kube-system`: Kubernetes system components\n- `kube-public`: Public resources\n- `kube-node-lease`: Node heartbeat data",
+          "code": null
+        },
+        {
+          "name": "Q35: How does Kubernetes handle service discovery and load balancing?",
+          "text": "**Service Discovery:**\n- **Environment Variables**: Injected into pods\n- **DNS**: Kubernetes DNS automatically creates DNS entries for services\n\n**Load Balancing:**\nServices distribute traffic across healthy pods using:\n- **ClusterIP**: Internal load balancing (default)\n- **NodePort**: External access via node IP:port\n- **LoadBalancer**: Cloud provider's load balancer\n- **Ingress**: HTTP/HTTPS routing with rules\n\n**Example:**\n```yaml\napiVersion: v1\nkind: Service\nmetadata:\n  name: myapp-service\nspec:\n  selector:\n    app: myapp\n  type: LoadBalancer\n  ports:\n  - port: 80\n    targetPort: 8080\n```",
+          "code": null
+        },
+        {
+          "name": "Q36: What is a Kubernetes ConfigMap and Secret?",
+          "text": "**ConfigMap**: Stores non-sensitive configuration data\n```yaml\napiVersion: v1\nkind: ConfigMap\nmetadata:\n  name: app-config\ndata:\n  database_url: \"postgres://db:5432\"\n  log_level: \"info\"\n```\n\n**Secret**: Stores sensitive data (base64 encoded)\n```yaml\napiVersion: v1\nkind: Secret\nmetadata:\n  name: app-secret\ntype: Opaque\ndata:\n  password: cGFzc3dvcmQxMjM=  # base64 encoded\n```\n\n**Usage in Pod:**\n```yaml\nenv:\n  - name: DB_URL\n    valueFrom:\n      configMapKeyRef:\n        name: app-config\n        key: database_url\n  - name: DB_PASS\n    valueFrom:\n      secretKeyRef:\n        name: app-secret\n        key: password\n```",
+          "code": null
+        },
+        {
+          "name": "Q37: How do you scale applications in Kubernetes?",
+          "text": "**Manual Scaling:**\n```bash\nkubectl scale deployment myapp --replicas=5\n```\n\n**Horizontal Pod Autoscaler (HPA):**\n```yaml\napiVersion: autoscaling/v2\nkind: HorizontalPodAutoscaler\nmetadata:\n  name: myapp-hpa\nspec:\n  scaleTargetRef:\n    apiVersion: apps/v1\n    kind: Deployment\n    name: myapp\n  minReplicas: 2\n  maxReplicas: 10\n  metrics:\n  - type: Resource\n    resource:\n      name: cpu\n      target:\n        type: Utilization\n        averageUtilization: 70\n```\n\n**Vertical Pod Autoscaler (VPA)**: Adjusts CPU/memory requests/limits\n\n**Cluster Autoscaler**: Scales nodes based on pod demand",
+          "code": null
+        },
+        {
+          "name": "Q38: What are Kubernetes health checks?",
+          "text": "**Liveness Probe**: Checks if container is running\n- Kills and restarts unhealthy containers\n\n**Readiness Probe**: Checks if container is ready to serve traffic\n- Removes pod from service endpoints if unhealthy\n\n**Startup Probe**: Checks if application has started\n- Useful for slow-starting containers\n\n**Example:**\n```yaml\nlivenessProbe:\n  httpGet:\n    path: /healthz\n    port: 8080\n  initialDelaySeconds: 30\n  periodSeconds: 10\nreadinessProbe:\n  httpGet:\n    path: /ready\n    port: 8080\n  initialDelaySeconds: 5\n  periodSeconds: 5\n```",
+          "code": null
+        },
+        {
+          "name": "Q39: What is a Kubernetes Ingress?",
+          "text": "Ingress manages external HTTP/HTTPS access to services, providing:\n- URL-based routing\n- SSL/TLS termination\n- Name-based virtual hosting\n- Load balancing\n\n**Example:**\n```yaml\napiVersion: networking.k8s.io/v1\nkind: Ingress\nmetadata:\n  name: app-ingress\n  annotations:\n    nginx.ingress.kubernetes.io/rewrite-target: /\nspec:\n  tls:\n  - hosts:\n    - myapp.example.com\n    secretName: tls-secret\n  rules:\n  - host: myapp.example.com\n    http:\n      paths:\n      - path: /api\n        pathType: Prefix\n        backend:\n          service:\n            name: api-service\n            port:\n              number: 80\n```\n\n**Requires Ingress Controller** (nginx, traefik, HAProxy)",
+          "code": null
+        },
+        {
+          "name": "Q40: How do you implement rolling updates and rollbacks in Kubernetes?",
+          "text": "**Rolling Update** (default strategy):\n```yaml\nspec:\n  strategy:\n    type: RollingUpdate\n    rollingUpdate:\n      maxSurge: 1        # Max pods above desired count\n      maxUnavailable: 0  # Max pods unavailable during update\n```\n\n**Update deployment:**\n```bash\nkubectl set image deployment/myapp myapp=myapp:2.0\nkubectl rollout status deployment/myapp\n```\n\n**Rollback:**\n```bash\nkubectl rollout history deployment/myapp\nkubectl rollout undo deployment/myapp\nkubectl rollout undo deployment/myapp --to-revision=2\n```\n\n**Pause/Resume:**\n```bash\nkubectl rollout pause deployment/myapp\nkubectl rollout resume deployment/myapp\n```",
+          "code": null
+        },
+        {
+          "name": "Q41: What are Kubernetes StatefulSets and when to use them?",
+          "text": "StatefulSets manage stateful applications with:\n- Stable, unique network identifiers\n- Stable persistent storage\n- Ordered, graceful deployment and scaling\n- Ordered, automated rolling updates\n\n**Use cases:**\n- Databases (MySQL, PostgreSQL, MongoDB)\n- Message queues (Kafka, RabbitMQ)\n- Distributed systems requiring stable identity\n\n**Example:**\n```yaml\napiVersion: apps/v1\nkind: StatefulSet\nmetadata:\n  name: postgres\nspec:\n  serviceName: postgres\n  replicas: 3\n  selector:\n    matchLabels:\n      app: postgres\n  template:\n    metadata:\n      labels:\n        app: postgres\n    spec:\n      containers:\n      - name: postgres\n        image: postgres:13\n        volumeMounts:\n        - name: data\n          mountPath: /var/lib/postgresql/data\n  volumeClaimTemplates:\n  - metadata:\n      name: data\n    spec:\n      accessModes: [\"ReadWriteOnce\"]\n      resources:\n        requests:\n          storage: 10Gi\n```",
+          "code": null
+        },
+        {
+          "name": "Q42: How do you troubleshoot Kubernetes pods?",
+          "text": "Troubleshooting workflow:\n\n1. **Check pod status:**\n```bash\nkubectl get pods\nkubectl describe pod <pod-name>\n```\n\n2. **View logs:**\n```bash\nkubectl logs <pod-name>\nkubectl logs <pod-name> --previous  # Previous container\nkubectl logs <pod-name> -c <container-name>  # Multi-container\n```\n\n3. **Execute commands:**\n```bash\nkubectl exec -it <pod-name> -- /bin/sh\n```\n\n4. **Check events:**\n```bash\nkubectl get events --sort-by=.metadata.creationTimestamp\n```\n\n5. **Resource usage:**\n```bash\nkubectl top pod <pod-name>\nkubectl describe node <node-name>\n```\n\n**Common issues:**\n- ImagePullBackOff: Wrong image or registry access\n- CrashLoopBackOff: Application crashes on startup\n- Pending: Insufficient resources\n- OOMKilled: Memory limit exceeded",
+          "code": null
+        },
+        {
+          "name": "Q43: What is a DaemonSet and its use cases?",
+          "text": "DaemonSet ensures all (or specific) nodes run a copy of a pod.\n\n**Use cases:**\n- Log collection (Fluentd, Logstash)\n- Monitoring agents (Prometheus Node Exporter, Datadog)\n- Storage daemons (Ceph, Gluster)\n- Network plugins (Calico, Weave)\n\n**Example:**\n```yaml\napiVersion: apps/v1\nkind: DaemonSet\nmetadata:\n  name: fluentd\nspec:\n  selector:\n    matchLabels:\n      name: fluentd\n  template:\n    metadata:\n      labels:\n        name: fluentd\n    spec:\n      containers:\n      - name: fluentd\n        image: fluent/fluentd:v1.14\n```",
+          "code": null
+        },
+        {
+          "name": "Q44: How do you manage Kubernetes RBAC (Role-Based Access Control)?",
+          "text": "RBAC controls access to Kubernetes API using:\n\n**Components:**\n- **Role/ClusterRole**: Define permissions\n- **RoleBinding/ClusterRoleBinding**: Grant permissions to users/groups\n\n**Example:**\n```yaml\n# Role: Namespace-scoped\napiVersion: rbac.authorization.k8s.io/v1\nkind: Role\nmetadata:\n  namespace: dev\n  name: pod-reader\nrules:\n- apiGroups: [\"\"]\n  resources: [\"pods\"]\n  verbs: [\"get\", \"list\"]\n\n# RoleBinding\napiVersion: rbac.authorization.k8s.io/v1\nkind: RoleBinding\nmetadata:\n  name: read-pods\n  namespace: dev\nsubjects:\n- kind: User\n  name: jane\nroleRef:\n  kind: Role\n  name: pod-reader\n  apiGroup: rbac.authorization.k8s.io\n```\n\n**Best practices:**\n- Principle of least privilege\n- Use namespace-scoped roles when possible\n- Audit access regularly\n- Avoid cluster-admin unless necessary",
+          "code": null
+        },
+        {
+          "name": "Q45: What is Helm and why use it?",
+          "text": "Helm is a package manager for Kubernetes that:\n- Packages Kubernetes manifests into \"charts\"\n- Manages releases and versioning\n- Simplifies application deployment\n- Enables template-based configuration\n- Facilitates rollback\n\n**Example:**\n```bash\n# Add repository\nhelm repo add stable https://charts.helm.sh/stable\n\n# Install chart\nhelm install myapp stable/mysql \\\n  --set mysqlRootPassword=secret\n\n# Upgrade\nhelm upgrade myapp stable/mysql --set mysqlRootPassword=newsecret\n\n# Rollback\nhelm rollback myapp 1\n\n# List releases\nhelm list\n```\n\n**Use cases:**\n- Deploy complex applications (databases, monitoring stacks)\n- Environment-specific configurations\n- Application versioning\n- Sharing and reusing configurations\n\n---",
+          "code": null
+        }
+      ]
+    },
+    {
+      "id": "section4",
+      "title": "📚 AWS CLOUD SERVICES",
+      "sections": [
+        {
+          "name": "Q46: What are the core AWS services for DevOps?",
+          "text": "**Compute:**\n- EC2: Virtual servers\n- ECS/EKS: Container orchestration\n- Lambda: Serverless compute\n- Elastic Beanstalk: PaaS\n\n**Storage:**\n- S3: Object storage\n- EBS: Block storage for EC2\n- EFS: Network file system\n\n**Database:**\n- RDS: Managed relational databases\n- DynamoDB: NoSQL database\n\n**Networking:**\n- VPC: Virtual private cloud\n- Route 53: DNS service\n- CloudFront: CDN\n- ELB: Load balancing\n\n**DevOps:**\n- CodePipeline: CI/CD orchestration\n- CodeBuild: Build service\n- CodeDeploy: Deployment automation\n- CloudFormation: IaC\n\n**Monitoring:**\n- CloudWatch: Monitoring and logging\n- X-Ray: Distributed tracing",
+          "code": null
+        },
+        {
+          "name": "Q47: What is AWS VPC and its key components?",
+          "text": "VPC (Virtual Private Cloud) provides isolated network environment in AWS.\n\n**Components:**\n- **Subnets**: IP address ranges (public/private)\n- **Route Tables**: Control traffic routing\n- **Internet Gateway**: Enables internet access\n- **NAT Gateway**: Outbound internet for private subnets\n- **Security Groups**: Instance-level firewall (stateful)\n- **Network ACLs**: Subnet-level firewall (stateless)\n- **VPC Peering**: Connect VPCs\n- **VPN**: Connect on-premises to VPC\n\n**Best practices:**\n- Multi-AZ deployment for high availability\n- Private subnets for databases/backend\n- Public subnets for load balancers\n- Least privilege security group rules",
+          "code": null
+        },
+        {
+          "name": "Q48: How do you implement high availability in AWS?",
+          "text": "HA architecture:\n\n1. **Multi-AZ Deployment**:\n   - Distribute across availability zones\n   - Each AZ has independent power, cooling, networking\n\n2. **Load Balancing**:\n   - Application Load Balancer (ALB) for HTTP/HTTPS\n   - Network Load Balancer (NLB) for TCP\n   - Distribute across AZs\n\n3. **Auto Scaling**:\n   - Automatically adjust capacity\n   - Based on metrics (CPU, custom)\n   - Min/desired/max instances\n\n4. **RDS Multi-AZ**:\n   - Automatic failover\n   - Synchronous replication\n   - 99.95% SLA\n\n5. **S3 Replication**:\n   - Cross-region replication\n   - 99.999999999% durability\n\n6. **Route 53 Health Checks**:\n   - DNS failover\n   - Multi-region routing",
+          "code": null
+        },
+        {
+          "name": "Q49: What is AWS IAM and its components?",
+          "text": "IAM (Identity and Access Management) controls access to AWS services.\n\n**Components:**\n\n**Users**: Individual identities\n\n**Groups**: Collections of users\n\n**Roles**: Temporary credentials for services/users\n\n**Policies**: JSON documents defining permissions\n```json\n{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Action\": [\"s3:GetObject\", \"s3:PutObject\"],\n      \"Resource\": \"arn:aws:s3:::mybucket/*\"\n    }\n  ]\n}\n```\n\n**Best practices:**\n- Enable MFA for root and privileged users\n- Use roles for applications\n- Principle of least privilege\n- Regular access reviews\n- No root account for daily tasks\n- Rotate credentials regularly",
+          "code": null
+        },
+        {
+          "name": "Q50: What is AWS CloudFormation and how does it work?",
+          "text": "CloudFormation is AWS's Infrastructure as Code service using templates (JSON/YAML).\n\n**Concepts:**\n- **Template**: Defines resources\n- **Stack**: Deployed resources from template\n- **Change Sets**: Preview changes before applying\n\n**Example:**\n```yaml\nAWSTemplateFormatVersion: '2010-09-09'\nDescription: Simple EC2 instance\n\nResources:\n  MyEC2Instance:\n    Type: AWS::EC2::Instance\n    Properties:\n      ImageId: ami-0c55b159cbfafe1f0\n      InstanceType: t2.micro\n      KeyName: mykey\n      SecurityGroupIds:\n        - !Ref InstanceSecurityGroup\n        \n  InstanceSecurityGroup:\n    Type: AWS::EC2::SecurityGroup\n    Properties:\n      GroupDescription: Allow SSH\n      SecurityGroupIngress:\n        - IpProtocol: tcp\n          FromPort: 22\n          ToPort: 22\n          CidrIp: 0.0.0.0/0\n\nOutputs:\n  InstanceId:\n    Value: !Ref MyEC2Instance\n    Export:\n      Name: MyInstanceId\n```\n\n**Benefits:**\n- Version-controlled infrastructure\n- Repeatable deployments\n- Automatic dependency resolution\n- Drift detection\n- Stack policies for protection",
+          "code": null
+        },
+        {
+          "name": "Q51: What is AWS ECS vs EKS?",
+          "text": "**ECS (Elastic Container Service)**:\n- AWS-native container orchestration\n- Simpler to set up\n- Deep AWS integration\n- Fargate support (serverless)\n- Less feature-rich than Kubernetes\n\n**EKS (Elastic Kubernetes Service)**:\n- Managed Kubernetes\n- Industry-standard orchestration\n- Multi-cloud portability\n- Rich ecosystem\n- More complex but more powerful\n- Higher learning curve\n\n**Choose ECS if:**\n- AWS-only deployment\n- Simpler requirements\n- Faster time to market\n\n**Choose EKS if:**\n- Multi-cloud strategy\n- Complex orchestration needs\n- Existing Kubernetes expertise\n- Rich Kubernetes ecosystem needed",
+          "code": null
+        },
+        {
+          "name": "Q52: What is AWS Lambda and its use cases in DevOps?",
+          "text": "Lambda is serverless compute that runs code in response to events.\n\n**DevOps use cases:**\n- **Automated backups**: Trigger snapshots on schedule\n- **Log processing**: Process CloudWatch logs\n- **Auto-remediation**: Fix non-compliant resources\n- **CI/CD automation**: Custom build/deploy steps\n- **Infrastructure automation**: Auto-tagging, cleanup\n- **Security automation**: Respond to security events\n- **API backends**: Serverless REST APIs\n\n**Example:**\n```python\nimport boto3\n\ndef lambda_handler(event, context):\n    ec2 = boto3.client('ec2')\n    # Get untagged instances\n    instances = ec2.describe_instances(\n        Filters=[{'Name': 'tag-key', 'Values': ['Name'], 'Exists': False}]\n    )\n    # Auto-tag them\n    for reservation in instances['Reservations']:\n        for instance in reservation['Instances']:\n            ec2.create_tags(\n                Resources=[instance['InstanceId']],\n                Tags=[{'Key': 'Name', 'Value': 'auto-tagged'}]\n            )\n    return {'statusCode': 200}\n```",
+          "code": null
+        },
+        {
+          "name": "Q53: How do you implement disaster recovery in AWS?",
+          "text": "DR strategies (RTO/RPO decreasing, cost increasing):\n\n**1. Backup & Restore** (RTO: hours, RPO: hours):\n- Regular snapshots to S3\n- Lowest cost\n- Manual recovery process\n\n**2. Pilot Light** (RTO: 10s of minutes, RPO: minutes):\n- Minimal infrastructure running\n- Critical services ready\n- Scale up on disaster\n\n**3. Warm Standby** (RTO: minutes, RPO: seconds):\n- Scaled-down version running\n- Can handle reduced traffic\n- Scale up when needed\n\n**4. Multi-Site Active/Active** (RTO: seconds, RPO: near-zero):\n- Full production in multiple regions\n- Traffic distributed\n- Highest cost\n\n**Key services:**\n- S3 Cross-Region Replication\n- RDS automated backups and read replicas\n- Route 53 health checks and failover\n- AWS Backup\n- CloudEndure Disaster Recovery",
+          "code": null
+        },
+        {
+          "name": "Q54: What is AWS CloudWatch and how do you use it?",
+          "text": "CloudWatch provides monitoring and observability.\n\n**Features:**\n- **Metrics**: Collect and track metrics\n- **Logs**: Centralized log management\n- **Alarms**: Trigger actions on thresholds\n- **Dashboards**: Visualize metrics\n- **Events/EventBridge**: React to state changes\n- **Insights**: Query and analyze logs\n\n**Example alarm:**\n```bash\naws cloudwatch put-metric-alarm \\\n  --alarm-name high-cpu \\\n  --alarm-description \"Alert when CPU exceeds 80%\" \\\n  --metric-name CPUUtilization \\\n  --namespace AWS/EC2 \\\n  --statistic Average \\\n  --period 300 \\\n  --threshold 80 \\\n  --comparison-operator GreaterThanThreshold \\\n  --evaluation-periods 2 \\\n  --dimensions Name=InstanceId,Value=i-1234567890abcdef0 \\\n  --alarm-actions arn:aws:sns:us-east-1:123456789012:my-topic\n```\n\n**Use cases:**\n- Application performance monitoring\n- Infrastructure monitoring\n- Log aggregation and analysis\n- Automated responses\n- Cost optimization",
+          "code": null
+        },
+        {
+          "name": "Q55: What is the AWS Well-Architected Framework?",
+          "text": "Framework for building secure, high-performing, resilient, and efficient infrastructure.\n\n**Six Pillars:**\n\n**1. Operational Excellence**:\n- IaC, monitoring, continuous improvement\n- Key: Automate operations\n\n**2. Security**:\n- Data protection, IAM, detection mechanisms\n- Key: Defense in depth\n\n**3. Reliability**:\n- Recover from failures, scaling, disaster recovery\n- Key: Design for failure\n\n**4. Performance Efficiency**:\n- Right resources, monitoring, efficiency over time\n- Key: Use appropriate services\n\n**5. Cost Optimization**:\n- Eliminate waste, right-sizing, reserved capacity\n- Key: Pay only for what you need\n\n**6. Sustainability**:\n- Minimize environmental impact\n- Key: Maximize utilization\n\n**Tools:**\n- AWS Well-Architected Tool\n- Trusted Advisor\n- Architecture reviews\n\n---",
+          "code": null
+        }
+      ]
+    },
+    {
+      "id": "section5",
+      "title": "📚 TERRAFORM & INFRASTRUCTURE AS CODE",
+      "sections": [
+        {
+          "name": "Q56: What is Terraform and its key advantages?",
+          "text": "Terraform is an open-source IaC tool by HashiCorp for provisioning and managing infrastructure.\n\n**Key advantages:**\n- **Multi-cloud**: AWS, Azure, GCP, on-premises\n- **Declarative**: Describe desired state, Terraform handles how\n- **State management**: Tracks resource state\n- **Plan before apply**: Preview changes\n- **Reusable modules**: DRY principle\n- **Version control**: Infrastructure in Git\n- **Provider ecosystem**: 1000+ providers\n\n**Basic workflow:**\n```bash\nterraform init     # Initialize and download providers\nterraform plan     # Preview changes\nterraform apply    # Apply changes\nterraform destroy  # Remove infrastructure\n```",
+          "code": null
+        },
+        {
+          "name": "Q57: What is the Terraform state file and why is it important?",
+          "text": "State file (`terraform.tfstate`) tracks managed infrastructure and metadata.\n\n**Importance:**\n- Maps real resources to configuration\n- Tracks metadata and dependencies\n- Improves performance (caching)\n- Enables collaboration\n\n**Best practices:**\n- **Remote backend**: Store in S3, Azure Blob, Terraform Cloud\n- **State locking**: Prevent concurrent modifications (DynamoDB)\n- **Encryption**: Encrypt sensitive data\n- **Versioning**: Enable backup/recovery\n- **Never manual edit**: Use terraform commands\n\n**Example remote backend:**\n```hcl\nterraform {\n  backend \"s3\" {\n    bucket         = \"my-terraform-state\"\n    key            = \"prod/terraform.tfstate\"\n    region         = \"us-east-1\"\n    encrypt        = true\n    dynamodb_table = \"terraform-lock\"\n  }\n}\n```",
+          "code": null
+        },
+        {
+          "name": "Q58: What are Terraform modules and how do you create them?",
+          "text": "Modules are containers for multiple resources used together.\n\n**Benefits:**\n- Code reusability\n- Consistent standards\n- Simplified management\n- Abstraction of complexity\n\n**Module structure:**\n```\nmodule/\n├── main.tf       # Resources\n├── variables.tf  # Input variables\n├── outputs.tf    # Output values\n└── README.md     # Documentation\n```\n\n**Example module:**\n```hcl\n# modules/vpc/main.tf\nresource \"aws_vpc\" \"main\" {\n  cidr_block = var.cidr_block\n  tags = {\n    Name = var.vpc_name\n  }\n}\n\n# modules/vpc/variables.tf\nvariable \"cidr_block\" {\n  type = string\n}\nvariable \"vpc_name\" {\n  type = string\n}\n\n# modules/vpc/outputs.tf\noutput \"vpc_id\" {\n  value = aws_vpc.main.id\n}\n\n# root main.tf - Using module\nmodule \"vpc\" {\n  source     = \"./modules/vpc\"\n  cidr_block = \"10.0.0.0/16\"\n  vpc_name   = \"production-vpc\"\n}\n```",
+          "code": null
+        },
+        {
+          "name": "Q59: What are Terraform workspaces and when to use them?",
+          "text": "Workspaces allow managing multiple states for the same configuration.\n\n**Use cases:**\n- Environment separation (dev, staging, prod)\n- Feature branches testing\n- Temporary infrastructure\n\n**Commands:**\n```bash\nterraform workspace new dev\nterraform workspace new prod\nterraform workspace list\nterraform workspace select dev\n```\n\n**Using in code:**\n```hcl\nresource \"aws_instance\" \"example\" {\n  instance_type = terraform.workspace == \"prod\" ? \"t3.large\" : \"t3.micro\"\n  tags = {\n    Environment = terraform.workspace\n  }\n}\n```\n\n**Alternatives:**\n- Separate directories per environment\n- Different backends per environment",
+          "code": null
+        },
+        {
+          "name": "Q60: How do you manage secrets in Terraform?",
+          "text": "Strategies:\n\n**1. Environment Variables:**\n```bash\nexport TF_VAR_db_password=\"secret\"\n```\n\n**2. Terraform Variables (marked sensitive):**\n```hcl\nvariable \"db_password\" {\n  type      = string\n  sensitive = true\n}\n```\n\n**3. External Secret Stores:**\n```hcl\ndata \"aws_secretsmanager_secret_version\" \"db_password\" {\n  secret_id = \"prod/db/password\"\n}\n\nresource \"aws_db_instance\" \"example\" {\n  password = data.aws_secretsmanager_secret_version.db_password.secret_string\n}\n```\n\n**4. Vault Provider:**\n```hcl\ndata \"vault_generic_secret\" \"db\" {\n  path = \"secret/database\"\n}\n```\n\n**Best practices:**\n- Never commit secrets to version control\n- Use .gitignore for *.tfvars with secrets\n- Encrypt state file\n- Use IAM roles instead of access keys\n- Rotate credentials regularly",
+          "code": null
+        },
+        {
+          "name": "Q61: What are Terraform provisioners and when should you use them?",
+          "text": "Provisioners execute scripts on resources after creation.\n\n**Types:**\n- **local-exec**: Runs on machine running Terraform\n- **remote-exec**: Runs on remote resource\n- **file**: Copies files to resource\n\n**Example:**\n```hcl\nresource \"aws_instance\" \"web\" {\n  ami           = \"ami-0c55b159cbfafe1f0\"\n  instance_type = \"t2.micro\"\n\n  provisioner \"remote-exec\" {\n    inline = [\n      \"sudo apt-get update\",\n      \"sudo apt-get install -y nginx\",\n    ]\n  }\n\n  provisioner \"local-exec\" {\n    command = \"echo ${self.public_ip} >> ip_addresses.txt\"\n  }\n}\n```\n\n**When NOT to use:**\n- Configuration management (use Ansible, Chef instead)\n- Complex orchestration\n- Production systems (prefer immutable infrastructure)\n\n**Best practices:**\n- Use sparingly (last resort)\n- Prefer user_data or cloud-init\n- Use null_resource for one-off tasks",
+          "code": null
+        },
+        {
+          "name": "Q62: How do you implement Terraform in a CI/CD pipeline?",
+          "text": "CI/CD integration:\n\n**1. Repository Structure:**\n```\nterraform/\n├── environments/\n│   ├── dev/\n│   ├── staging/\n│   └── prod/\n├── modules/\n└── .gitlab-ci.yml\n```\n\n**2. Pipeline stages:**\n```yaml\nstages:\n  - validate\n  - plan\n  - apply\n\nvalidate:\n  stage: validate\n  script:\n    - terraform init\n    - terraform validate\n    - terraform fmt -check\n\nplan:\n  stage: plan\n  script:\n    - terraform init\n    - terraform plan -out=plan.tfplan\n  artifacts:\n    paths:\n      - plan.tfplan\n\napply:\n  stage: apply\n  script:\n    - terraform apply plan.tfplan\n  when: manual  # Require approval\n  only:\n    - main\n```\n\n**3. Best practices:**\n- Separate plan and apply stages\n- Manual approval for production\n- Store state remotely\n- Use state locking\n- Run terraform validate\n- Automated testing (terratest)\n- Security scanning (tfsec, checkov)",
+          "code": null
+        },
+        {
+          "name": "Q63: What is terraform import and when do you use it?",
+          "text": "`terraform import` brings existing infrastructure under Terraform management.\n\n**Use cases:**\n- Migrating to Terraform\n- Manually created resources\n- Disaster recovery\n\n**Process:**\n```bash\n# 1. Create resource block (empty)\nresource \"aws_instance\" \"imported\" {\n  # Configuration will be added after import\n}\n\n# 2. Import resource\nterraform import aws_instance.imported i-1234567890abcdef0\n\n# 3. Run terraform plan to see required attributes\nterraform plan\n\n# 4. Update resource block with required attributes\nresource \"aws_instance\" \"imported\" {\n  ami           = \"ami-0c55b159cbfafe1f0\"\n  instance_type = \"t2.micro\"\n  # ... other attributes\n}\n\n# 5. Verify\nterraform plan  # Should show no changes\n```\n\n**Limitations:**\n- Imports one resource at a time\n- Doesn't generate configuration (manual task)\n- Complex for interconnected resources",
+          "code": null
+        },
+        {
+          "name": "Q64: How do you handle Terraform dependencies?",
+          "text": "Terraform automatically handles most dependencies, but you can control:\n\n**1. Implicit Dependencies** (automatic):\n```hcl\nresource \"aws_instance\" \"web\" {\n  subnet_id = aws_subnet.public.id  # Implicit dependency\n}\n```\n\n**2. Explicit Dependencies** (depends_on):\n```hcl\nresource \"aws_instance\" \"web\" {\n  # ...\n  depends_on = [aws_iam_role_policy.example]\n}\n```\n\n**3. Data Dependencies:**\n```hcl\ndata \"aws_ami\" \"ubuntu\" {\n  most_recent = true\n  filter {\n    name   = \"name\"\n    values = [\"ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*\"]\n  }\n}\n\nresource \"aws_instance\" \"web\" {\n  ami = data.aws_ami.ubuntu.id\n}\n```\n\n**4. Module Dependencies:**\n```hcl\nmodule \"network\" {\n  source = \"./modules/network\"\n}\n\nmodule \"compute\" {\n  source    = \"./modules/compute\"\n  vpc_id    = module.network.vpc_id  # Dependency\n}\n```",
+          "code": null
+        },
+        {
+          "name": "Q65: What are Terraform best practices?",
+          "text": "**1. Code Organization:**\n- Use modules for reusability\n- Separate environments\n- Consistent naming conventions\n\n**2. State Management:**\n- Remote backend\n- State locking\n- Encryption\n- Regular backups\n\n**3. Version Control:**\n- Pin provider versions\n- Use .gitignore for sensitive files\n- Meaningful commit messages\n\n**4. Security:**\n- Never commit secrets\n- Use IAM roles over keys\n- Scan for security issues (tfsec)\n- Least privilege access\n\n**5. Testing:**\n- terraform validate\n- terraform plan before apply\n- Automated tests (terratest)\n- Code review process\n\n**6. Documentation:**\n- README for each module\n- Comment complex logic\n- Use variable descriptions\n\n**7. Performance:**\n- Use -target for specific resources\n- Minimize provider calls\n- Leverage data sources caching\n\n---",
+          "code": null
+        }
+      ]
+    },
+    {
+      "id": "section6",
+      "title": "📚 ANSIBLE & CONFIGURATION MANAGEMENT",
+      "sections": [
+        {
+          "name": "Q66: What is Ansible and how does it differ from Terraform?",
+          "text": "**Ansible**: Configuration management tool, procedural\n\n**Terraform**: Infrastructure provisioning tool, declarative\n\n**Key differences:**\n\n| Aspect | Ansible | Terraform |\n|--------|---------|-----------|\n| **Purpose** | Configuration, deployment | Infrastructure provisioning |\n| **Approach** | Procedural (how) | Declarative (what) |\n| **State** | Stateless | Stateful |\n| **Agent** | Agentless (SSH) | Agentless (API) |\n| **Language** | YAML (Playbooks) | HCL |\n| **Idempotency** | Module-dependent | Built-in |\n\n**Use together:**\n- Terraform: Provision infrastructure\n- Ansible: Configure applications",
+          "code": null
+        },
+        {
+          "name": "Q67: What is an Ansible playbook and its structure?",
+          "text": "Playbook is YAML file defining automation tasks.\n\n**Structure:**\n```yaml\n---\n- name: Configure web servers\n  hosts: webservers\n  become: yes\n  vars:\n    http_port: 80\n    max_clients: 200\n  \n  tasks:\n    - name: Install nginx\n      apt:\n        name: nginx\n        state: present\n        update_cache: yes\n    \n    - name: Copy configuration\n      template:\n        src: nginx.conf.j2\n        dest: /etc/nginx/nginx.conf\n      notify: Restart nginx\n    \n    - name: Start nginx\n      service:\n        name: nginx\n        state: started\n        enabled: yes\n  \n  handlers:\n    - name: Restart nginx\n      service:\n        name: nginx\n        state: restarted\n```\n\n**Components:**\n- **Hosts**: Target servers\n- **Vars**: Variables\n- **Tasks**: Actions to perform\n- **Handlers**: Triggered by tasks (e.g., restart service)",
+          "code": null
+        },
+        {
+          "name": "Q68: What are Ansible roles and how do you use them?",
+          "text": "Roles organize playbooks into reusable components.\n\n**Structure:**\n```\nroles/\n└── webserver/\n    ├── tasks/\n    │   └── main.yml\n    ├── handlers/\n    │   └── main.yml\n    ├── templates/\n    │   └── nginx.conf.j2\n    ├── files/\n    ├── vars/\n    │   └── main.yml\n    ├── defaults/\n    │   └── main.yml\n    └── meta/\n        └── main.yml\n```\n\n**Usage:**\n```yaml\n---\n- name: Setup web infrastructure\n  hosts: webservers\n  roles:\n    - common\n    - webserver\n    - { role: database, db_name: myapp }\n```\n\n**Benefits:**\n- Modularity\n- Reusability\n- Easier testing\n- Galaxy sharing",
+          "code": null
+        },
+        {
+          "name": "Q69: What is Ansible inventory and dynamic inventory?",
+          "text": "**Static Inventory** (INI format):\n```ini\n[webservers]\nweb1.example.com\nweb2.example.com\n\n[databases]\ndb1.example.com\n\n[production:children]\nwebservers\ndatabases\n\n[production:vars]\nansible_user=admin\n```\n\n**Dynamic Inventory**: Generated from external sources\n\n**AWS Example:**\n```bash\n# Use AWS EC2 plugin\nansible-inventory -i aws_ec2.yml --graph\n\n# aws_ec2.yml\nplugin: aws_ec2\nregions:\n  - us-east-1\nfilters:\n  tag:Environment: production\nkeyed_groups:\n  - key: tags.Role\n    prefix: role\n```\n\n**Benefits of dynamic:**\n- Always up-to-date\n- No manual maintenance\n- Integrates with cloud providers\n- Scales automatically",
+          "code": null
+        },
+        {
+          "name": "Q70: How do you handle secrets in Ansible?",
+          "text": "**Ansible Vault**: Encrypt sensitive data\n\n**Encrypt file:**\n```bash\nansible-vault create secrets.yml\nansible-vault encrypt existing_file.yml\nansible-vault edit secrets.yml\n```\n\n**Encrypted variables:**\n```yaml\n# secrets.yml (encrypted)\ndb_password: !vault |\n  $ANSIBLE_VAULT;1.1;AES256\n  66386439653964336462623764313163...\n```\n\n**Use in playbook:**\n```bash\nansible-playbook -i inventory playbook.yml --ask-vault-pass\n# or\nansible-playbook -i inventory playbook.yml --vault-password-file ~/.vault_pass\n```\n\n**Best practices:**\n- Encrypt only sensitive values, not entire files\n- Use different vault passwords per environment\n- Store vault password securely (AWS Secrets Manager, HashiCorp Vault)\n- Add *.vault to .gitignore\n- Use ansible-vault rekey to change password\n\n---",
+          "code": null
+        }
+      ]
+    },
+    {
+      "id": "section7",
+      "title": "📚 CI/CD PIPELINES & TOOLS",
+      "sections": [
+        {
+          "name": "Q71: What is Jenkins and its architecture?",
+          "text": "Jenkins is an open-source automation server for CI/CD.\n\n**Architecture:**\n- **Master/Controller**: Schedules jobs, monitors agents, manages configuration\n- **Agents/Nodes**: Execute jobs\n- **Executor**: Thread that runs builds\n- **Job/Project**: Defined tasks\n- **Build**: Execution instance of a job\n- **Plugin**: Extends functionality\n\n**Types:**\n- **Freestyle**: Simple, UI-configured\n- **Pipeline**: Code-based (Jenkinsfile)\n- **Multibranch**: Automatically creates pipelines for branches",
+          "code": null
+        },
+        {
+          "name": "Q72: What is a Jenkins Pipeline and Declarative vs Scripted syntax?",
+          "text": "**Declarative Pipeline** (simpler, recommended):\n\n\n**Scripted Pipeline** (more flexible, Groovy):",
+          "code": "// groovy\npipeline {\n    agent any\n    \n    environment {\n        APP_ENV = 'production'\n    }\n    \n    stages {\n        stage('Build') {\n            steps {\n                sh 'mvn clean package'\n            }\n        }\n        stage('Test') {\n            steps {\n                sh 'mvn test'\n            }\n        }\n        stage('Deploy') {\n            when {\n                branch 'main'\n            }\n            steps {\n                sh './deploy.sh'\n            }\n        }\n    }\n    \n    post {\n        success {\n            echo 'Pipeline succeeded!'\n        }\n        failure {\n            echo 'Pipeline failed!'\n        }\n    }\n}\n\n// groovy\nnode {\n    stage('Build') {\n        checkout scm\n        sh 'mvn clean package'\n    }\n    stage('Test') {\n        sh 'mvn test'\n    }\n    if (env.BRANCH_NAME == 'main') {\n        stage('Deploy') {\n            sh './deploy.sh'\n        }\n    }\n}"
+        },
+        {
+          "name": "Q73: How do you implement parallel execution in Jenkins?",
+          "text": "**Declarative:**\n```groovy\npipeline {\n    agent any\n    stages {\n        stage('Test') {\n            parallel {\n                stage('Unit Tests') {\n                    steps {\n                        sh 'npm run test:unit'\n                    }\n                }\n                stage('Integration Tests') {\n                    steps {\n                        sh 'npm run test:integration'\n                    }\n                }\n                stage('E2E Tests') {\n                    agent {\n                        label 'e2e-runner'\n                    }\n                    steps {\n                        sh 'npm run test:e2e'\n                    }\n                }\n            }\n        }\n    }\n}\n```\n\n**Benefits:**\n- Faster pipeline execution\n- Better resource utilization\n- Independent test environments",
+          "code": null
+        },
+        {
+          "name": "Q74: What is GitLab CI/CD and how does it compare to Jenkins?",
+          "text": "**GitLab CI/CD**: Built into GitLab, configured via `.gitlab-ci.yml`\n\n**Comparison:**\n\n| Feature | GitLab CI/CD | Jenkins |\n|---------|-------------|---------|\n| **Integration** | Native to GitLab | Separate tool |\n| **Configuration** | YAML in repo | Jenkinsfile or UI |\n| **Setup** | Easy, SaaS available | Requires server setup |\n| **Runners** | Shared or custom | Agents/nodes |\n| **Plugins** | Limited | Extensive |\n| **Cost** | Free tier, paid tiers | Free, but infrastructure cost |\n\n**Example .gitlab-ci.yml:**\n```yaml\nstages:\n  - build\n  - test\n  - deploy\n\nvariables:\n  DOCKER_IMAGE: myapp:${CI_COMMIT_SHA}\n\nbuild:\n  stage: build\n  script:\n    - docker build -t $DOCKER_IMAGE .\n    - docker push $DOCKER_IMAGE\n  only:\n    - main\n\ntest:\n  stage: test\n  script:\n    - npm install\n    - npm test\n  coverage: '/Statements\\s+:\\s+(\\d+\\.\\d+)%/'\n\ndeploy:\n  stage: deploy\n  script:\n    - kubectl set image deployment/myapp app=$DOCKER_IMAGE\n  environment:\n    name: production\n  when: manual\n  only:\n    - main\n```",
+          "code": null
+        },
+        {
+          "name": "Q75: What is GitHub Actions and its key concepts?",
+          "text": "GitHub Actions is CI/CD built into GitHub.\n\n**Key concepts:**\n- **Workflow**: Automated process defined in YAML\n- **Event**: Trigger (push, PR, schedule)\n- **Job**: Set of steps on same runner\n- **Step**: Individual task\n- **Action**: Reusable unit\n- **Runner**: Server executing jobs\n\n**Example:**\n```yaml\nname: CI/CD Pipeline\n\non:\n  push:\n    branches: [ main ]\n  pull_request:\n    branches: [ main ]\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    \n    steps:\n      - uses: actions/checkout@v3\n      \n      - name: Set up Node.js\n        uses: actions/setup-node@v3\n        with:\n          node-version: '18'\n          cache: 'npm'\n      \n      - name: Install dependencies\n        run: npm ci\n      \n      - name: Run tests\n        run: npm test\n      \n      - name: Build\n        run: npm run build\n      \n      - name: Deploy to staging\n        if: github.ref == 'refs/heads/main'\n        env:\n          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}\n          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}\n        run: |\n          aws s3 sync ./build s3://my-staging-bucket\n```",
+          "code": null
+        },
+        {
+          "name": "Q76: How do you implement security scanning in CI/CD pipelines?",
+          "text": "Multi-layer security scanning:\n\n**1. Static Application Security Testing (SAST):**\n```yaml\nsast:\n  stage: test\n  script:\n    - bandit -r . -f json -o bandit-report.json  # Python\n    - sonar-scanner  # SonarQube\n```\n\n**2. Dependency Scanning:**\n```yaml\ndependency_scan:\n  stage: test\n  script:\n    - npm audit\n    - safety check  # Python dependencies\n    - snyk test\n```\n\n**3. Container Scanning:**\n```yaml\ncontainer_scan:\n  stage: test\n  script:\n    - trivy image myapp:latest\n    - docker scan myapp:latest\n```\n\n**4. Infrastructure Scanning:**\n```yaml\niac_scan:\n  stage: test\n  script:\n    - tfsec .  # Terraform\n    - checkov -d .\n```\n\n**5. Secret Scanning:**\n```yaml\nsecret_scan:\n  stage: test\n  script:\n    - gitleaks detect --source . --verbose\n    - trufflehog filesystem .\n```\n\n**Best practices:**\n- Fail build on critical vulnerabilities\n- Generate reports\n- Track over time\n- Auto-create tickets for issues",
+          "code": null
+        },
+        {
+          "name": "Q77: How do you manage environment-specific configurations in CI/CD?",
+          "text": "Strategies:\n\n**1. Environment Variables:**\n```yaml\ndeploy_staging:\n  stage: deploy\n  environment:\n    name: staging\n  variables:\n    APP_ENV: staging\n    DATABASE_URL: $STAGING_DB_URL\n  script:\n    - deploy.sh\n\ndeploy_prod:\n  stage: deploy\n  environment:\n    name: production\n  variables:\n    APP_ENV: production\n    DATABASE_URL: $PROD_DB_URL\n  script:\n    - deploy.sh\n```\n\n**2. Configuration Files:**\n```yaml\n- name: Select config\n  run: |\n    if [ \"$ENVIRONMENT\" == \"prod\" ]; then\n      cp config/prod.yml config.yml\n    else\n      cp config/staging.yml config.yml\n    fi\n```\n\n**3. Secret Management:**\n```yaml\n- name: Get secrets\n  env:\n    VAULT_TOKEN: ${{ secrets.VAULT_TOKEN }}\n  run: |\n    vault kv get -field=db_password secret/prod/db > db_password.txt\n```\n\n**4. Templating:**\n```yaml\n- name: Generate config\n  run: |\n    envsubst < config.template > config.yml\n  env:\n    DB_HOST: ${{ secrets.DB_HOST }}\n    DB_PORT: 5432\n```",
+          "code": null
+        },
+        {
+          "name": "Q78: What are CI/CD best practices?",
+          "text": "**1. Pipeline Design:**\n- Fast feedback (fail fast)\n- Parallelize when possible\n- Small, frequent commits\n- Separate build artifacts from deployments\n\n**2. Testing:**\n- Comprehensive test coverage\n- Test pyramid (unit > integration > e2e)\n- Performance testing in pipeline\n- Security scanning\n\n**3. Deployment:**\n- Automated deployments\n- Blue-green or canary deployments\n- Automated rollback\n- Deployment approval gates for production\n\n**4. Security:**\n- Secrets in vault, not code\n- Scan for vulnerabilities\n- Least privilege access\n- Audit logs\n\n**5. Monitoring:**\n- Pipeline metrics (success rate, duration)\n- Deployment tracking\n- Post-deployment verification\n- Alert on failures\n\n**6. Maintenance:**\n- Keep pipelines DRY (reusable templates)\n- Version pipeline definitions\n- Regular dependency updates\n- Documentation",
+          "code": null
+        },
+        {
+          "name": "Q79: How do you handle database migrations in CI/CD?",
+          "text": "Strategies:\n\n**1. Automated Migration Tools:**\n```yaml\nmigrate:\n  stage: deploy\n  script:\n    - flyway -url=$DB_URL -user=$DB_USER -password=$DB_PASS migrate\n    # or\n    - alembic upgrade head  # Python\n    # or\n    - ./mvnw flyway:migrate  # Java\n```\n\n**2. Backward Compatible Migrations:**\n- **Phase 1**: Add new column (nullable)\n- **Phase 2**: Migrate data, deploy code\n- **Phase 3**: Make column non-nullable, remove old column\n\n**3. Blue-Green Database:**\n- Clone database\n- Apply migrations to clone\n- Switch after validation\n- Higher complexity and cost\n\n**4. Rollback Strategy:**\n```yaml\nmigrate:\n  script:\n    - flyway -url=$DB_URL migrate\n  after_script:\n    - |\n      if [ $CI_JOB_STATUS == 'failed' ]; then\n        flyway -url=$DB_URL undo\n      fi\n```\n\n**Best practices:**\n- Always test migrations\n- Version migrations\n- Backup before migrations\n- Separate schema and data migrations\n- Monitor migration execution time",
+          "code": null
+        },
+        {
+          "name": "Q80: How do you implement artifact management in CI/CD?",
+          "text": "Artifact repositories store build outputs.\n\n**Popular tools:**\n- **JFrog Artifactory**: Universal repository\n- **Nexus**: Java/Maven focus\n- **AWS ECR/S3**: Cloud-native\n- **Docker Registry**: Container images\n- **npm/PyPI**: Language-specific\n\n**Example workflow:**\n```yaml\nbuild:\n  stage: build\n  script:\n    - mvn clean package\n    - |\n      curl -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD} \\\n        -T target/app-${VERSION}.jar \\\n        \"https://artifactory.company.com/libs-release/app-${VERSION}.jar\"\n  artifacts:\n    paths:\n      - target/app-${VERSION}.jar\n    expire_in: 30 days\n\ndeploy:\n  stage: deploy\n  script:\n    - |\n      curl -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD} \\\n        -O \"https://artifactory.company.com/libs-release/app-${VERSION}.jar\"\n    - deploy.sh app-${VERSION}.jar\n```\n\n**Best practices:**\n- Semantic versioning\n- Retention policies\n- Immutable artifacts\n- Security scanning\n- Access control\n- High availability setup\n\n---",
+          "code": null
+        }
+      ]
+    },
+    {
+      "id": "section8",
+      "title": "📚 MONITORING & OBSERVABILITY",
+      "sections": [
+        {
+          "name": "Q81: What is the difference between monitoring and observability?",
+          "text": "**Monitoring**: Collecting predefined metrics and logs\n- Known unknowns\n- Dashboards, alerts on specific metrics\n- Reactive\n\n**Observability**: Understanding system state from outputs\n- Unknown unknowns\n- Explore and query arbitrary data\n- Proactive debugging\n\n**Three pillars of observability:**\n1. **Metrics**: Time-series data (CPU, latency)\n2. **Logs**: Discrete events\n3. **Traces**: Request flow through distributed system",
+          "code": null
+        },
+        {
+          "name": "Q82: What is Prometheus and how does it work?",
+          "text": "Prometheus is an open-source monitoring and alerting toolkit.\n\n**Architecture:**\n- **Prometheus Server**: Scrapes and stores metrics\n- **Exporters**: Expose metrics from services\n- **Alertmanager**: Handles alerts\n- **Pushgateway**: For short-lived jobs\n- **PromQL**: Query language\n\n**Key concepts:**\n- **Pull model**: Prometheus scrapes targets\n- **Time-series database**: Metrics stored with timestamps\n- **Service discovery**: Auto-discover targets (Kubernetes, EC2)\n\n**Example configuration:**\n```yaml\nglobal:\n  scrape_interval: 15s\n\nscrape_configs:\n  - job_name: 'prometheus'\n    static_configs:\n      - targets: ['localhost:9090']\n  \n  - job_name: 'node-exporter'\n    static_configs:\n      - targets: ['node1:9100', 'node2:9100']\n  \n  - job_name: 'kubernetes-pods'\n    kubernetes_sd_configs:\n      - role: pod\n```",
+          "code": null
+        },
+        {
+          "name": "Q83: What is PromQL and provide examples.",
+          "text": "PromQL is Prometheus Query Language for querying metrics.\n\n**Basic queries:**\n```promql\n# Current CPU usage\nnode_cpu_seconds_total\n\n# Filter by label\nnode_cpu_seconds_total{mode=\"idle\"}\n\n# Rate over 5 minutes\nrate(node_cpu_seconds_total[5m])\n\n# Average across instances\navg(rate(node_cpu_seconds_total[5m])) by (instance)\n\n# CPU usage percentage\n100 - (avg by (instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)\n\n# Memory usage\n(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100\n\n# HTTP error rate\nrate(http_requests_total{status=~\"5..\"}[5m]) / rate(http_requests_total[5m])\n\n# 95th percentile latency\nhistogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))\n```",
+          "code": null
+        },
+        {
+          "name": "Q84: What is Grafana and how do you create effective dashboards?",
+          "text": "Grafana is an open-source analytics and visualization platform.\n\n**Key features:**\n- Multi-datasource (Prometheus, InfluxDB, Elasticsearch)\n- Templating\n- Alerting\n- Annotations\n- Plugins\n\n**Effective dashboard design:**\n\n**1. Organization:**\n- Group related metrics\n- Use rows for sections\n- Consistent naming\n\n**2. Panels:**\n- Choose appropriate visualization (graph, gauge, table)\n- Clear titles and descriptions\n- Useful legends\n\n**3. Variables:**\n```\nName: environment\nType: Query\nQuery: label_values(up, environment)\n```\n\n**4. Best practices:**\n- RED method (Rate, Errors, Duration) for services\n- USE method (Utilization, Saturation, Errors) for resources\n- Golden signals (Latency, Traffic, Errors, Saturation)\n- Time range selector\n- Auto-refresh\n- Alert annotations",
+          "code": null
+        },
+        {
+          "name": "Q85: What is the ELK Stack and its components?",
+          "text": "ELK = Elasticsearch + Logstash + Kibana (now Elastic Stack with Beats)\n\n**Components:**\n\n**1. Elasticsearch**: \n- Distributed search and analytics engine\n- Stores and indexes logs\n- RESTful API\n\n**2. Logstash**:\n- Data processing pipeline\n- Ingests, transforms, sends to Elasticsearch\n\n**Example config:**\n```ruby\ninput {\n  beats {\n    port => 5044\n  }\n}\n\nfilter {\n  if [type] == \"syslog\" {\n    grok {\n      match => { \"message\" => \"%{SYSLOGLINE}\" }\n    }\n    date {\n      match => [ \"timestamp\", \"MMM  d HH:mm:ss\", \"MMM dd HH:mm:ss\" ]\n    }\n  }\n}\n\noutput {\n  elasticsearch {\n    hosts => [\"localhost:9200\"]\n    index => \"logs-%{+YYYY.MM.dd}\"\n  }\n}\n```\n\n**3. Kibana**:\n- Visualization and exploration\n- Dashboards, queries\n- Alerting (X-Pack)\n\n**4. Beats**:\n- Lightweight data shippers\n- Filebeat (logs), Metricbeat (metrics), Packetbeat (network)",
+          "code": null
+        },
+        {
+          "name": "Q86: How do you implement centralized logging for microservices?",
+          "text": "Centralized logging architecture:\n\n**1. Log Collection:**\n```yaml\n# Kubernetes sidecar\napiVersion: v1\nkind: Pod\nmetadata:\n  name: myapp\nspec:\n  containers:\n  - name: app\n    image: myapp:latest\n  - name: log-forwarder\n    image: fluent/fluentd:latest\n    volumeMounts:\n    - name: varlog\n      mountPath: /var/log\n  volumes:\n  - name: varlog\n    emptyDir: {}\n```\n\n**2. Log Aggregation:**\n- Fluentd/Fluent Bit: Collect and forward\n- Logstash: Parse and enrich\n- Elasticsearch: Store and index\n- Kibana: Visualize\n\n**3. Structured Logging:**\n```python\nimport logging\nimport json\n\nlogger = logging.getLogger()\n\ndef json_log(level, message, **kwargs):\n    log_entry = {\n        'timestamp': datetime.utcnow().isoformat(),\n        'level': level,\n        'message': message,\n        'service': 'api-service',\n        'environment': 'production',\n        **kwargs\n    }\n    logger.log(level, json.dumps(log_entry))\n\n# Usage\njson_log(logging.INFO, 'User login', user_id=123, ip='192.168.1.1')\n```\n\n**4. Correlation:**\n- Request ID across services\n- Trace context propagation\n\n**Best practices:**\n- Structured logging (JSON)\n- Consistent log levels\n- Include context (user ID, request ID)\n- Retention policies\n- Index rotation\n- Performance monitoring",
+          "code": null
+        },
+        {
+          "name": "Q87: What is distributed tracing and how do you implement it?",
+          "text": "Distributed tracing tracks requests across microservices.\n\n**Tools:**\n- **Jaeger**: CNCF project\n- **Zipkin**: Twitter open-source\n- **AWS X-Ray**: AWS-native\n- **Datadog APM**: Commercial\n\n**Concepts:**\n- **Trace**: End-to-end request journey\n- **Span**: Single operation\n- **Context Propagation**: Pass trace ID between services\n\n**Implementation (Jaeger + OpenTelemetry):**\n\n**1. Instrument application:**\n```python\nfrom opentelemetry import trace\nfrom opentelemetry.exporter.jaeger.thrift import JaegerExporter\nfrom opentelemetry.sdk.trace import TracerProvider\nfrom opentelemetry.sdk.trace.export import BatchSpanProcessor\n\n# Setup\ntrace.set_tracer_provider(TracerProvider())\njaeger_exporter = JaegerExporter(\n    agent_host_name=\"localhost\",\n    agent_port=6831,\n)\ntrace.get_tracer_provider().add_span_processor(\n    BatchSpanProcessor(jaeger_exporter)\n)\n\ntracer = trace.get_tracer(__name__)\n\n# Use in code\n@tracer.start_as_current_span(\"process_order\")\ndef process_order(order_id):\n    with tracer.start_as_current_span(\"validate_order\"):\n        validate(order_id)\n    with tracer.start_as_current_span(\"charge_payment\"):\n        charge(order_id)\n    return order_id\n```\n\n**2. Propagate context:**\n```python\nimport requests\nfrom opentelemetry.propagate import inject\n\nheaders = {}\ninject(headers)  # Inject trace context\nresponse = requests.get('http://inventory-service/check', headers=headers)\n```",
+          "code": null
+        },
+        {
+          "name": "Q88: How do you set up effective alerting?",
+          "text": "Alerting best practices:\n\n**1. Alert on symptoms, not causes:**\n```yaml\n# Good: User-facing impact\n- alert: HighErrorRate\n  expr: rate(http_requests_total{status=~\"5..\"}[5m]) > 0.05\n  for: 5m\n  annotations:\n    summary: \"High error rate detected\"\n    \n# Avoid: Low-level metric\n- alert: HighCPU\n  expr: cpu_usage > 80\n```\n\n**2. Severity levels:**\n```yaml\n- alert: APIDown\n  expr: up{job=\"api\"} == 0\n  labels:\n    severity: critical  # Page on-call\n    \n- alert: HighLatency\n  expr: http_request_duration_seconds > 2\n  labels:\n    severity: warning  # Ticket, no page\n```\n\n**3. Actionable alerts:**\n```yaml\nannotations:\n  summary: \"API response time is {{ $value }}s\"\n  description: \"API latency is above 2s for 5 minutes\"\n  runbook: \"https://wiki.company.com/runbooks/high-latency\"\n  dashboard: \"https://grafana.company.com/d/api-dashboard\"\n```\n\n**4. Avoid alert fatigue:**\n- Reduce noise (group, aggregate)\n- Appropriate thresholds\n- for duration to avoid flapping\n- Silence during maintenance\n\n**5. Alert routing:**\n```yaml\n# Alertmanager config\nroute:\n  group_by: ['alertname', 'cluster']\n  group_wait: 10s\n  group_interval: 10s\n  repeat_interval: 12h\n  receiver: 'default'\n  routes:\n  - match:\n      severity: critical\n    receiver: 'pagerduty'\n  - match:\n      severity: warning\n    receiver: 'slack'\n```\n\n---",
+          "code": null
+        }
+      ]
+    },
+    {
+      "id": "section9",
+      "title": "📚 MLOPS & AI SERVICE DEPLOYMENT",
+      "sections": [
+        {
+          "name": "Q89: What is MLOps and how does it differ from DevOps?",
+          "text": "**MLOps**: Machine Learning Operations - applying DevOps practices to ML lifecycle\n\n**Key differences:**\n\n| Aspect | DevOps | MLOps |\n|--------|--------|-------|\n| **Focus** | Code deployment | Model + data + code |\n| **Testing** | Unit, integration | Data validation, model performance |\n| **Versioning** | Code | Code + data + models |\n| **Deployment** | Binary/container | Model serving endpoints |\n| **Monitoring** | Logs, metrics | Model drift, data drift, performance |\n| **Rollback** | Previous code version | Previous model version |\n\n**Additional MLOps concerns:**\n- Data versioning and lineage\n- Feature engineering pipelines\n- Model training and hyperparameter tuning\n- Model registry and versioning\n- A/B testing for models\n- Continuous training (retraining on new data)",
+          "code": null
+        },
+        {
+          "name": "Q90: How do you deploy machine learning models to production?",
+          "text": "Deployment strategies:\n\n**1. REST API (Flask/FastAPI):**\n```python\nfrom fastapi import FastAPI\nimport pickle\n\napp = FastAPI()\n\n# Load model\nwith open('model.pkl', 'rb') as f:\n    model = pickle.load(f)\n\n@app.post(\"/predict\")\ndef predict(data: dict):\n    features = data['features']\n    prediction = model.predict([features])\n    return {\"prediction\": prediction[0]}\n```\n\n**Containerize:**\n```dockerfile\nFROM python:3.9-slim\nCOPY requirements.txt .\nRUN pip install -r requirements.txt\nCOPY model.pkl app.py .\nCMD [\"uvicorn\", \"app:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]\n```\n\n**2. Model Serving Platforms:**\n- **TensorFlow Serving**: For TensorFlow models\n- **TorchServe**: For PyTorch models\n- **MLflow Model Serving**: Framework-agnostic\n- **Seldon Core**: Kubernetes-native\n- **AWS SageMaker**: Managed service\n- **Azure ML**: Managed endpoints\n\n**3. Batch Prediction:**\n- Scheduled jobs (Airflow, Kubernetes CronJob)\n- Process large datasets periodically\n\n**4. Edge Deployment:**\n- Compressed/quantized models\n- TensorFlow Lite, ONNX Runtime",
+          "code": null
+        },
+        {
+          "name": "Q91: How do you handle model versioning and registry?",
+          "text": "Model versioning systems:\n\n**1. MLflow Model Registry:**\n```python\nimport mlflow\nimport mlflow.sklearn\n\n# Log model\nwith mlflow.start_run():\n    mlflow.log_param(\"n_estimators\", 100)\n    mlflow.log_metric(\"accuracy\", 0.95)\n    mlflow.sklearn.log_model(model, \"model\")\n\n# Register model\nmodel_uri = f\"runs:/{run_id}/model\"\nmlflow.register_model(model_uri, \"churn-prediction-model\")\n\n# Transition to production\nclient = mlflow.tracking.MlflowClient()\nclient.transition_model_version_stage(\n    name=\"churn-prediction-model\",\n    version=3,\n    stage=\"Production\"\n)\n```\n\n**2. DVC (Data Version Control):**\n```bash\n# Track model\ndvc add models/model.pkl\ngit add models/model.pkl.dvc .dvc/config\ngit commit -m \"Add model v1.0\"\n\n# Push to remote storage\ndvc push\n\n# Pull specific version\ngit checkout v1.0\ndvc pull\n```\n\n**3. Model Metadata:**\n```yaml\nmodel:\n  name: churn-prediction\n  version: 2.1.0\n  framework: scikit-learn==1.0.2\n  metrics:\n    accuracy: 0.95\n    f1_score: 0.93\n  training_data:\n    version: 2023-01-15\n    size: 1M rows\n  features:\n    - age\n    - tenure\n    - monthly_charges\n```",
+          "code": null
+        },
+        {
+          "name": "Q92: What is model drift and how do you detect it?",
+          "text": "Model drift: Degradation of model performance over time\n\n**Types:**\n\n**1. Data Drift (Covariate Shift):**\n- Input data distribution changes\n- Detection: Compare train vs production distributions\n\n**2. Concept Drift:**\n- Relationship between input and output changes\n- Detection: Monitor prediction accuracy\n\n**Detection methods:**\n\n**1. Statistical Tests:**\n```python\nfrom scipy.stats import ks_2samp\n\n# Kolmogorov-Smirnov test\nstatistic, p_value = ks_2samp(training_data['age'], production_data['age'])\nif p_value < 0.05:\n    alert(\"Data drift detected in 'age' feature\")\n```\n\n**2. Performance Monitoring:**\n```python\n# Track metrics over time\ncurrent_accuracy = evaluate_model(recent_data)\nbaseline_accuracy = 0.95\n\nif current_accuracy < baseline_accuracy - 0.05:\n    trigger_retraining()\n```\n\n**3. Monitoring Tools:**\n- **Evidently AI**: Drift detection dashboards\n- **WhyLabs**: ML observability\n- **Fiddler**: Model monitoring\n\n**Mitigation:**\n- Automated retraining pipeline\n- A/B testing new models\n- Gradual rollout (canary)\n- Feedback loops",
+          "code": null
+        },
+        {
+          "name": "Q93: How do you deploy and manage LLM/NLP APIs?",
+          "text": "LLM deployment considerations:\n\n**1. Model Optimization:**\n```python\n# Quantization for reduced memory\nfrom transformers import AutoModelForCausalLM\nimport torch\n\nmodel = AutoModelForCausalLM.from_pretrained(\n    \"model-name\",\n    load_in_8bit=True,  # 8-bit quantization\n    device_map=\"auto\"\n)\n```\n\n**2. Inference Optimization:**\n- **Batching**: Process multiple requests together\n- **Caching**: Store frequent query results\n- **vLLM**: Optimized serving with PagedAttention\n\n**Example with vLLM:**\n```python\nfrom vllm import LLM, SamplingParams\n\nllm = LLM(model=\"meta-llama/Llama-2-7b-hf\")\nprompts = [\"Analyze this text:\", \"Summarize:\"]\nsampling_params = SamplingParams(temperature=0.7, max_tokens=100)\n\noutputs = llm.generate(prompts, sampling_params)\n```\n\n**3. Scalable Deployment:**\n```yaml\n# Kubernetes with GPU\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: llm-api\nspec:\n  replicas: 3\n  template:\n    spec:\n      containers:\n      - name: llm\n        image: llm-api:latest\n        resources:\n          limits:\n            nvidia.com/gpu: 1\n        env:\n        - name: MODEL_NAME\n          value: \"gpt-3.5-turbo\"\n```\n\n**4. Rate Limiting & Cost Control:**\n```python\nfrom fastapi import FastAPI\nfrom slowapi import Limiter\nfrom slowapi.util import get_remote_address\n\nlimiter = Limiter(key_func=get_remote_address)\napp = FastAPI()\napp.state.limiter = limiter\n\n@app.post(\"/chat\")\n@limiter.limit(\"10/minute\")\nasync def chat(prompt: str):\n    return llm.generate(prompt)\n```\n\n**5. Monitoring:**\n- Token usage and costs\n- Latency (time to first token, total time)\n- Error rates\n- Content safety violations",
+          "code": null
+        },
+        {
+          "name": "Q94: How do you build a data pipeline for a BI platform?",
+          "text": "BI data pipeline architecture:\n\n**1. Data Ingestion:**\n```python\n# Apache Airflow DAG\nfrom airflow import DAG\nfrom airflow.operators.python import PythonOperator\nfrom datetime import datetime\n\ndef extract_from_api():\n    # Extract data from source\n    data = requests.get('https://api.source.com/data').json()\n    save_to_staging(data)\n\ndef transform_data():\n    # Clean, aggregate, join\n    df = pd.read_csv('staging/data.csv')\n    df_clean = df.dropna()\n    df_agg = df_clean.groupby('category').agg({'sales': 'sum'})\n    df_agg.to_csv('processed/data.csv')\n\ndef load_to_warehouse():\n    # Load to data warehouse\n    df = pd.read_csv('processed/data.csv')\n    df.to_sql('sales_summary', engine, if_exists='replace')\n\ndag = DAG(\n    'bi_pipeline',\n    schedule_interval='@daily',\n    start_date=datetime(2024, 1, 1)\n)\n\nextract = PythonOperator(task_id='extract', python_callable=extract_from_api, dag=dag)\ntransform = PythonOperator(task_id='transform', python_callable=transform_data, dag=dag)\nload = PythonOperator(task_id='load', python_callable=load_to_warehouse, dag=dag)\n\nextract >> transform >> load\n```\n\n**2. Data Warehouse:**\n- Snowflake, BigQuery, Redshift\n- Star/snowflake schema design\n\n**3. BI Tools Integration:**\n- Connect BI tools (Tableau, Power BI, Looker)\n- Semantic layer for business logic\n\n**4. Data Quality:**\n```python\n# Great Expectations\nimport great_expectations as ge\n\ndf = ge.read_csv('data.csv')\ndf.expect_column_values_to_not_be_null('customer_id')\ndf.expect_column_values_to_be_between('age', 18, 100)\nresults = df.validate()\n```\n\n**5. CDC (Change Data Capture):**\n- Debezium for real-time data sync\n- Incremental loads\n\n**6. Monitoring:**\n- Data freshness\n- Pipeline success rate\n- Data quality metrics\n- Query performance\n\n---",
+          "code": null
+        }
+      ]
+    },
+    {
+      "id": "section10",
+      "title": "📚 ADVANCED & SCENARIO-BASED",
+      "sections": [
+        {
+          "name": "Q95: How would you design a highly available and scalable CI/CD system?",
+          "text": "HA CI/CD architecture:\n\n**1. Distributed Architecture:**\n- Multiple Jenkins masters (active-passive with shared storage)\n- Or GitLab runners across AZs\n- Load balanced agents\n\n**2. Infrastructure:**\n```yaml\n# Kubernetes deployment\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: jenkins-master\nspec:\n  replicas: 2\n  template:\n    spec:\n      containers:\n      - name: jenkins\n        image: jenkins/jenkins:lts\n        volumeMounts:\n        - name: jenkins-home\n          mountPath: /var/jenkins_home\n  volumeClaimTemplates:\n  - metadata:\n      name: jenkins-home\n    spec:\n      accessModes: [\"ReadWriteOnce\"]\n      resources:\n        requests:\n          storage: 100Gi\n```\n\n**3. Scaling:**\n- Auto-scaling agent pools\n- Spot instances for cost optimization\n- Dynamic agents (Kubernetes plugin)\n\n**4. Reliability:**\n- Backup configurations and jobs\n- Pipeline as code (Jenkinsfile in SCM)\n- Immutable infrastructure\n- Health checks and auto-recovery\n\n**5. Performance:**\n- Parallel execution\n- Caching (dependencies, Docker layers)\n- Distributed builds\n- Pipeline optimization",
+          "code": null
+        },
+        {
+          "name": "Q96: Describe your approach to incident response for a production outage.",
+          "text": "Incident response process:\n\n**1. Detection (0-2 min):**\n- Automated alerts trigger\n- On-call engineer paged\n\n**2. Triage (2-5 min):**\n- Assess severity and impact\n- Declare incident if needed\n- Page additional team members\n\n**3. Investigation (5-30 min):**\n- Check recent deployments\n- Review logs and metrics\n- Identify root cause vs symptoms\n\n**Tools:**\n```bash\n# Quick checks\nkubectl get pods | grep -v Running\nkubectl logs <pod> --previous\nkubectl describe pod <pod>\n\n# Metrics\ncurl \"http://prometheus:9090/api/v1/query?query=up{job='api'}\"\n\n# Logs\nkubectl logs -l app=api --tail=100 | grep ERROR\n```\n\n**4. Mitigation (ASAP):**\n- Rollback deployment\n- Scale resources\n- Failover to backup\n- Disable problematic feature\n\n**5. Resolution:**\n- Verify fix\n- Monitor for recurrence\n- Document timeline\n\n**6. Post-Mortem:**\n- Blameless analysis\n- Root cause identification\n- Action items for prevention\n- Update runbooks\n\n**Communication:**\n- Status page updates\n- Stakeholder notifications\n- Regular updates to leadership",
+          "code": null
+        },
+        {
+          "name": "Q97: How do you implement zero-downtime deployments for a database-backed application?",
+          "text": "Zero-downtime deployment strategy:\n\n**1. Database Migration Strategy:**\n\n**Phase 1: Add (Backward compatible)**\n```sql\n-- Add new column (nullable)\nALTER TABLE users ADD COLUMN email_verified BOOLEAN DEFAULT NULL;\n\n-- Deploy new code that writes to both old and new\n-- Old code continues reading old fields\n```\n\n**Phase 2: Migrate**\n```python\n# Background job\ndef migrate_data():\n    users = User.filter(email_verified__isnull=True)\n    for user in users.batch(1000):\n        user.email_verified = verify_email(user.email)\n        user.save()\n```\n\n**Phase 3: Switch**\n```python\n# Deploy code that reads from new column\n# Remove dependencies on old column\n```\n\n**Phase 4: Cleanup**\n```sql\n-- Make column non-nullable\nALTER TABLE users ALTER COLUMN email_verified SET NOT NULL;\n\n-- Later: Remove old column\nALTER TABLE users DROP COLUMN old_email_field;\n```\n\n**2. Application Deployment:**\n- Blue-green deployment\n- Rolling update with readiness probes\n- Traffic shifting (canary)\n\n**3. Database Connection Management:**\n```python\n# Graceful shutdown\ndef shutdown():\n    # Stop accepting new requests\n    stop_accepting_connections()\n    \n    # Wait for in-flight requests\n    wait_for_completion(timeout=30)\n    \n    # Close DB connections\n    db.close()\n```\n\n**4. Validation:**\n- Smoke tests after deployment\n- Monitor error rates\n- Verify data integrity",
+          "code": null
+        },
+        {
+          "name": "Q98: How would you troubleshoot high memory usage in a Kubernetes cluster?",
+          "text": "Troubleshooting workflow:\n\n**1. Identify Problem:**\n```bash\n# Cluster-level\nkubectl top nodes\n\n# Pod-level\nkubectl top pods --all-namespaces --sort-by=memory\n\n# Container-level\nkubectl top pod <pod-name> --containers\n```\n\n**2. Investigate Specific Pod:**\n```bash\n# Describe pod\nkubectl describe pod <pod-name>\n\n# Check events\nkubectl get events --field-selector involvedObject.name=<pod-name>\n\n# Common issues\n# - OOMKilled: Memory limit exceeded\n# - Evicted: Node pressure\n```\n\n**3. Analyze Application:**\n```bash\n# Execute into pod\nkubectl exec -it <pod-name> -- /bin/sh\n\n# Check processes\ntop\nps aux --sort=-%mem | head\n\n# Memory stats\ncat /proc/meminfo\nfree -m\n```\n\n**4. Review Resource Limits:**\n```yaml\nresources:\n  requests:\n    memory: \"128Mi\"\n  limits:\n    memory: \"256Mi\"  # Too low? Causing OOMKills\n```\n\n**5. Profile Application:**\n```python\n# Memory profiling\nimport tracemalloc\ntracemalloc.start()\n\n# ... application code ...\n\nsnapshot = tracemalloc.take_snapshot()\ntop_stats = snapshot.statistics('lineno')\nfor stat in top_stats[:10]:\n    print(stat)\n```\n\n**6. Solutions:**\n- Increase memory limits\n- Fix memory leaks\n- Optimize application\n- Add more nodes\n- Use Vertical Pod Autoscaler\n\n**7. Monitor Over Time:**\n```promql\n# Prometheus query\ncontainer_memory_usage_bytes{pod=\"<pod-name>\"}\n```",
+          "code": null
+        },
+        {
+          "name": "Q99: Design a secure multi-tenant deployment architecture.",
+          "text": "Multi-tenant security architecture:\n\n**1. Namespace Isolation:**\n```yaml\napiVersion: v1\nkind: Namespace\nmetadata:\n  name: tenant-a\n---\napiVersion: v1\nkind: ResourceQuota\nmetadata:\n  name: tenant-a-quota\n  namespace: tenant-a\nspec:\n  hard:\n    requests.cpu: \"10\"\n    requests.memory: 20Gi\n    persistentvolumeclaims: \"5\"\n```\n\n**2. Network Policies:**\n```yaml\napiVersion: networking.k8s.io/v1\nkind: NetworkPolicy\nmetadata:\n  name: deny-cross-tenant\n  namespace: tenant-a\nspec:\n  podSelector: {}\n  policyTypes:\n  - Ingress\n  - Egress\n  ingress:\n  - from:\n    - namespaceSelector:\n        matchLabels:\n          tenant: tenant-a\n  egress:\n  - to:\n    - namespaceSelector:\n        matchLabels:\n          tenant: tenant-a\n```\n\n**3. RBAC:**\n```yaml\napiVersion: rbac.authorization.k8s.io/v1\nkind: RoleBinding\nmetadata:\n  name: tenant-a-admin\n  namespace: tenant-a\nsubjects:\n- kind: User\n  name: tenant-a-user\nroleRef:\n  kind: ClusterRole\n  name: admin\n```\n\n**4. Data Isolation:**\n- Separate databases per tenant\n- Or row-level security in shared DB\n- Encrypted storage per tenant\n\n**5. Application-Level:**\n```python\n@require_tenant\ndef get_data(tenant_id, user_id):\n    # Verify user belongs to tenant\n    if not verify_user_tenant(user_id, tenant_id):\n        raise Forbidden()\n    \n    # Filter all queries by tenant\n    return Data.query.filter_by(tenant_id=tenant_id).all()\n```\n\n**6. Monitoring:**\n- Per-tenant metrics and logs\n- Cost allocation\n- Usage tracking\n\n**7. Compliance:**\n- Data residency requirements\n- Audit logging\n- Encryption at rest and in transit",
+          "code": null
+        },
+        {
+          "name": "Q100: How do you approach capacity planning for a growing platform?",
+          "text": "Capacity planning process:\n\n**1. Current State Analysis:**\n```python\n# Collect metrics\nimport pandas as pd\n\n# Load historical data\nmetrics = pd.read_csv('metrics.csv')\n\n# Analyze trends\ndaily_users = metrics.groupby('date')['users'].max()\ndaily_requests = metrics.groupby('date')['requests'].sum()\n```\n\n**2. Forecasting:**\n```python\nfrom sklearn.linear_model import LinearRegression\nimport numpy as np\n\n# Prepare data\nX = np.array(range(len(daily_users))).reshape(-1, 1)\ny = daily_users.values\n\n# Forecast next 90 days\nmodel = LinearRegression()\nmodel.fit(X, y)\nfuture = np.array(range(len(daily_users), len(daily_users) + 90)).reshape(-1, 1)\nforecast = model.predict(future)\n\n# Add growth buffer\nforecast_with_buffer = forecast * 1.5  # 50% buffer\n```\n\n**3. Resource Calculation:**\n```python\n# Current: 1000 req/s with 10 instances\n# Each instance handles 100 req/s\n\nforecasted_rps = forecast_requests_per_second()\ninstances_needed = ceil(forecasted_rps / 100)\n\n# Factor in:\n# - Peak vs average (2-3x multiplier)\n# - Redundancy (N+1 or N+2)\n# - Deployment headroom\n\ntotal_instances = instances_needed * 3  # Peak multiplier\ntotal_instances = total_instances + 2   # N+2 redundancy\n```\n\n**4. Cost Analysis:**\n```yaml\n# Current costs\ncompute: $5000/month (10 instances)\nstorage: $1000/month (10TB)\nnetwork: $500/month\n\n# Projected costs\ncompute: $15000/month (30 instances)\nstorage: $3000/month (30TB)\nnetwork: $1500/month\n\n# Optimization opportunities\n- Reserved instances: -40% compute\n- Spot instances: -70% for batch workloads\n- S3 Intelligent-Tiering: -30% storage\n```\n\n**5. Scaling Strategy:**\n```yaml\n# Horizontal scaling\napiVersion: autoscaling/v2\nkind: HorizontalPodAutoscaler\nspec:\n  minReplicas: 10\n  maxReplicas: 50  # Increased from 30\n  metrics:\n  - type: Resource\n    resource:\n      name: cpu\n      target:\n        type: Utilization\n        averageUtilization: 70\n\n# Vertical scaling\n# Increase instance types as needed\n```\n\n**6. Testing:**\n- Load testing at projected capacity\n- Chaos engineering\n- Disaster recovery drills\n\n**7. Monitoring & Adjustment:**\n- Review monthly\n- Alert on 70% capacity\n- Quarterly re-forecasting\n\n**8. Documentation:**\n- Capacity reports\n- Growth trends\n- Cost projections\n- Scaling runbooks\n\n---\n\n## BONUS TIPS FOR INTERVIEW SUCCESS\n\n**Technical Preparation:**\n1. Practice hands-on labs (AWS, Kubernetes, Terraform)\n2. Build sample projects demonstrating skills\n3. Understand real-world trade-offs (cost vs performance)\n4. Stay current with industry trends\n\n**Communication:**\n1. Use STAR method for behavioral questions\n2. Explain thought process clearly\n3. Ask clarifying questions\n4. Admit knowledge gaps honestly\n\n**Cultural Fit:**\n1. Emphasize collaboration experience\n2. Share continuous learning examples\n3. Discuss Agile/SAFe experience\n\n**Practical Tips:**\n1. Prepare environment diagrams\n2. Have code examples ready\n3. Know your resume projects deeply\n4. Prepare questions about the role\n\n**Common Pitfalls to Avoid:**\n1. Overcomplicating simple questions\n2. Not asking clarifying questions\n3. Ignoring security considerations\n4. Forgetting monitoring/observability\n5. Not considering costs\n\n---\n\n**Good luck with your DevOps Engineer career!**",
+          "code": null
+        }
+      ]
+    }
+  ]
+}
