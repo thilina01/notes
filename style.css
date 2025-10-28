@@ -1433,7 +1433,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 11000; /* Above offline indicator z-index: 10000 */
     padding: var(--space-16);
     box-sizing: border-box;
 }
