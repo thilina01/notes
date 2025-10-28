@@ -1771,8 +1771,8 @@ body {
 @media (max-width: 768px) {
     .modal-header {
         padding: var(--space-16) var(--space-20);
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row; /* Keep buttons on same row */
+        align-items: flex-start;
         gap: var(--space-12);
     }
 
